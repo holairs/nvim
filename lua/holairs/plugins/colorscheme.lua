@@ -79,18 +79,18 @@
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
 
-return {
-	{
-		"mcchrish/zenbones.nvim",
-		dependencies = { "rktjmp/lush.nvim" },
-		config = function()
-			vim.opt.background = "light"
-			vim.cmd("colorscheme zenbones")
-			vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-			vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-		end,
-	},
-}
+-- return {
+-- 	{
+-- 		"mcchrish/zenbones.nvim",
+-- 		dependencies = { "rktjmp/lush.nvim" },
+-- 		config = function()
+-- 			vim.opt.background = "dark"
+-- 			vim.cmd("colorscheme zenbones")
+-- 			vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- 			vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+-- 		end,
+-- 	},
+-- }
 
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
@@ -112,21 +112,18 @@ return {
 
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
--------                        distilled, nice retro blue color                            --------
+-------                   Monochrome Minimal, monochromatic b&w variatons                  --------
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
 
--- return {
---      "karoliskoncevicius/distilled-vim",
---      config = function()
---              vim.opt.background = "dark"
---              vim.cmd("colorscheme distilled")
---              vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
---              vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
---              vim.api.nvim_set_hl(0, "signcolumn", { bg = "none" })
---              vim.api.nvim_set_hl(0, "cursorlinenr", { fg = "#FFFFFF", bg = "none", bold = true })
---              vim.api.nvim_set_hl(0, "statusline", { fg = "#b2ceee", bg = "#6194ba" })
---              vim.api.nvim_set_hl(0, "normalfloat", { bg = "none" })
---              vim.api.nvim_set_hl(0, "floatborder", { bg = "none" })
---      end,
--- }
+return {
+	"kdheepak/monochrome.nvim",
+	config = function()
+		vim.opt.background = "dark"
+		vim.cmd("colorscheme monochrome")
+		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+		vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+		vim.api.nvim_set_hl(0, "signcolumn", { bg = "none" })
+		vim.api.nvim_set_hl(0, "cursorlinenr", { fg = "#FFFFFF", bg = "none", bold = true })
+	end,
+}

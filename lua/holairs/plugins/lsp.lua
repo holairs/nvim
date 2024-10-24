@@ -82,13 +82,21 @@ return {
 
 			-- pyright config
 			require("lspconfig").pyright.setup({
-				on_attach = on_attach,
+				on_attach = on_attach, -- Asegúrate de que 'on_attach' está definido en otro lugar de tu configuración
 				settings = {
 					python = {
 						analysis = {
+							-- Configuración del análisis de tipos
 							typeCheckingMode = "basic",
+							-- Excluir directorios de las migraciones para evitar falsos positivos
+							exclude = { "**/migrations/**" },
+							-- Automáticamente añade rutas de búsqueda basadas en el entorno
 							autoSearchPaths = true,
+							-- Usa el código de la biblioteca para inferir tipos
 							useLibraryCodeForTypes = true,
+							-- Desactivar reportes específicos para hacer la experiencia menos ruidosa
+							reportUnknownMemberType = false,
+							reportGeneralTypeIssues = false,
 						},
 					},
 				},

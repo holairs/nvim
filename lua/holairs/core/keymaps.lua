@@ -60,6 +60,9 @@ keymap.set("n", "<leader>np", ":tabnew<CR>")
 -- Close actual tab
 keymap.set("n", "<leader>qq", ":tabclose<CR>")
 
+-- Quit buffer
+keymap.set("n", "<leader>ql", ":q<CR>")
+
 -- Move inside native nvim panels
 keymap.set("n", "<C-k>", ":wincmd k<CR>")
 keymap.set("n", "<C-j>", ":wincmd j<CR>")
