@@ -11,6 +11,15 @@ keymap.set("n", "<leader>aa", "V$%")
 -- Make selection and fold of a structured code fragment (as if it were syntax-based)
 keymap.set("n", "<leader>af", "V$%zf")
 
+-- Create a new tab and start a terminal
+keymap.set("n", "<leader>tt", ":tabnew | term<CR>i", { noremap = true, silent = true })
+
+-- Close actual terminal tab
+keymap.set("t", "<leader>qq", "<C-\\><C-n>:tabclose<CR>", { noremap = true, silent = true })
+
+-- Remap to exit from terminal insert mode
+keymap.set("t", "<C-v>", "<C-\\><C-n>", { noremap = true, silent = true })
+
 -- Open LSP suggestion menu
 keymap.set("i", "<C-l>", "<C-x><C-o>")
 
@@ -58,19 +67,19 @@ keymap.set("n", "9p", "9gt")
 keymap.set("n", "<leader>np", ":tabnew<CR>")
 
 -- Close actual tab
-keymap.set("n", "<leader>qq", ":tabclose<CR>")
+keymap.set("n", "<leader>qt", ":tabclose<CR>")
 
 -- Quit buffer
-keymap.set("n", "<leader>ql", ":q<CR>")
+keymap.set("n", "<leader>qq", ":q<CR>")
 
--- Move inside native nvim panels
+-- Move inside native nvvim panels
 keymap.set("n", "<C-k>", ":wincmd k<CR>")
 keymap.set("n", "<C-j>", ":wincmd j<CR>")
 keymap.set("n", "<C-h>", ":wincmd h<CR>")
 keymap.set("n", "<C-l>", ":wincmd l<CR>")
 
 -- Show native explorer nvim
-keymap.set("n", "<leader>ee", ":Ex<CR>")
+keymap.set("n", "<leader>ee", ":Lex<CR>")
 
 -- Split panes with native nvim
 keymap.set("n", "<leader>o", ":sp<CR>")
@@ -108,3 +117,14 @@ keymap.set("v", "<leader>k", ":m '<-2<CR>gv=gv") -- move line down(v)
 
 -- PYTHON TEMP: Replace "" with ''
 keymap.set("n", "<leader>fp", ":%s/\"/'/g<CR>gg", { noremap = true, silent = true })
+
+keymap.set("n", "<leader>1", "'1")
+keymap.set("n", "<leader>2", "'2")
+keymap.set("n", "<leader>3", "'3")
+keymap.set("n", "<leader>4", "'4")
+keymap.set("n", "<leader>5", "'5")
+keymap.set("n", "<leader>6", "'6")
+keymap.set("n", "<leader>7", "'7")
+keymap.set("n", "<leader>8", "'8")
+keymap.set("n", "<leader>9", "'9")
+keymap.set("n", "<leader>0", "'0")

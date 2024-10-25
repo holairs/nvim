@@ -6,8 +6,8 @@
 --
 -- This file contains configurations for plugins that add various utility functionalities to Neovim:
 --
--- 1. **gitsigns.nvim** - Adds git-related signs to the sign column, plus keybindings for navigation
---    and operations like blame, diff, and hunk reset. Only loads if in a git repository.
+-- 1. **gitsigns.nvim** - Adds git-related signs to the sign column, plus keybindings for
+--    navigation and operations like blame, diff, and hunk reset. Only loads if in a git repository.
 --
 -- 2. **harpoon** - Allows quick navigation between files. You can mark files and switch between
 --    them with customizable keybindings. This is the Harpoon 2 branch.
@@ -80,15 +80,29 @@ return {
 			},
 		},
 		keys = {
-			{ "<leader>ff", desc = "Buscar archivos" },
-			{ "<leader>fg", desc = "Buscar en contenido de archivos" },
-			{ "<leader>fs", desc = "Buscar archivos incluyendo ocultos" },
+			{ "<leader>ff", desc = "Search for files" },
+			{ "<leader>fh", desc = "Search for files including hidden files" },
+			{ "<leader>fg", desc = "Search within file contents" },
+			{ "<leader>fd", desc = "List open buffers" },
 		},
 		config = function()
-			vim.g.fzf_preview_window = { "up:60%", "ctrl-/" } -- Preview to left
+			vim.g.fzf_preview_window = { "right:50%", "ctrl-/" } -- Preview on the right, taking 50%
+			vim.cmd([[let $FZF_DEFAULT_OPTS='--height=50% --layout=reverse --border' ]])
 
 			-- Keyamps
-			vim.keymap.set("n", "<leader>ff", ":Files<CR>", { desc = "Search for files" })
+			vim.keymap.set(
+				"n",
+				"<leader>ff",
+				':let $FZF_DEFAULT_COMMAND=\'rg --files --hidden --glob "!.git/" --glob "!venv/" --glob "!.*" --glob "!node_modules" --glob "!.DS_Store" --glob "!lazy-lock.json"\' | Files<CR><CR>',
+				{ desc = "Search for files" }
+			)
+
+			vim.keymap.set(
+				"n",
+				"<leader>fh",
+				":let $FZF_DEFAULT_COMMAND='' | Files<CR>",
+				{ desc = "Search for files including hidden files" }
+			)
 			vim.keymap.set("n", "<leader>fg", ":Rg<CR>", { desc = "Search within file contents" })
 			vim.keymap.set("n", "<leader>fd", ":Buffers<CR>", { desc = "List open buffers" })
 		end,

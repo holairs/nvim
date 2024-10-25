@@ -127,3 +127,28 @@ return {
 		vim.api.nvim_set_hl(0, "cursorlinenr", { fg = "#FFFFFF", bg = "none", bold = true })
 	end,
 }
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+-------                   A lot of colorschemes                                            --------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+-- return {
+-- 	"wincent/base16-nvim",
+-- 	lazy = false, -- load at start
+-- 	priority = 1000, -- load first,
+-- 	config = function()
+-- 		vim.cmd([[colorscheme base16-gruvbox-dark-soft]])
+-- 		vim.o.background = "dark"
+-- 		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- 		vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+-- 		vim.api.nvim_set_hl(0, "SignColumn", { bg = "#3c3836" })
+--
+-- 		-- Asignar el mismo fondo a los signos del LSP en SignColumn
+-- 		vim.api.nvim_set_hl(0, "DiagnosticSignError", { bg = "#3c3836", fg = "#fb4934" })
+-- 		vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { bg = "#3c3836", fg = "#fabd2f" })
+-- 		vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { bg = "#3c3836", fg = "#83a598" })
+-- 		vim.api.nvim_set_hl(0, "DiagnosticSignHint", { bg = "#3c3836", fg = "#8ec07c" })
+-- 	end,
+-- }

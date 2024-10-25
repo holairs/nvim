@@ -38,7 +38,9 @@ opt.hlsearch = false
 g.netrw_browse_split = 0
 g.netrw_banner = 0
 g.netrw_winsize = 25
-g.netrw_liststyle = 0
+g.netrw_liststyle = 3
+g.netrw_keedir = 0
+
 
 -- Some default settings
 opt.tabstop = 2 -- Sets the number of spaces a tab is displayed as
