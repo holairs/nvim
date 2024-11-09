@@ -80,6 +80,22 @@ return {
 				on_attach = on_attach,
 			})
 
+			-- require("lspconfig").basedpyright.setup({
+			-- 	on_attach = on_attach,
+			-- 	settings = {
+			-- 		python = {
+			-- 			analysis = {
+			-- 				typeCheckingMode = "basic",
+			-- 				exclude = { "**/migrations/**" },
+			-- 				autoSearchPaths = true,
+			-- 				useLibraryCodeForTypes = true,
+			-- 				reportUnknownMemberType = false,
+			-- 				reportGeneralTypeIssues = false,
+			-- 			},
+			-- 		},
+			-- 	},
+			-- })
+      --
 			-- pyright config
 			require("lspconfig").pyright.setup({
 				on_attach = on_attach, -- Asegúrate de que 'on_attach' está definido en otro lugar de tu configuración
@@ -100,6 +116,11 @@ return {
 						},
 					},
 				},
+			})
+
+			-- C/C++ LSP config
+			lspconfig.clangd.setup({
+				on_attach = on_attach,
 			})
 
 			-- Reference preview in Quick Fix List

@@ -3,7 +3,6 @@
 ---------------------------------------------------------------------------------------------------
 -----------------------------------Utility Plugins for Neovim--------------------------------------
 ---------------------------------------------------------------------------------------------------
---
 -- This file contains configurations for plugins that add various utility functionalities to Neovim:
 --
 -- 1. **gitsigns.nvim** - Adds git-related signs to the sign column, plus keybindings for
@@ -29,6 +28,21 @@
 --
 -- 7. **Conform** - Code - Language formatter tool, It provides syntax/code formatting using
 --    external formatters like "prettier", "blac", etc.
+--
+-- 8. **nvim-tree** - A file explorer tree for Neovim, providing an organized and customizable
+--    interface for navigating and managing files and directories within the editor. It supports
+--    icons, Git integration, and various customization options such as defining icons, layout
+--    preferences, and mapping keys. Ideal for quickly browsing and manipulating project files
+--    without leaving Neovim.
+--
+-- 9. **aerial.nvim** - A code outline plugin for Neovim, which displays a sidebar with a
+--    hierarchical view of symbols (functions, methods, classes, etc.) based on LSP, Treesitter,
+--    or ctags. This provides a structured overview of the code, helping with navigation and
+--    improving understanding of the file's layout. Configurable to display on either side of the
+--    editor and offers integration with other Neovim features like LSP and Treesitter.
+--
+--10. **stat.nvim** - A minimal statusline, it shows the file type, git changes and file path at
+--    the top of te terminal.
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
@@ -54,6 +68,68 @@ return {
 		end,
 	},
 
+	-- Configuration to install and use "Harpoon"
+	{
+		"theprimeagen/harpoon",
+		event = "VeryLazy",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("harpoon"):setup()
+		end,
+		keys = {
+			{
+				"<leader>a",
+				function()
+					require("harpoon"):list():add()
+				end,
+				desc = "harpoon file",
+			},
+			{
+				"<leader>h",
+				function()
+					local harpoon = require("harpoon")
+					harpoon.ui:toggle_quick_menu(harpoon:list())
+				end,
+				desc = "harpoon quick menu",
+			},
+			{
+				"<leader>1",
+				function()
+					require("harpoon"):list():select(1)
+				end,
+				desc = "harpoon to file 1",
+			},
+			{
+				"<leader>2",
+				function()
+					require("harpoon"):list():select(2)
+				end,
+				desc = "harpoon to file 2",
+			},
+			{
+				"<leader>3",
+				function()
+					require("harpoon"):list():select(3)
+				end,
+				desc = "harpoon to file 3",
+			},
+			{
+				"<leader>4",
+				function()
+					require("harpoon"):list():select(4)
+				end,
+				desc = "harpoon to file 4",
+			},
+			{
+				"<leader>5",
+				function()
+					require("harpoon"):list():select(5)
+				end,
+				desc = "harpoon to file 5",
+			},
+		},
+	},
 	-- Undotree configuration
 	{
 		"mbbill/undotree",
@@ -93,14 +169,14 @@ return {
 			vim.keymap.set(
 				"n",
 				"<leader>ff",
-				':let $FZF_DEFAULT_COMMAND=\'rg --files --hidden --glob "!.git/" --glob "!venv/" --glob "!.*" --glob "!node_modules" --glob "!.DS_Store" --glob "!lazy-lock.json"\' | Files<CR><CR>',
+				':let $FZF_DEFAULT_COMMAND=\'rg --files --hidden --glob "!.git/" --glob "!venv/" --glob "!.*" --glob "!node_modules" --glob "!.DS_Store" --glob "!cmake-build-debug/" --glob "!lazy-lock.json"\' | Files!<CR><CR>',
 				{ desc = "Search for files" }
 			)
 
 			vim.keymap.set(
 				"n",
 				"<leader>fh",
-				":let $FZF_DEFAULT_COMMAND='' | Files<CR>",
+				":let $FZF_DEFAULT_COMMAND='' | Files!<CR>",
 				{ desc = "Search for files including hidden files" }
 			)
 			vim.keymap.set("n", "<leader>fg", ":Rg<CR>", { desc = "Search within file contents" })
@@ -175,6 +251,90 @@ return {
 					python = { "black" },
 				},
 			})
+		end,
+	},
+
+	-- Configuration for NvimTree
+	{
+		"nvim-tree/nvim-tree.lua",
+		dependencies = {
+			-- "nvim-tree/nvim-web-devicons", -- for icons
+		},
+		keys = {
+			{
+				"<leader>ee",
+				function()
+					require("nvim-tree.api").tree.toggle({ focus = true })
+				end,
+				desc = "Toggle Nvim Tree",
+			},
+		},
+		config = function()
+			require("nvim-tree").setup({
+				renderer = {
+					icons = {
+						show = {
+							folder_arrow = false,
+						},
+						glyphs = {
+							default = "",
+							symlink = "",
+							git = {
+								unstaged = "✗",
+								staged = "✓",
+								unmerged = "",
+								renamed = "➜",
+								untracked = "★",
+								deleted = "",
+								ignored = "◌",
+							},
+							folder = {
+								default = ">",
+								open = "v",
+								empty = ">",
+								empty_open = "v",
+								symlink = "",
+							},
+						},
+					},
+				},
+				view = {
+					side = "right",
+					width = 30,
+				},
+			})
+			-- transparent background
+			vim.cmd([[ highlight NvimTreeNormal guibg=NONE ctermbg=NONE ]])
+		end,
+	},
+
+	-- Configuration for Aerial.nvim
+	{
+		"stevearc/aerial.nvim",
+		keys = {
+			{
+				"<leader>as",
+				function()
+					require("aerial").toggle()
+				end,
+				desc = "Toggle Aerial",
+			},
+		},
+		config = function()
+			require("aerial").setup({
+				backends = { "lsp", "treesitter", "ctags" },
+				layout = {
+					default_direction = "left", -- to left
+				},
+			})
+		end,
+	},
+
+  -- Config for minimal statusline "stat.nvim" 
+	{
+		"leath-dub/stat.nvim",
+		config = function()
+			require("stat").setup({})
 		end,
 	},
 }

@@ -79,7 +79,7 @@ keymap.set("n", "<C-h>", ":wincmd h<CR>")
 keymap.set("n", "<C-l>", ":wincmd l<CR>")
 
 -- Show native explorer nvim
-keymap.set("n", "<leader>ee", ":Lex<CR>")
+-- keymap.set("n", "<leader>ee", ":Lex<CR>")
 
 -- Split panes with native nvim
 keymap.set("n", "<leader>o", ":sp<CR>")
@@ -115,16 +115,20 @@ keymap.set("n", "<leader>we", ":%bdelete|edit#|bdelete#<CR>", { noremap = true, 
 keymap.set("v", "<leader>j", ":m '>+1<CR>gv=gv") -- move line up(v)
 keymap.set("v", "<leader>k", ":m '<-2<CR>gv=gv") -- move line down(v)
 
--- PYTHON TEMP: Replace "" with ''
-keymap.set("n", "<leader>fp", ":%s/\"/'/g<CR>gg", { noremap = true, silent = true })
+-- Surround words with symbols
+keymap.set("x", "<leader>s'", [[:s/\%V\(.*\)\%V/'\1'/ <CR>]], { desc = "Surround selection with '" })
+keymap.set("x", '<leader>s"', [[:s/\%V\(.*\)\%V/"\1"/ <CR>]], { desc = 'Surround selection with "' })
+keymap.set("x", "<leader>s*", [[:s/\%V\(.*\)\%V/*\1*/ <CR>]], { desc = "Surround selection with *" })
+keymap.set("x", "<leader>s)", [[:s/\%V\(.*\)\%V/(\1)/ <CR>]], { desc = "Surround selection with ()" })
+keymap.set("x", "<leader>s}", [[:s/\%V\(.*\)\%V/{\1}/ <CR>]], { desc = "Surround selection with {}" })
+keymap.set("x", "<leader>s]", [[:s/\%V\(.*\)\%V/[\1]/ <CR>]], { desc = "Surround selection with []" })
+keymap.set("x", "<leader>s>", [[:s/\%V\(.*\)\%V/<\1>/ <CR>]], { desc = "Surround selection with <>" })
 
-keymap.set("n", "<leader>1", "'1")
-keymap.set("n", "<leader>2", "'2")
-keymap.set("n", "<leader>3", "'3")
-keymap.set("n", "<leader>4", "'4")
-keymap.set("n", "<leader>5", "'5")
-keymap.set("n", "<leader>6", "'6")
-keymap.set("n", "<leader>7", "'7")
-keymap.set("n", "<leader>8", "'8")
-keymap.set("n", "<leader>9", "'9")
-keymap.set("n", "<leader>0", "'0")
+-- Surround selection words with symbols
+keymap.set("n", "<leader>s*", [[:s/\<<C-r><C-w>\>/*<C-r><C-w>\*/ <CR>]], { desc = "Surround word with *" })
+keymap.set("n", '<leader>s"', [[:s/\<<C-r><C-w>\>/"<C-r><C-w>\"/ <CR>]], { desc = 'Surround word with "' })
+keymap.set("n", "<leader>s'", [[:s/\<<C-r><C-w>\>/'<C-r><C-w>\'/ <CR>]], { desc = "Surround word with '" })
+keymap.set("n", "<leader>s)", [[:s/\<<C-r><C-w>\>/(<C-r><C-w>\)/ <CR>]], { desc = "Surround word with ()" })
+keymap.set("n", "<leader>s}", [[:s/\<<C-r><C-w>\>/{<C-r><C-w>\}/ <CR>]], { desc = "Surround word with {}" })
+keymap.set("n", "<leader>s]", [[:s/\<<C-r><C-w>\>/[<C-r><C-w>\]/ <CR>]], { desc = "Surround word with []" })
+keymap.set("n", "<leader>s>", [[:s/\<<C-r><C-w>\>/<<C-r><C-w>\>/ <CR>]], { desc = "Surround word with <>" })

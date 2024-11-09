@@ -34,13 +34,9 @@ opt.signcolumn = "yes"
 -- Removes the highlight from searched text upon leaving the search
 opt.hlsearch = false
 
--- Minimal Netrw explorer
-g.netrw_browse_split = 0
-g.netrw_banner = 0
-g.netrw_winsize = 25
-g.netrw_liststyle = 3
-g.netrw_keedir = 0
-
+-- Disable netrw
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
 
 -- Some default settings
 opt.tabstop = 2 -- Sets the number of spaces a tab is displayed as
@@ -96,3 +92,7 @@ api.nvim_create_user_command("W", "w", {})
 
 -- Create custom command for :Wq -> :wq
 api.nvim_create_user_command("Wq", "wq", {})
+
+-- vim.cmd("colorscheme darkblue")
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })

@@ -44,34 +44,34 @@
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
 
--- return {
--- 	"aktersnurra/no-clown-fiesta.nvim",
--- 	lazy = false,
--- 	priority = 1000,
---
--- 	config = function()
--- 		vim.cmd("colorscheme no-clown-fiesta")
---
--- 		vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#b46958", bg = "#232323" })
--- 		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
--- 		vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
--- 		vim.api.nvim_set_hl(0, "signcolumn", { bg = "none" })
--- 		vim.api.nvim_set_hl(0, "cursorlinenr", { fg = "#b46958", bg = "none", bold = true })
--- 		vim.api.nvim_set_hl(0, "LineNr", { fg = "#505050", bg = "none" })
--- 		vim.api.nvim_set_hl(0, "statusline", { bg = "#171717", fg = "#b46958" })
--- 		vim.api.nvim_set_hl(0, "normalfloat", { bg = "none" })
--- 		vim.api.nvim_set_hl(0, "floatborder", { bg = "none" })
--- 		vim.api.nvim_set_hl(0, "MsgArea", { bg = "none" })
--- 		vim.api.nvim_set_hl(0, "MsgSeparator", { bg = "none" })
--- 		vim.api.nvim_set_hl(0, "Cmdline", { bg = "none", ctermbg = "NONE" })
--- 		vim.api.nvim_set_hl(0, "CmdlineWin", { bg = "none", ctermbg = "NONE" })
--- 		vim.api.nvim_set_hl(0, "CmdlineMode", { bg = "none", ctermbg = "NONE" })
--- 		-- Fonts
--- 		vim.api.nvim_set_hl(0, "Comment", { italic = true })
--- 		vim.api.nvim_set_hl(0, "Keyword", { italic = true })
--- 		vim.api.nvim_set_hl(0, "Type", { italic = true })
--- 	end,
--- }
+return {
+	"aktersnurra/no-clown-fiesta.nvim",
+	lazy = false,
+	priority = 1000,
+
+	config = function()
+		vim.cmd("colorscheme no-clown-fiesta")
+
+		vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#b46958", bg = "#232323" })
+		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+		vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+		vim.api.nvim_set_hl(0, "signcolumn", { bg = "none" })
+		vim.api.nvim_set_hl(0, "cursorlinenr", { fg = "#b46958", bg = "none", bold = true })
+		vim.api.nvim_set_hl(0, "LineNr", { fg = "#505050", bg = "none" })
+		vim.api.nvim_set_hl(0, "statusline", { bg = "#171717", fg = "#b46958" })
+		vim.api.nvim_set_hl(0, "normalfloat", { bg = "none" })
+		vim.api.nvim_set_hl(0, "floatborder", { bg = "none" })
+		vim.api.nvim_set_hl(0, "MsgArea", { bg = "none" })
+		vim.api.nvim_set_hl(0, "MsgSeparator", { bg = "none" })
+		vim.api.nvim_set_hl(0, "Cmdline", { bg = "none", ctermbg = "NONE" })
+		vim.api.nvim_set_hl(0, "CmdlineWin", { bg = "none", ctermbg = "NONE" })
+		vim.api.nvim_set_hl(0, "CmdlineMode", { bg = "none", ctermbg = "NONE" })
+		-- Fonts
+		vim.api.nvim_set_hl(0, "Comment", { italic = true })
+		vim.api.nvim_set_hl(0, "Keyword", { italic = true })
+		vim.api.nvim_set_hl(0, "Type", { italic = true })
+	end,
+}
 
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
@@ -94,7 +94,7 @@
 
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
--------                   vim-256noir   Minimal, monochromatic b&w                         --------
+-------                       vim-256noir Minimal, monochromatic b&w                       --------
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
 
@@ -116,21 +116,23 @@
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
 
-return {
-	"kdheepak/monochrome.nvim",
-	config = function()
-		vim.opt.background = "dark"
-		vim.cmd("colorscheme monochrome")
-		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-		vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-		vim.api.nvim_set_hl(0, "signcolumn", { bg = "none" })
-		vim.api.nvim_set_hl(0, "cursorlinenr", { fg = "#FFFFFF", bg = "none", bold = true })
-	end,
-}
+-- return {
+-- 	{
+-- 		"kdheepak/monochrome.nvim",
+-- 		config = function()
+-- 			vim.opt.background = "dark"
+-- 			vim.cmd("colorscheme monochrome")
+-- 			vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- 			vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+-- 			vim.api.nvim_set_hl(0, "signcolumn", { bg = "none" })
+-- 			vim.api.nvim_set_hl(0, "cursorlinenr", { fg = "#FFFFFF", bg = "none", bold = true })
+-- 		end,
+-- 	},
+-- }
 
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
--------                   A lot of colorschemes                                            --------
+-------                             A lot of colorschemes                                  --------
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
 
@@ -151,4 +153,27 @@ return {
 -- 		vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { bg = "#3c3836", fg = "#83a598" })
 -- 		vim.api.nvim_set_hl(0, "DiagnosticSignHint", { bg = "#3c3836", fg = "#8ec07c" })
 -- 	end,
+-- }
+--
+
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+-------                             A blood red scheme color                               --------
+---------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+-- return {
+-- 	"sainttttt/flesh-and-blood",
+-- 	config = function()
+-- 		vim.opt.background = "dark"
+-- 		vim.cmd("colorscheme flesh-and-blood")
+-- 		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- 		vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+-- 		vim.api.nvim_set_hl(0, "signcolumn", { bg = "none" })
+-- 		vim.api.nvim_set_hl(0, "cursorlinenr", { fg = "#FFFFFF", bg = "none", bold = true })
+-- 	end,
+-- }
+
+-- return {
+-- 	-- Right now using a default colorscheme
 -- }
