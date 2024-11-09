@@ -2,7 +2,7 @@
 
 This is my customized Neovim configuration, designed to be lightweight and efficient by avoiding unnecessary plugins and fully leveraging Neovim's native capabilities. This setup is ideal for those seeking a fast, minimalist experience, with specific tweaks to key mappings, LSP integration, and a carefully curated selection of plugins.
 
-<img width="1728" alt="image" src="https://github.com/user-attachments/assets/2d8b04d8-bfa2-422d-b188-c8bfc1bca4c7">
+<img width="1728" alt="image" src="https://github.com/user-attachments/assets/b35f1827-8b26-4594-9617-901e5f587236">
 
 
 ## Purpose
