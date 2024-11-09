@@ -78,24 +78,9 @@ return {
 			-- rust_analyzer config
 			lspconfig.rust_analyzer.setup({
 				on_attach = on_attach,
+				root_dir = lspconfig.util.root_pattern("Cargo.toml", ".git"),
 			})
 
-			-- require("lspconfig").basedpyright.setup({
-			-- 	on_attach = on_attach,
-			-- 	settings = {
-			-- 		python = {
-			-- 			analysis = {
-			-- 				typeCheckingMode = "basic",
-			-- 				exclude = { "**/migrations/**" },
-			-- 				autoSearchPaths = true,
-			-- 				useLibraryCodeForTypes = true,
-			-- 				reportUnknownMemberType = false,
-			-- 				reportGeneralTypeIssues = false,
-			-- 			},
-			-- 		},
-			-- 	},
-			-- })
-      --
 			-- pyright config
 			require("lspconfig").pyright.setup({
 				on_attach = on_attach, -- Asegúrate de que 'on_attach' está definido en otro lugar de tu configuración
