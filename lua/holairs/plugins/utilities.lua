@@ -164,19 +164,22 @@ return {
 		config = function()
 			vim.g.fzf_preview_window = { "right:50%", "ctrl-/" } -- Preview on the right, taking 50%
 			vim.cmd([[let $FZF_DEFAULT_OPTS='--height=50% --layout=reverse --border' ]])
+			vim.cmd(
+				[[ let $FZF_DEFAULT_OPTS = '--height=50% --layout=reverse --border --color=fg:-1,bg:-1,hl:4,fg+:7,bg+:0,hl+:4,info:2,prompt:2,pointer:1,marker:5,spinner:4,header:3' ]]
+			)
 
 			-- Keyamps
 			vim.keymap.set(
 				"n",
 				"<leader>ff",
-				':let $FZF_DEFAULT_COMMAND=\'rg --files --hidden --glob "!.git/" --glob "!venv/" --glob "!.*" --glob "!node_modules" --glob "!.DS_Store" --glob "!cmake-build-debug/" --glob "!lazy-lock.json"\' | Files!<CR><CR>',
+				':let $FZF_DEFAULT_COMMAND=\'rg --files --hidden --glob "!.git/" --glob "!venv/" --glob "!.*" --glob "!node_modules" --glob "!.DS_Store" --glob "!cmake-build-debug/" --glob "!lazy-lock.json"\' | Files<CR><CR>',
 				{ desc = "Search for files" }
 			)
 
 			vim.keymap.set(
 				"n",
 				"<leader>fh",
-				":let $FZF_DEFAULT_COMMAND='' | Files!<CR>",
+				":let $FZF_DEFAULT_COMMAND='' | Files<CR>",
 				{ desc = "Search for files including hidden files" }
 			)
 			vim.keymap.set("n", "<leader>fg", ":Rg<CR>", { desc = "Search within file contents" })
@@ -330,7 +333,7 @@ return {
 		end,
 	},
 
-  -- Config for minimal statusline "stat.nvim" 
+	-- Config for minimal statusline "stat.nvim"
 	{
 		"leath-dub/stat.nvim",
 		config = function()
