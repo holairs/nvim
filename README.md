@@ -50,6 +50,7 @@ The LSP configuration is minimal, avoiding unnecessary plugins for autocompletio
 ### Plugin Selection
 
 The plugins chosen focus on adding valuable functionality that complements Neovim without cluttering the experience:
+- **Total Plugins: ** 
 
 - **[gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim):** Displays git-related signs in the sign column and provides keybindings for navigating diffs and operations like blame and hunk reset.
 - **[Harpoon](https://github.com/theprimeagen/harpoon):** Allows quick file navigation with a simple, customizable interface.
@@ -58,9 +59,8 @@ The plugins chosen focus on adding valuable functionality that complements Neovi
 - **[Flash.nvim](https://github.com/folke/flash.nvim):** Enhances search navigation with a single-key system for jumping to matches.
 - **[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter):** Provides syntax highlighting and support for advanced text manipulation in multiple languages.
 - **[Conform](https://github.com/stevearc/conform.nvim):** A code formatting tool that uses external formatters like `prettier` and `black`.
-- **[nvim-tree](https://github.com/nvim-tree/nvim-tree.lua):** A file explorer for Neovim, offering an organized interface with icon and Git support.
+- **[oil.nvim](https://github.com/stevearc/oil.nvim):** A file manager and explorer for Neovim, offering an organized interface.
 - **[aerial.nvim](https://github.com/stevearc/aerial.nvim):** Displays a hierarchical view of code symbols, such as functions and classes, to help with navigation.
-- **[stat.nvim](https://github.com/leath-dub/stat.nvim):** A minimal statusline that shows file type, git changes, and file path at the top of the terminal.
 
 ### Colorscheme
 

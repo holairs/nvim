@@ -7,7 +7,6 @@
 --
 -- 1. **gitsigns.nvim** - Adds git-related signs to the sign column, plus keybindings for
 --    navigation and operations like blame, diff, and hunk reset. Only loads if in a git repository.
---
 -- 2. **harpoon** - Allows quick navigation between files. You can mark files and switch between
 --    them with customizable keybindings. This is the Harpoon 2 branch.
 --
@@ -29,20 +28,14 @@
 -- 7. **Conform** - Code - Language formatter tool, It provides syntax/code formatting using
 --    external formatters like "prettier", "blac", etc.
 --
--- 8. **nvim-tree** - A file explorer tree for Neovim, providing an organized and customizable
---    interface for navigating and managing files and directories within the editor. It supports
---    icons, Git integration, and various customization options such as defining icons, layout
---    preferences, and mapping keys. Ideal for quickly browsing and manipulating project files
---    without leaving Neovim.
---
--- 9. **aerial.nvim** - A code outline plugin for Neovim, which displays a sidebar with a
+-- 8. **aerial.nvim** - A code outline plugin for Neovim, which displays a sidebar with a
 --    hierarchical view of symbols (functions, methods, classes, etc.) based on LSP, Treesitter,
 --    or ctags. This provides a structured overview of the code, helping with navigation and
 --    improving understanding of the file's layout. Configurable to display on either side of the
 --    editor and offers integration with other Neovim features like LSP and Treesitter.
---
---10. **stat.nvim** - A minimal statusline, it shows the file type, git changes and file path at
---    the top of te terminal.
+--    
+-- 9. **oil.nvim** - A file explorer and file manager for Neovim, providing an organized 
+--    interface for navigating and managing files and directories within the editor. 
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
@@ -192,7 +185,7 @@ return {
 		"folke/flash.nvim",
 		keys = {
 			{
-				"?",
+				"'",
 				mode = { "n", "x", "o" },
 				function()
 					require("flash").jump()
@@ -257,60 +250,6 @@ return {
 		end,
 	},
 
-	-- Configuration for NvimTree
-	{
-		"nvim-tree/nvim-tree.lua",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons", -- for icons
-		},
-		keys = {
-			{
-				"<leader>ee",
-				function()
-					require("nvim-tree.api").tree.toggle({ focus = true })
-				end,
-				desc = "Toggle Nvim Tree",
-			},
-		},
-		config = function()
-			require("nvim-tree").setup({
-				renderer = {
-					icons = {
-						show = {
-							folder_arrow = false,
-						},
-						glyphs = {
-							default = "",
-							symlink = "",
-							git = {
-								unstaged = "✗",
-								staged = "✓",
-								unmerged = "",
-								renamed = "➜",
-								untracked = "★",
-								deleted = "",
-								ignored = "◌",
-							},
-							folder = {
-								default = ">",
-								open = "v",
-								empty = ">",
-								empty_open = "v",
-								symlink = "",
-							},
-						},
-					},
-				},
-				view = {
-					side = "right",
-					width = 30,
-				},
-			})
-			-- transparent background
-			vim.cmd([[ highlight NvimTreeNormal guibg=NONE ctermbg=NONE ]])
-		end,
-	},
-
 	-- Configuration for Aerial.nvim
 	{
 		"stevearc/aerial.nvim",
@@ -330,6 +269,31 @@ return {
 					default_direction = "left", -- to left
 				},
 			})
+		end,
+	},
+
+	-- Configuration for "Oil.nvim" explorer
+	{
+		"stevearc/oil.nvim",
+		keys = {
+			{
+				"<leader>ee",
+				function()
+					require("oil").open()
+				end,
+				desc = "Open Oil file explorer",
+			},
+		},
+		---@module 'oil'
+		---@type oil.SetupOpts
+		opts = {
+			columns = { "icon" },
+			view_options = {
+				show_hidden = true,
+			},
+		},
+		config = function()
+			require("oil").setup()
 		end,
 	},
 }
