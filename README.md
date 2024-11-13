@@ -62,18 +62,9 @@ The plugins chosen focus on adding valuable functionality that complements Neovi
 - **[aerial.nvim](https://github.com/stevearc/aerial.nvim):** Displays a hierarchical view of code symbols, such as functions and classes, to help with navigation.
 - **[stat.nvim](https://github.com/leath-dub/stat.nvim):** A minimal statusline that shows file type, git changes, and file path at the top of the terminal.
 
-### Colorschemes
+### Colorscheme
 
-This configuration includes a selection of colorschemes, each offering a unique aesthetic for Neovim. To activate a colorscheme, simply uncomment the corresponding block in the `plugins/colorscheme.lua` file and restart Neovim. Only one colorscheme should be active at a time for the best visual results.
-
-#### Available Colorschemes
-
-- **Moonfly** - A retro-inspired theme with pastel tones that enhance readability and contrast, perfect for long coding sessions.
-- **No Clown Fiesta** - A minimalist theme with soft, low-contrast colors to reduce eye strain and create a calm visual environment.
-- **256noir** - A monochromatic black-and-white theme that provides a clean and distraction-free workspace, ideal for those who prefer simplicity.
-- **Monochrome** - Another minimal black-and-white theme that introduces subtle variations for better element differentiation and a refined look.
-
-Each colorscheme includes additional highlights for elements such as line numbers, cursor line, and status line to ensure consistency and clarity. Feel free to experiment by enabling each one to find the style that suits you best.
+This configuration includes a default built-in colorscheme selected called "habamax" it can be modified inside "core/vim-options.lua"
 
 ## Project Structure
 

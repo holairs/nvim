@@ -261,7 +261,7 @@ return {
 	{
 		"nvim-tree/nvim-tree.lua",
 		dependencies = {
-			-- "nvim-tree/nvim-web-devicons", -- for icons
+			"nvim-tree/nvim-web-devicons", -- for icons
 		},
 		keys = {
 			{
@@ -330,14 +330,6 @@ return {
 					default_direction = "left", -- to left
 				},
 			})
-		end,
-	},
-
-	-- Config for minimal statusline "stat.nvim"
-	{
-		"leath-dub/stat.nvim",
-		config = function()
-			require("stat").setup({})
 		end,
 	},
 }
