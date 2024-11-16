@@ -2,8 +2,7 @@
 
 ---------------------------------------------------------------------------------------------------
 -----------------------------------Utility Plugins for Neovim--------------------------------------
----------------------------------------------------------------------------------------------------
--- This file contains configurations for plugins that add various utility functionalities to Neovim:
+--------------------------------------------------------------------------------------------------- This file contains configurations for plugins that add various utility functionalities to Neovim:
 --
 -- 1. **gitsigns.nvim** - Adds git-related signs to the sign column, plus keybindings for
 --    navigation and operations like blame, diff, and hunk reset. Only loads if in a git repository.
@@ -33,9 +32,18 @@
 --    or ctags. This provides a structured overview of the code, helping with navigation and
 --    improving understanding of the file's layout. Configurable to display on either side of the
 --    editor and offers integration with other Neovim features like LSP and Treesitter.
---    
--- 9. **oil.nvim** - A file explorer and file manager for Neovim, providing an organized 
---    interface for navigating and managing files and directories within the editor. 
+--
+-- 9. **oil.nvim** - A file explorer and file manager for Neovim, providing an organized
+--    interface for navigating and managing files and directories within the editor.
+--
+-- 10. **todo-comments.nvim** - A Neovim plugin that highlights and organizes TODO comments
+--     in the code. It supports custom keywords, integrations with LocList and QuickFix, and
+--     allows for quick navigation between TODOs. Ideal for tracking tasks, notes, or markers
+--     in the codebase, enhancing productivity and organization during development.
+
+-- 11. **zen-mode.nvim** - A Neovim plugin that provides a distraction-free coding environment
+--     by centering and resizing the editor to a comfortable width, hiding unnecessary UI elements,
+--     and optionally dimming background features. Perfect for focused coding sessions or writing.
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
@@ -295,5 +303,46 @@ return {
 		config = function()
 			require("oil").setup()
 		end,
+	},
+  -- Configuration for "todo-comments"
+
+	{
+		"folke/todo-comments.nvim",
+		event = "VeryLazy",
+		keys = {
+			{
+				"\\",
+				function()
+					vim.cmd("TodoQuickFix")
+				end,
+				desc = "Open Todo Quick Fix List",
+			},
+		},
+		config = function()
+			require("todo-comments").setup({})
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "qf",
+				callback = function(event)
+					local opts = { buffer = event.buf, silent = true }
+					vim.keymap.set("n", "<C-n>", "<cmd>cn | wincmd p<CR>", opts)
+					vim.keymap.set("n", "<C-p>", "<cmd>cN | wincmd p<CR>", opts)
+					vim.keymap.set("n", "<CR>", ":cclose<CR><CR>", opts)
+				end,
+			})
+		end,
+	},
+
+	-- Configuration for "ZenMode" 
+	{
+		"folke/zen-mode.nvim",
+		keys = {
+			{
+				"<leader>z",
+				function()
+					vim.cmd("ZenMode")
+				end,
+				desc = "Toggle Zenmode",
+			},
+		},
 	},
 }

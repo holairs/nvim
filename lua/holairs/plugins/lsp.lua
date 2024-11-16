@@ -44,6 +44,11 @@ return {
 				on_attach = on_attach,
 			})
 
+			require("lspconfig").r_language_server.setup({
+				cmd = { "R", "--slave", "-e", "languageserver::run()" },
+				filetypes = { "r", "rmd" },
+			})
+
 			-- lua-language-server config
 			lspconfig.lua_ls.setup({
 				on_attach = on_attach,

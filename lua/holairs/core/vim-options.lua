@@ -3,7 +3,6 @@
 local opt = vim.opt
 local g = vim.g
 local api = vim.api
-
 -- Encoding options
 vim.scriptencoding = "utf-8"
 vim.encoding = "utf-8"
@@ -95,7 +94,7 @@ api.nvim_create_user_command("Wq", "wq", {})
 
 -- Default colorscheme options
 vim.opt.background = "dark"
-vim.cmd("colorscheme habamax")
+vim.cmd("colorscheme wildcharm")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
