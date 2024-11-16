@@ -1,27 +1,27 @@
 -- plugins/lsp/lsp.lua
 
----------------------------------------------------------------------------------------------------
------------------------------------------------LSP-------------------------------------------------
----------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------LSP---------------------------------------
+-------------------------------------------------------------------------------
 --
---                This configuration manages the LSP (Language Server Protocol).
---                No plugin is used to auto-install or manage the LSP servers.
---                The plugin "neovim/nvim-lspconfig" is in use, so it is necessary
---                to manually install and configure each LSP server.
+--     This configuration manages the LSP (Language Server Protocol).
+--     No plugin is used to auto-install or manage the LSP servers.
+--     The plugin "neovim/nvim-lspconfig" is in use, so it is necessary
+--     to manually install and configure each LSP server.
 --
---                Default personal LSP:
+--     Default personal LSP:
 --
---                              * rust_analyzer -> For Rust
---                              * ts_ls         -> For TypeScript & Javascript
---                              * lua_ls        -> For Lua
---                              * pyright       -> For Python
+--                   * rust_analyzer -> For Rust
+--                   * ts_ls         -> For TypeScript & Javascript
+--                   * lua_ls        -> For Lua
+--                   * pyright       -> For Python
 --
---                If is necessary to install another just add another LSP manual call
---                in the respective space.
+--     If is necessary to install another just add another LSP manual call
+--     in the respective space.
 --
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 return {
 	{
@@ -35,8 +35,14 @@ return {
 				local opts = { noremap = true, silent = true, buffer = bufnr }
 
 				-- Native LSP mappgings
-				vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition(LSP)" })
-				vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "Search references (LSP)" })
+				vim.keymap.set("n", "gd", vim.lsp.buf.definition, {
+					buffer = bufnr,
+					desc = "Go to definition(LSP)",
+				})
+				vim.keymap.set("n", "gr", vim.lsp.buf.references, {
+					buffer = bufnr,
+					desc = "Search references (LSP)",
+				})
 			end
 
 			-- ts_ls config for TypeScript/JavaScript
@@ -59,7 +65,11 @@ return {
 						},
 						diagnostics = {
 							globals = { "vim" },
-							disable = { "undefined-global", "unused-local", "undefined-field" },
+							disable = {
+								"undefined-global",
+								"unused-local",
+								"undefined-field",
+							},
 						},
 						workspace = {
 							library = vim.api.nvim_get_runtime_file("", true),
@@ -73,9 +83,14 @@ return {
 				on_init = function(client)
 					local path = vim.fn.fnamemodify(vim.fn.getcwd(), ":p")
 					if string.find(path, "config/nvim") then
-						client.config.settings.Lua.diagnostics.disable =
-							{ "undefined-global", "unused-local", "undefined-field" }
-						client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+						client.config.settings.Lua.diagnostics.disable = {
+							"undefined-global",
+							"unused-local",
+							"undefined-field",
+						}
+						client.notify("workspace/didChangeConfiguration", {
+							settings = client.config.settings,
+						})
 					end
 				end,
 			})
@@ -88,19 +103,14 @@ return {
 
 			-- pyright config
 			require("lspconfig").pyright.setup({
-				on_attach = on_attach, -- Asegúrate de que 'on_attach' está definido en otro lugar de tu configuración
+				on_attach = on_attach,
 				settings = {
 					python = {
 						analysis = {
-							-- Configuración del análisis de tipos
 							typeCheckingMode = "basic",
-							-- Excluir directorios de las migraciones para evitar falsos positivos
 							exclude = { "**/migrations/**" },
-							-- Automáticamente añade rutas de búsqueda basadas en el entorno
 							autoSearchPaths = true,
-							-- Usa el código de la biblioteca para inferir tipos
 							useLibraryCodeForTypes = true,
-							-- Desactivar reportes específicos para hacer la experiencia menos ruidosa
 							reportUnknownMemberType = false,
 							reportGeneralTypeIssues = false,
 						},

@@ -1,53 +1,50 @@
 -- plugins/utilities.lua
 
----------------------------------------------------------------------------------------------------
------------------------------------Utility Plugins for Neovim--------------------------------------
---------------------------------------------------------------------------------------------------- This file contains configurations for plugins that add various utility functionalities to Neovim:
+-------------------------------------------------------------------------------
+--------------------------- Utility Plugins for Neovim ------------------------
+-------------------------------------------------------------------------------
+-- 1. **gitsigns.nvim** - Adds git-related signs to the sign column, plus
+--    keybindings for navigation and operations like blame, diff, and reset.
+--    Only loads if in a git repository.
 --
--- 1. **gitsigns.nvim** - Adds git-related signs to the sign column, plus keybindings for
---    navigation and operations like blame, diff, and hunk reset. Only loads if in a git repository.
--- 2. **harpoon** - Allows quick navigation between files. You can mark files and switch between
---    them with customizable keybindings. This is the Harpoon 2 branch.
+-- 2. **harpoon** - Allows quick navigation between files. You can mark files
+--    and switch between them with customizable keybindings.
 --
--- 3. **undotree** - Visualizes the undo history and allows navigation through different file states
---    with persistent undo enabled.
+-- 3. **undotree** - Visualizes the undo history and allows navigation through
+--    different file states with persistent undo enabled.
 --
--- 4. **fzf.vim** - Integrates FZF (Fuzzy Finder) for searching files, contents, and more. Provides
---    keybindings for various search functionalities akin to advanced IDEs.
+-- 4. **fzf.vim** - Integrates FZF (Fuzzy Finder) for searching files, contents,
+--    and more. Provides keybindings for various search functionalities akin to
+--    advanced IDEs.
 --
--- 5. **Flash** - Improves navigation through search results with an efficient one-key system
---    to jump to any match on the screen, making search and replace operations or simply
---    finding occurrences much faster and intuitive.
+-- 5. **Flash** - Improves navigation through search results with an efficient
+--    one-key system to jump to any match on the screen, making search and
+--    replace operations or simply finding occurrences much faster and intuitive.
 --
--- 6. **nvim-treesitter** - A parser generator tool and an incremental parsing library. It
---    provides syntax highlighting, indentation support, and enables features like text objects
---    for various programming languages, improving code readability and editor functionality.
---    Languages supported by default in this config include JavaScript, TypeScript, JSON, and Rust.
+-- 6. **nvim-treesitter** - A parser generator tool and an incremental parsing
+--    library. Provides syntax highlighting, indentation support, and enables
+--    features like text objects for programming languages.
 --
--- 7. **Conform** - Code - Language formatter tool, It provides syntax/code formatting using
---    external formatters like "prettier", "blac", etc.
+-- 7. **Conform** - Language formatter tool, supports external formatters like
+--    "prettier" and "black" for efficient code formatting.
 --
--- 8. **aerial.nvim** - A code outline plugin for Neovim, which displays a sidebar with a
---    hierarchical view of symbols (functions, methods, classes, etc.) based on LSP, Treesitter,
---    or ctags. This provides a structured overview of the code, helping with navigation and
---    improving understanding of the file's layout. Configurable to display on either side of the
---    editor and offers integration with other Neovim features like LSP and Treesitter.
+-- 8. **aerial.nvim** - Displays a sidebar with a hierarchical view of symbols
+--    (functions, methods, classes, etc.), improving navigation and
+--    understanding of the file's layout.
 --
--- 9. **oil.nvim** - A file explorer and file manager for Neovim, providing an organized
---    interface for navigating and managing files and directories within the editor.
+-- 9. **oil.nvim** - A file explorer and manager providing an organized
+--    interface for navigating and managing files and directories within the
+--    editor.
 --
--- 10. **todo-comments.nvim** - A Neovim plugin that highlights and organizes TODO comments
---     in the code. It supports custom keywords, integrations with LocList and QuickFix, and
---     allows for quick navigation between TODOs. Ideal for tracking tasks, notes, or markers
---     in the codebase, enhancing productivity and organization during development.
-
--- 11. **zen-mode.nvim** - A Neovim plugin that provides a distraction-free coding environment
---     by centering and resizing the editor to a comfortable width, hiding unnecessary UI elements,
---     and optionally dimming background features. Perfect for focused coding sessions or writing.
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------
-
+-- 10. **todo-comments.nvim** - Highlights and organizes TODO comments in the
+--     code. Supports LocList, QuickFix, and custom keywords for enhanced
+--     productivity.
+--
+-- 11. **zen-mode.nvim** - Offers a distraction-free coding environment by
+--     centering the editor, hiding UI elements, and dimming distractions.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 return {
 
 	-- Configuration of "gitsigns"
@@ -61,8 +58,14 @@ return {
 			require("gitsigns").setup({})
 			vim.keymap.set("n", "<leader>gn", ":Gitsigns toggle_current_line_blame<CR>")
 			vim.keymap.set("n", "<leader>df", ":Gitsigns diffthis<CR>")
-			vim.keymap.set("n", "<leader>ghr", ":Gitsigns reset_hunk<CR>", { noremap = true, silent = true }) -- Reset actual hunk
-			vim.keymap.set("n", "<leader>gr", ":Gitsigns reset_buffer<CR>", { noremap = true, silent = true }) -- Reset all file
+			vim.keymap.set("n", "<leader>ghr", ":Gitsigns reset_hunk<CR>", {
+				noremap = true, -- Reset actual hunk
+				silent = true,
+			})
+			vim.keymap.set("n", "<leader>gr", ":Gitsigns reset_buffer<CR>", {
+				noremap = true,
+				silent = true,
+			}) -- Reset all file
 			vim.keymap.set("v", "<leader>ghr", function()
 				require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 			end, { noremap = true, silent = true }) -- Reset selected (v) hunks
@@ -136,18 +139,22 @@ return {
 		"mbbill/undotree",
 		config = function()
 			-- Enable persistent undo
-			vim.opt.undofile = true -- Enable the persistent undo system
-			vim.opt.undodir = vim.fn.expand("~/.undotree") -- Directory where undo files will be saved
-
+			vim.opt.undofile = true
+			-- Directory where undo files will be saved
+			vim.opt.undodir = vim.fn.expand("~/.undotree")
 			-- Create the directory if it doesn't exist
-			vim.fn.system({ "mkdir", "-p", vim.opt.undodir._value }) -- Ensure the correct value is used as a string
+			-- Ensure the correct value is used as a string
+			vim.fn.system({ "mkdir", "-p", vim.opt.undodir._value })
 
 			-- Mapping to open Undotree
-			vim.api.nvim_set_keymap("n", "<leader>u", ":UndotreeToggle<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>u", ":UndotreeToggle<CR>", {
+				noremap = true,
+				silent = true,
+			})
 		end,
 	},
 
-	-- Configuration of "fzf" for navigating and searching for files, text, references,
+	-- Configuration of "fzf"
 	{
 		"junegunn/fzf.vim",
 		dependencies = {
@@ -163,17 +170,27 @@ return {
 			{ "<leader>fd", desc = "List open buffers" },
 		},
 		config = function()
-			vim.g.fzf_preview_window = { "right:50%", "ctrl-/" } -- Preview on the right, taking 50%
-			vim.cmd([[let $FZF_DEFAULT_OPTS='--height=50% --layout=reverse --border' ]])
-			vim.cmd(
-				[[ let $FZF_DEFAULT_OPTS = '--height=50% --layout=reverse --border --color=fg:-1,bg:-1,hl:4,fg+:7,bg+:0,hl+:4,info:2,prompt:2,pointer:1,marker:5,spinner:4,header:3' ]]
-			)
+			-- Preview on the right, taking 50%
+			vim.g.fzf_preview_window = { "right:50%", "ctrl-/" }
+			vim.cmd([[
+        let $FZF_DEFAULT_OPTS='--height=50% --layout=reverse --border'
+      ]])
+
+			vim.cmd([[
+        let $FZF_DEFAULT_OPTS = '--height=50% --layout=reverse --border '
+          \ .. '--color=fg:-1,bg:-1,hl:4,fg+:7,bg+:0,hl+:4,info:2,'
+          \ .. 'prompt:2,pointer:1,marker:5,spinner:4,header:3'
+      ]])
 
 			-- Keyamps
 			vim.keymap.set(
 				"n",
 				"<leader>ff",
-				':let $FZF_DEFAULT_COMMAND=\'rg --files --hidden --glob "!.git/" --glob "!venv/" --glob "!.*" --glob "!node_modules" --glob "!.DS_Store" --glob "!cmake-build-debug/" --glob "!lazy-lock.json"\' | Files<CR><CR>',
+				":let $FZF_DEFAULT_COMMAND='rg --files --hidden "
+					.. '--glob "!.git/" --glob "!venv/" --glob "!.*" '
+					.. '--glob "!node_modules" --glob "!.DS_Store" '
+					.. '--glob "!cmake-build-debug/" --glob "!lazy-lock.json"\' '
+					.. "| Files<CR><CR>",
 				{ desc = "Search for files" }
 			)
 
@@ -183,8 +200,12 @@ return {
 				":let $FZF_DEFAULT_COMMAND='' | Files<CR>",
 				{ desc = "Search for files including hidden files" }
 			)
-			vim.keymap.set("n", "<leader>fg", ":Rg<CR>", { desc = "Search within file contents" })
-			vim.keymap.set("n", "<leader>fd", ":Buffers<CR>", { desc = "List open buffers" })
+			vim.keymap.set("n", "<leader>fg", ":Rg<CR>", {
+				desc = "Search within file contents",
+			})
+			vim.keymap.set("n", "<leader>fd", ":Buffers<CR>", {
+				desc = "List open buffers",
+			})
 		end,
 	},
 
@@ -241,7 +262,11 @@ return {
 	{
 		"stevearc/conform.nvim",
 		keys = {
-			{ "<leader>fa", ":lua require('conform').format({ async = true })<CR>", desc = "Formatear archivo" },
+			{
+				"<leader>fa",
+				":lua require('conform').format({ async = true })<CR>",
+				desc = "Formatear archivo",
+			},
 		},
 		config = function()
 			require("conform").setup({
@@ -304,7 +329,7 @@ return {
 			require("oil").setup()
 		end,
 	},
-  -- Configuration for "todo-comments"
+	-- Configuration for "todo-comments"
 
 	{
 		"folke/todo-comments.nvim",
@@ -332,7 +357,7 @@ return {
 		end,
 	},
 
-	-- Configuration for "ZenMode" 
+	-- Configuration for "ZenMode"
 	{
 		"folke/zen-mode.nvim",
 		keys = {
