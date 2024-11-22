@@ -11,7 +11,7 @@ keymap.set("x", "<leader>p", '"_dP', {
 -- Select a structured block (syntax)
 keymap.set("n", "<leader>aa", "V$%")
 
--- Make selection and fold of a structured code fragment 
+-- Make selection and fold of a structured code fragment
 -- (as if it were syntax-based)
 keymap.set("n", "<leader>af", "V$%zf")
 
@@ -121,7 +121,7 @@ keymap.set("n", "-", "<C-x>")
 keymap.set("n", "dw", 'vb"_d')
 
 -- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
+keymap.set("n", "<leader>sa", "gg<S-v>G")
 
 -- Move between buffers
 keymap.set("n", "<Tab>", ":bnext<CR>", {
@@ -194,3 +194,8 @@ keymap.set("n", "<leader>s]", [[:s/\<<C-r><C-w>\>/[<C-r><C-w>\]/ <CR>]], {
 keymap.set("n", "<leader>s>", [[:s/\<<C-r><C-w>\>/<<C-r><C-w>\>/ <CR>]], {
 	desc = "Surround word with <>",
 })
+
+-- Open netrw in the current directory
+-- keymap.set("n", "<leader>ee", "<Cmd>23Lexplore! %:p:h<CR>", {
+--     desc = "Toggle Right-side netrw file explorer with 25 col width",
+-- })

@@ -55,7 +55,9 @@ return {
 			return vim.fn.isdirectory(".git") == 1
 		end,
 		config = function()
-			require("gitsigns").setup({})
+			require("gitsigns").setup({
+				current_line_blame = true, -- Enable git blame on line
+			})
 			vim.keymap.set("n", "<leader>gn", ":Gitsigns toggle_current_line_blame<CR>")
 			vim.keymap.set("n", "<leader>df", ":Gitsigns diffthis<CR>")
 			vim.keymap.set("n", "<leader>ghr", ":Gitsigns reset_hunk<CR>", {
@@ -299,7 +301,7 @@ return {
 			require("aerial").setup({
 				backends = { "lsp", "treesitter", "ctags" },
 				layout = {
-					default_direction = "left", -- to left
+					default_direction = "right", -- to right
 				},
 			})
 		end,
@@ -308,25 +310,53 @@ return {
 	-- Configuration for "Oil.nvim" explorer
 	{
 		"stevearc/oil.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{
 				"<leader>ee",
 				function()
-					require("oil").open()
+					local oil = require("oil")
+					local bufnr = vim.api.nvim_get_current_buf()
+					local bufname = vim.api.nvim_buf_get_name(bufnr)
+
+					-- Check if the current buffer is an oil buffer
+					if bufname:match("^oil://") then
+						-- If it's open, close it
+						oil.close()
+					else
+						-- If it's not open, open it as a floating window
+						oil.open_float()
+					end
 				end,
-				desc = "Open Oil file explorer",
-			},
-		},
-		---@module 'oil'
-		---@type oil.SetupOpts
-		opts = {
-			columns = { "icon" },
-			view_options = {
-				show_hidden = true,
+				desc = "Toggle Oil floating file explorer",
 			},
 		},
 		config = function()
-			require("oil").setup()
+			require("oil").setup({
+				default_file_explorer = true,
+				delete_to_trash = true,
+				skip_confirms_for_simple_edits = true,
+				view_options = {
+					show_hidden = true,
+					natural_order = true,
+					is_always_hidden = function(name, _)
+						return name == ".DS_Store" or name == ".git"
+					end,
+				},
+				win_options = {
+					wrap = true,
+				},
+				-- Floating window options
+				float = {
+					padding = 2,
+					max_width = 100,
+					max_height = 30,
+					border = "rounded", -- Options: "none", "single", "double", "rounded", etc.
+					win_options = {
+						winblend = 3, -- Transparency
+					},
+				},
+			})
 		end,
 	},
 	-- Configuration for "todo-comments"
@@ -362,12 +392,44 @@ return {
 		"folke/zen-mode.nvim",
 		keys = {
 			{
-				"<leader>z",
+				"<leader>zz",
 				function()
 					vim.cmd("ZenMode")
 				end,
-				desc = "Toggle Zenmode",
+				desc = "Toggle ZenMode",
 			},
 		},
 	},
+
+	-- {
+	--   "yetone/avante.nvim",
+	--   event = "VeryLazy",
+	--   lazy = false,
+	--   version = false,
+	--   opts = {
+	--     provider = "openai", -- Selecciona OpenAI como proveedor
+	--     openai = {
+	--       model = "gpt-4", -- Modelo a usar (ajusta según tus necesidades)
+	--       temperature = 0.7, -- Controla la creatividad de las respuestas
+	--       max_tokens = 2048, -- Límite de tokens por respuesta
+	--     },
+	--     mappings = {
+	--       submit = {
+	--         normal = "<CR>", -- Tecla para enviar preguntas a OpenAI
+	--       },
+	--     },
+	--     windows = {
+	--       position = "right", -- Posición del panel lateral
+	--       width = 30, -- Ancho del panel lateral
+	--     },
+	--   },
+	--   build = "make",
+	--   dependencies = {
+	--     "nvim-treesitter/nvim-treesitter",
+	--     "stevearc/dressing.nvim",
+	--     "nvim-lua/plenary.nvim",
+	--     "MunifTanjim/nui.nvim",
+	--     "zbirenbaum/copilot.lua",
+	--   },
+	-- }
 }
