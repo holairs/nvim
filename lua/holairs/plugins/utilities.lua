@@ -36,12 +36,9 @@
 --    interface for navigating and managing files and directories within the
 --    editor.
 --
--- 10. **todo-comments.nvim** - Highlights and organizes TODO comments in the
---     code. Supports LocList, QuickFix, and custom keywords for enhanced
---     productivity.
---
--- 11. **zen-mode.nvim** - Offers a distraction-free coding environment by
---     centering the editor, hiding UI elements, and dimming distractions.
+-- 10. **copilot.vim** - Integrates GitHub Copilot into Neovim, providing
+--     AI-assisted code completion and suggestions for faster and smarter
+--     coding.
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
@@ -349,87 +346,51 @@ return {
 				-- Floating window options
 				float = {
 					padding = 2,
-					max_width = 100,
-					max_height = 30,
+					max_width = 60,
+					max_height = 20,
 					border = "rounded", -- Options: "none", "single", "double", "rounded", etc.
 					win_options = {
-						winblend = 3, -- Transparency
+						winblend = 0, -- Transparency
 					},
 				},
 			})
 		end,
 	},
-	-- Configuration for "todo-comments"
 
+	-- Configuration for "Copilot"
 	{
-		"folke/todo-comments.nvim",
-		event = "VeryLazy",
-		keys = {
-			{
-				"\\",
-				function()
-					vim.cmd("TodoQuickFix")
-				end,
-				desc = "Open Todo Quick Fix List",
-			},
-		},
+		"github/copilot.vim",
 		config = function()
-			require("todo-comments").setup({})
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "qf",
-				callback = function(event)
-					local opts = { buffer = event.buf, silent = true }
-					vim.keymap.set("n", "<C-n>", "<cmd>cn | wincmd p<CR>", opts)
-					vim.keymap.set("n", "<C-p>", "<cmd>cN | wincmd p<CR>", opts)
-					vim.keymap.set("n", "<CR>", ":cclose<CR><CR>", opts)
-				end,
+			-- Activar Copilot automáticamente
+			vim.cmd("Copilot enable")
+
+			-- Accept suggestions with Ctrl-F
+			vim.api.nvim_set_keymap("i", "<C-f>", 'copilot#Accept("<CR>")', {
+				silent = true,
+				expr = true,
+			})
+
+			-- Navigate suggestions with Ctrl-N and Ctrl-P
+			vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>(copilot-next)", {})
+			vim.api.nvim_set_keymap("i", "<C-p>", "<Plug>(copilot-previous)", {})
+
+			-- Toggle Copilot (enable/disable)
+			local copilot_enabled = true -- Initial state
+			function _G.toggle_copilot()
+				if copilot_enabled then
+					vim.cmd("Copilot disable")
+					copilot_enabled = false
+					print("Copilot disabled")
+				else
+					vim.cmd("Copilot enable")
+					copilot_enabled = true
+					print("Copilot enabled")
+				end
+			end
+			vim.api.nvim_set_keymap("n", "<leader>cp", ":lua toggle_copilot()<CR>", {
+				noremap = true,
+				silent = true,
 			})
 		end,
 	},
-
-	-- Configuration for "ZenMode"
-	{
-		"folke/zen-mode.nvim",
-		keys = {
-			{
-				"<leader>zz",
-				function()
-					vim.cmd("ZenMode")
-				end,
-				desc = "Toggle ZenMode",
-			},
-		},
-	},
-
-	-- {
-	--   "yetone/avante.nvim",
-	--   event = "VeryLazy",
-	--   lazy = false,
-	--   version = false,
-	--   opts = {
-	--     provider = "openai", -- Selecciona OpenAI como proveedor
-	--     openai = {
-	--       model = "gpt-4", -- Modelo a usar (ajusta según tus necesidades)
-	--       temperature = 0.7, -- Controla la creatividad de las respuestas
-	--       max_tokens = 2048, -- Límite de tokens por respuesta
-	--     },
-	--     mappings = {
-	--       submit = {
-	--         normal = "<CR>", -- Tecla para enviar preguntas a OpenAI
-	--       },
-	--     },
-	--     windows = {
-	--       position = "right", -- Posición del panel lateral
-	--       width = 30, -- Ancho del panel lateral
-	--     },
-	--   },
-	--   build = "make",
-	--   dependencies = {
-	--     "nvim-treesitter/nvim-treesitter",
-	--     "stevearc/dressing.nvim",
-	--     "nvim-lua/plenary.nvim",
-	--     "MunifTanjim/nui.nvim",
-	--     "zbirenbaum/copilot.lua",
-	--   },
-	-- }
 }

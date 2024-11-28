@@ -92,7 +92,7 @@ opt.cursorline = true
 vim.cmd([[
   augroup CustomCursorLine
     autocmd!
-    autocmd ColorScheme * highlight CursorLine ctermbg=NONE guibg=NONE 
+    autocmd ColorScheme * highlight CursorLine gui=underline ctermbg=NONE guibg=NONE 
     " Use or add "gui=underline" to set underline
   augroup END
 ]])
@@ -100,21 +100,22 @@ vim.cmd([[
 -- Cursor as "Block" but with "Blink" effect in insert mode
 opt.guicursor = "n-v-c-sm:block,i-ci-ve:blinkon1"
 
+-- Disable native mode line
+opt.showmode = true
+
 -- CommandLine use just 1 line
 opt.cmdheight = 1
 
--- Create custom command for :Q -> :q
+-- Create custom command for miskates :)
 api.nvim_create_user_command("Q", "q", {})
-
--- Create custom command for :W -> :w
 api.nvim_create_user_command("W", "w", {})
-
--- Create custom command for :Wq -> :wq
 api.nvim_create_user_command("Wq", "wq", {})
 
 -- Default colorscheme options
 vim.opt.background = "dark"
-vim.cmd("colorscheme retrobox")
+vim.cmd("colorscheme lunaperche")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", ctermbg = "none" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none", ctermbg = "none" })

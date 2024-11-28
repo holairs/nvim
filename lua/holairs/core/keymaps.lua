@@ -8,6 +8,17 @@ keymap.set("x", "<leader>p", '"_dP', {
 	silent = true,
 })
 
+-- Move selections up / down
+keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move selection up(v)
+keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move selection down(v)
+
+-- Move selection right / left
+vim.keymap.set("v", "<", "<gv", opts) -- move selection to the left
+vim.keymap.set("v", ">", ">gv", opts) -- move selection to the right
+
+-- Delete but without saving the deleted data on clipboard
+keymap.set({"n", "v"}, "<leader>d", [["+y]])
+
 -- Select a structured block (syntax)
 keymap.set("n", "<leader>aa", "V$%")
 
@@ -28,7 +39,7 @@ keymap.set("t", "<leader>qq", "<C-\\><C-n>:tabclose<CR>", {
 })
 
 -- Remap to exit from terminal insert mode
-keymap.set("t", "<C-v>", "<C-\\><C-n>", {
+keymap.set("t", "||", "<C-\\><C-n>", {
 	noremap = true,
 	silent = true,
 })
@@ -100,9 +111,6 @@ keymap.set("n", "<C-j>", ":wincmd j<CR>")
 keymap.set("n", "<C-h>", ":wincmd h<CR>")
 keymap.set("n", "<C-l>", ":wincmd l<CR>")
 
--- Show native explorer nvim
--- keymap.set("n", "<leader>ee", ":Lex<CR>")
-
 -- Split panes with native nvim
 keymap.set("n", "<leader>o", ":sp<CR>")
 keymap.set("n", "<leader>p", ":vsp<CR>")
@@ -144,10 +152,6 @@ keymap.set("n", "<leader>we", ":%bdelete|edit#|bdelete#<CR>", {
 	noremap = true,
 	silent = true,
 })
-
--- Move selected lines in visual mode
-keymap.set("v", "<leader>j", ":m '>+1<CR>gv=gv") -- move line up(v)
-keymap.set("v", "<leader>k", ":m '<-2<CR>gv=gv") -- move line down(v)
 
 -- Surround words with symbols
 keymap.set("x", "<leader>s'", [[:s/\%V\(.*\)\%V/'\1'/ <CR>]], {
@@ -194,6 +198,22 @@ keymap.set("n", "<leader>s]", [[:s/\<<C-r><C-w>\>/[<C-r><C-w>\]/ <CR>]], {
 keymap.set("n", "<leader>s>", [[:s/\<<C-r><C-w>\>/<<C-r><C-w>\>/ <CR>]], {
 	desc = "Surround word with <>",
 })
+
+-- Function to focus on a float window
+function FocusFloat()
+    local wins = vim.api.nvim_tabpage_list_wins(0)
+    for _, win in ipairs(wins) do
+        local config = vim.api.nvim_win_get_config(win)
+        if config.relative ~= "" then
+            vim.api.nvim_set_current_win(win)
+            return
+        end
+    end
+    print("No float window found")
+end
+
+-- Keymap to focus on a float window
+vim.api.nvim_set_keymap('n', '<leader>jf', ':lua FocusFloat()<CR>', { noremap = true, silent = true })
 
 -- Open netrw in the current directory
 -- keymap.set("n", "<leader>ee", "<Cmd>23Lexplore! %:p:h<CR>", {
