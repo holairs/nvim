@@ -39,9 +39,40 @@
 -- 10. **copilot.vim** - Integrates GitHub Copilot into Neovim, providing
 --     AI-assisted code completion and suggestions for faster and smarter
 --     coding.
+--
+-- 11. **codecompanion.nvim** - A plugin that provides a floating window with
+--     information about the current line, such as the function signature,
+--     documentation, and more. It also supports markdown preview for better
+--     documentation reading.
+--
+-- 12. **grug-far.nvim** - A plugin that allows you to find and replace text
+--     across multiple files in your project. It provides a quick and efficient
+--     way to perform bulk search and replace operations.
+--
+-- 13. **indent-blankline.nvim** - Adds indent guides to the left side of the
+--     buffer, making it easier to visualize the indentation levels and
+--     structure of the code.
+--
+-- 14. **nvim-autopairs** - A plugin that automatically inserts and manages
+--     pairs of brackets, quotes, and other characters, making coding faster
+--     and more efficient.
+--
+-- 15. **solarized.nvim** - A colorscheme plugin that provides the Solarized
+--     color palette for Neovim, with light and dark mode options and
+--     customization features for a visually pleasing coding experience.
+--
+-- 16. **nvim-tree.lua** - A file explorer plugin that provides a tree view of
+--     the project directory, allowing easy navigation and management of files
+--     and directories within Neovim.
+--
+-- 17. **zen-mode.nvim** - A plugin that creates a distraction-free writing
+--     environment by hiding UI elements and focusing on the current buffer,
+--     providing a clean and minimalistic workspace for writing and coding.
+--
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
+
 return {
 
 	-- Configuration of "gitsigns"
@@ -133,7 +164,8 @@ return {
 			},
 		},
 	},
-	-- Undotree configuration
+
+	-- Configuration of "undotree"
 	{
 		"mbbill/undotree",
 		config = function()
@@ -144,7 +176,6 @@ return {
 			-- Create the directory if it doesn't exist
 			-- Ensure the correct value is used as a string
 			vim.fn.system({ "mkdir", "-p", vim.opt.undodir._value })
-
 			-- Mapping to open Undotree
 			vim.api.nvim_set_keymap("n", "<leader>u", ":UndotreeToggle<CR>", {
 				noremap = true,
@@ -174,13 +205,11 @@ return {
 			vim.cmd([[
         let $FZF_DEFAULT_OPTS='--height=50% --layout=reverse --border'
       ]])
-
 			vim.cmd([[
         let $FZF_DEFAULT_OPTS = '--height=50% --layout=reverse --border '
           \ .. '--color=fg:-1,bg:-1,hl:4,fg+:7,bg+:0,hl+:4,info:2,'
           \ .. 'prompt:2,pointer:1,marker:5,spinner:4,header:3'
       ]])
-
 			-- Keyamps
 			vim.keymap.set(
 				"n",
@@ -192,7 +221,6 @@ return {
 					.. "| Files<CR><CR>",
 				{ desc = "Search for files" }
 			)
-
 			vim.keymap.set(
 				"n",
 				"<leader>fh",
@@ -257,14 +285,14 @@ return {
 		end,
 	},
 
-	-- Conform configuration
+	-- Configuration for "Conform"
 	{
 		"stevearc/conform.nvim",
 		keys = {
 			{
 				"<leader>fa",
 				":lua require('conform').format({ async = true })<CR>",
-				desc = "Formatear archivo",
+				desc = "Format file",
 			},
 		},
 		config = function()
@@ -298,7 +326,7 @@ return {
 			require("aerial").setup({
 				backends = { "lsp", "treesitter", "ctags" },
 				layout = {
-					default_direction = "right", -- to right
+					default_direction = "left", -- to right
 				},
 			})
 		end,
@@ -310,12 +338,11 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{
-				"<leader>ee",
+				"<leader>er",
 				function()
 					local oil = require("oil")
 					local bufnr = vim.api.nvim_get_current_buf()
 					local bufname = vim.api.nvim_buf_get_name(bufnr)
-
 					-- Check if the current buffer is an oil buffer
 					if bufname:match("^oil://") then
 						-- If it's open, close it
@@ -346,8 +373,8 @@ return {
 				-- Floating window options
 				float = {
 					padding = 2,
-					max_width = 60,
-					max_height = 20,
+					max_width = 70,
+					max_height = 25,
 					border = "rounded", -- Options: "none", "single", "double", "rounded", etc.
 					win_options = {
 						winblend = 0, -- Transparency
@@ -363,17 +390,14 @@ return {
 		config = function()
 			-- Activar Copilot automáticamente
 			vim.cmd("Copilot enable")
-
 			-- Accept suggestions with Ctrl-F
 			vim.api.nvim_set_keymap("i", "<C-f>", 'copilot#Accept("<CR>")', {
 				silent = true,
 				expr = true,
 			})
-
 			-- Navigate suggestions with Ctrl-N and Ctrl-P
 			vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>(copilot-next)", {})
 			vim.api.nvim_set_keymap("i", "<C-p>", "<Plug>(copilot-previous)", {})
-
 			-- Toggle Copilot (enable/disable)
 			local copilot_enabled = true -- Initial state
 			function _G.toggle_copilot()
@@ -392,5 +416,186 @@ return {
 				silent = true,
 			})
 		end,
+	},
+
+	-- Configuration for "codecompanion"
+	{
+		"olimorris/codecompanion.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+			-- The following are optional to enable a nice markdown preview
+			{
+				"MeanderingProgrammer/render-markdown.nvim",
+				ft = { "markdown", "codecompanion" },
+			},
+		},
+		keys = {
+			{
+				"<leader>cc",
+				"<cmd>CodeCompanionChat Toggle<cr>",
+				mode = { "n", "v" },
+				desc = "Toggle Code Companion Chat",
+			},
+		},
+		lazy = true,
+		config = function()
+			require("codecompanion").setup({})
+		end,
+	},
+
+	-- Configuration for "grug-far"
+	{
+		"MagicDuck/grug-far.nvim",
+		keys = {
+			{
+				"<leader>fr",
+				"<cmd>GrugFar<cr>",
+				desc = "Find and replace files",
+			},
+		},
+		lazy = true,
+		config = function()
+			require("grug-far").setup({})
+		end,
+	},
+
+	-- Configuration for "indent-blankline"
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		main = "ibl",
+		opts = {
+			indent = { char = "┊" },
+		},
+	},
+
+	-- Configuration for "nvim-autopairs"
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = function()
+			require("nvim-autopairs").setup()
+		end,
+	},
+
+	-- Configuration for NvimTree
+	{
+		"nvim-tree/nvim-tree.lua",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons", -- for icons
+		},
+		keys = {
+			{
+				"<leader>ee",
+				function()
+					require("nvim-tree.api").tree.toggle({ find_file = true, focus = true })
+				end,
+				desc = "Toggle and find current file in Nvim Tree",
+			},
+			{
+				"<leader>ew",
+				function()
+					require("nvim-tree.api").tree.collapse_all()
+				end,
+				desc = "Collapse all folders in Nvim Tree",
+			},
+		},
+		config = function()
+			require("nvim-tree").setup({
+				filters = {
+					dotfiles = false,
+				},
+				renderer = {
+					icons = {
+						show = {
+							folder_arrow = false,
+						},
+						glyphs = {
+							default = "",
+							symlink = "",
+							git = {
+								unstaged = "",
+								staged = "✓",
+								unmerged = "",
+								renamed = "➜",
+								untracked = "★",
+								deleted = "",
+								ignored = "◌",
+							},
+							folder = {
+								default = "",
+								open = "",
+								empty = "",
+								empty_open = "",
+								symlink = "",
+							},
+						},
+					},
+				},
+				view = {
+					side = "right",
+					width = 30,
+				},
+			})
+			-- transparent background
+			vim.cmd([[ highlight NvimTreeNormal guibg=NONE ctermbg=NONE ]])
+		end,
+	},
+
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		---@type snacks.Config
+		opts = {
+			bigfile = { enabled = true }, -- Big file support
+			-- input = { enabled = true }, -- Nice UI for Floating input windows
+			quickfile = { enabled = true }, -- Quick load file
+			statuscolumn = { enabled = true }, -- Git status in SignColumn
+			words = { enabled = true }, -- Highlight words under cursor
+			lazygit = { enabled = true }, -- In Editor Lazygit integration
+			zen = { enabled = true }, -- Zen mode
+			terminal = { enabled = true }, -- Terminal
+		},
+		keys = {
+			{
+				"<leader>gg",
+				function()
+					Snacks.lazygit()
+				end,
+				desc = "Lazygit",
+			},
+			{
+				"<leader>z",
+				function()
+					Snacks.zen()
+				end,
+				desc = "Toggle Zen Mode",
+			},
+			{
+				"<leader>Z",
+				function()
+					Snacks.zen.zoom()
+				end,
+				desc = "Toggle Zoom",
+			},
+			{
+				"<C-/>",
+				function()
+					Snacks.terminal()
+				end,
+				desc = "Toggle Terminal",
+			},
+			{
+				"<C-/>",
+				function()
+					vim.cmd("stopinsert") -- Exit terminal mode
+					Snacks.terminal()
+				end,
+				mode = "t",
+				desc = "Toggle Terminal (Terminal Mode)",
+			},
+		},
 	},
 }

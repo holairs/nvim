@@ -1,5 +1,6 @@
 -- core/keymaps.lua
 
+local utils = require("holairs.core.custom-actions")
 local keymap = vim.keymap -- for conciseness
 
 -- Better Paste in Visual-line mode
@@ -13,11 +14,14 @@ keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move selection up(v)
 keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move selection down(v)
 
 -- Move selection right / left
-vim.keymap.set("v", "<", "<gv", opts) -- move selection to the left
-vim.keymap.set("v", ">", ">gv", opts) -- move selection to the right
+keymap.set("v", "<", "<gv", opts) -- move selection to the left
+keymap.set("v", ">", ">gv", opts) -- move selection to the right
+
+-- Delete actual line keeping the blank line
+keymap.set("n", "<leader>cv", "0C<Esc>")
 
 -- Delete but without saving the deleted data on clipboard
-keymap.set({"n", "v"}, "<leader>d", [["+y]])
+keymap.set({ "n", "v" }, "<leader>d", [["+y]])
 
 -- Select a structured block (syntax)
 keymap.set("n", "<leader>aa", "V$%")
@@ -39,7 +43,7 @@ keymap.set("t", "<leader>qq", "<C-\\><C-n>:tabclose<CR>", {
 })
 
 -- Remap to exit from terminal insert mode
-keymap.set("t", "||", "<C-\\><C-n>", {
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", {
 	noremap = true,
 	silent = true,
 })
@@ -82,8 +86,8 @@ keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {
 -- Move between native tabs
 
 -- Move to previous & next tabs
-keymap.set("n", "<leader>[", ":tabprevious<CR>")
-keymap.set("n", "<leader>]", ":tabnext<CR>")
+vim.keymap.set("n", "<C-,>", ":tabprevious<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-.>", ":tabnext<CR>", { noremap = true, silent = true })
 
 -- Got to specific tab using numbers
 keymap.set("n", "1p", "1gt")
@@ -199,21 +203,20 @@ keymap.set("n", "<leader>s>", [[:s/\<<C-r><C-w>\>/<<C-r><C-w>\>/ <CR>]], {
 	desc = "Surround word with <>",
 })
 
--- Function to focus on a float window
-function FocusFloat()
-    local wins = vim.api.nvim_tabpage_list_wins(0)
-    for _, win in ipairs(wins) do
-        local config = vim.api.nvim_win_get_config(win)
-        if config.relative ~= "" then
-            vim.api.nvim_set_current_win(win)
-            return
-        end
-    end
-    print("No float window found")
-end
+-- Keymap to toggle line numbers
+vim.keymap.set("n", "<leader>cn", function()
+	utils.ToggleLineNumber()
+end, { noremap = true, silent = true })
+
+-- Keymap to toggle background theme
+vim.keymap.set("n", "<leader>cb", function()
+	utils.ToggleTheme()
+end, { noremap = true, silent = true })
 
 -- Keymap to focus on a float window
-vim.api.nvim_set_keymap('n', '<leader>jf', ':lua FocusFloat()<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>jf", function()
+	utils.FocusFloat()
+end, { noremap = true, silent = true })
 
 -- Open netrw in the current directory
 -- keymap.set("n", "<leader>ee", "<Cmd>23Lexplore! %:p:h<CR>", {

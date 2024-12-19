@@ -15,6 +15,7 @@
 --                   * ts_ls         -> For TypeScript & Javascript
 --                   * lua_ls        -> For Lua
 --                   * pyright       -> For Python
+--                   * clangd        -> For C/C++
 --
 --     If is necessary to install another just add another LSP manual call
 --     in the respective space.
@@ -27,8 +28,15 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			"hrsh7th/nvim-cmp", -- Core autocompletion plugin
+			"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
+			"hrsh7th/cmp-path", -- File path completions
+		},
 		config = function()
 			local lspconfig = require("lspconfig")
+			local cmp = require("cmp")
+			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 			-- Mappings and options function when LSP is attached
 			local on_attach = function(client, bufnr)
@@ -48,11 +56,6 @@ return {
 			-- ts_ls config for TypeScript/JavaScript
 			lspconfig.ts_ls.setup({
 				on_attach = on_attach,
-			})
-
-			require("lspconfig").r_language_server.setup({
-				cmd = { "R", "--slave", "-e", "languageserver::run()" },
-				filetypes = { "r", "rmd" },
 			})
 
 			-- lua-language-server config
@@ -123,6 +126,36 @@ return {
 				on_attach = on_attach,
 			})
 
+			-- nvim-cmp setup
+			cmp.setup({
+				mapping = cmp.mapping.preset.insert({
+					["<C-Space>"] = cmp.mapping.complete(), -- Trigger autocompletion
+					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Confirm selection
+					["<C-e>"] = cmp.mapping.abort(), -- Close completion menu
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+				}),
+				sources = {
+					{ name = "nvim_lsp" }, -- LSP completions
+					{ name = "path" }, -- Path completions
+				},
+				window = {
+					completion = cmp.config.window.bordered(),
+					documentation = cmp.config.window.bordered(),
+				},
+			})
 			-- Reference preview in Quick Fix List
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "qf",

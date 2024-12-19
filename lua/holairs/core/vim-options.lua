@@ -1,8 +1,12 @@
 -- core/vim-options.lua
-
 local opt = vim.opt
 local g = vim.g
 local api = vim.api
+local o = vim.o
+local command = api.nvim_create_user_command
+local hl = vim.api.nvim_set_hl
+local set_sign = vim.fn.sign_define
+local cmd = vim.cmd
 
 -- Encoding options
 vim.scriptencoding = "utf-8"
@@ -83,13 +87,34 @@ opt.splitright = true
 -- Specifically, 'i' means 'auto-wrap text using textwidth'.
 opt.formatoptions:append({ "i" })
 
--- Custom statusline
-opt.statusline = "%f %m %r %=%-14.(%l,%c%V%) %P %y"
+o.showtabline = 1 -- Hide tabline when there is only one tab
+o.tabline = "%!v:lua.TabLine()" -- Use lua function to generate tabline
+
+function TabLine()
+	local s = ""
+	for tabnr = 1, vim.fn.tabpagenr("$") do
+		-- Select the current tab
+		local active = (tabnr == vim.fn.tabpagenr()) and "%#TabLineSel#" or "%#TabLine#"
+		s = s .. active
+
+		-- Active buffer name
+		local buflist = vim.fn.tabpagebuflist(tabnr)
+		local winnr = vim.fn.tabpagewinnr(tabnr)
+		local bufname = vim.fn.bufname(buflist[winnr])
+		local filename = vim.fn.fnamemodify(bufname, ":t") -- Get filename only
+
+		-- Show filename or "[No Name]" if it's empty
+		s = s .. " " .. (filename ~= "" and filename or "[Blank]") .. " "
+	end
+
+	s = s .. "%#TabLineFill#" -- Fill white space
+	return s
+end
 
 -- Set cursorline
 opt.cursorline = true
 
-vim.cmd([[
+cmd([[
   augroup CustomCursorLine
     autocmd!
     autocmd ColorScheme * highlight CursorLine gui=underline ctermbg=NONE guibg=NONE 
@@ -107,15 +132,24 @@ opt.showmode = true
 opt.cmdheight = 1
 
 -- Create custom command for miskates :)
-api.nvim_create_user_command("Q", "q", {})
-api.nvim_create_user_command("W", "w", {})
-api.nvim_create_user_command("Wq", "wq", {})
+command("Q", "q", {})
+command("W", "w", {})
+command("Wq", "wq", {})
 
--- Default colorscheme options
-vim.opt.background = "dark"
-vim.cmd("colorscheme lunaperche")
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none", ctermbg = "none" })
-vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none", ctermbg = "none" })
+-- Set default colorscheme
+o.background = "dark"
+cmd("colorscheme retrobox")
+hl(0, "Normal", { bg = "none" })
+hl(0, "NormalNC", { bg = "none" })
+hl(0, "NormalFloat", { bg = "none" })
+hl(0, "FloatBorder", { bg = "none" })
+hl(0, "SignColumn", { bg = "none" })
+hl(0, "EndOfBuffer", { bg = "none" })
+hl(0, "ColorColumn", { bg = "#303030" })
+
+-- Set Error diagnostic sign
+set_sign("DiagnosticSignError", {
+	text = ">>",
+	texthl = "DiagnosticSignError",
+	numhl = "",
+})
