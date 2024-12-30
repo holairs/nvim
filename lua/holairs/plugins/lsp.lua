@@ -14,8 +14,6 @@
 --                   * rust_analyzer -> For Rust
 --                   * ts_ls         -> For TypeScript & Javascript
 --                   * lua_ls        -> For Lua
---                   * pyright       -> For Python
---                   * clangd        -> For C/C++
 --
 --     If is necessary to install another just add another LSP manual call
 --     in the respective space.
@@ -53,6 +51,12 @@ return {
 				})
 			end
 
+			-------------------------------------------------------------------------------
+			-------------------------------------------------------------------------------
+			--                 Manual LSP server setup for each language                 --
+			-------------------------------------------------------------------------------
+			-------------------------------------------------------------------------------
+
 			-- ts_ls config for TypeScript/JavaScript
 			lspconfig.ts_ls.setup({
 				on_attach = on_attach,
@@ -60,42 +64,33 @@ return {
 
 			-- lua-language-server config
 			lspconfig.lua_ls.setup({
-				on_attach = on_attach,
 				settings = {
 					Lua = {
 						runtime = {
+							-- Tell the language server which version of Lua you're using
+							-- (most likely LuaJIT in the case of Neovim)
 							version = "LuaJIT",
 						},
 						diagnostics = {
-							globals = { "vim" },
-							disable = {
-								"undefined-global",
-								"unused-local",
-								"undefined-field",
+							-- Get the language server to recognize the ⁠ vim ⁠ global
+							globals = {
+								"vim",
+								"require",
+								"opts",
+								"bufnr",
+								"_value",
 							},
 						},
 						workspace = {
+							-- Make the server aware of Neovim runtime files
 							library = vim.api.nvim_get_runtime_file("", true),
-							checkThirdParty = false,
 						},
+						-- Do not send telemetry data containing a randomized but unique identifier
 						telemetry = {
 							enable = false,
 						},
 					},
 				},
-				on_init = function(client)
-					local path = vim.fn.fnamemodify(vim.fn.getcwd(), ":p")
-					if string.find(path, "config/nvim") then
-						client.config.settings.Lua.diagnostics.disable = {
-							"undefined-global",
-							"unused-local",
-							"undefined-field",
-						}
-						client.notify("workspace/didChangeConfiguration", {
-							settings = client.config.settings,
-						})
-					end
-				end,
 			})
 
 			-- rust_analyzer config
@@ -104,29 +99,12 @@ return {
 				root_dir = lspconfig.util.root_pattern("Cargo.toml", ".git"),
 			})
 
-			-- pyright config
-			require("lspconfig").pyright.setup({
-				on_attach = on_attach,
-				settings = {
-					python = {
-						analysis = {
-							typeCheckingMode = "basic",
-							exclude = { "**/migrations/**" },
-							autoSearchPaths = true,
-							useLibraryCodeForTypes = true,
-							reportUnknownMemberType = false,
-							reportGeneralTypeIssues = false,
-						},
-					},
-				},
-			})
+			-------------------------------------------------------------------------------
+			-------------------------------------------------------------------------------
+			--                              nvim-cmp setup                               --
+			-------------------------------------------------------------------------------
+			-------------------------------------------------------------------------------
 
-			-- C/C++ LSP config
-			lspconfig.clangd.setup({
-				on_attach = on_attach,
-			})
-
-			-- nvim-cmp setup
 			cmp.setup({
 				mapping = cmp.mapping.preset.insert({
 					["<C-Space>"] = cmp.mapping.complete(), -- Trigger autocompletion

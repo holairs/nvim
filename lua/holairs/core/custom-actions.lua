@@ -30,14 +30,16 @@ end
 function M.ToggleTheme()
 	if vim.o.background == "light" then
 		vim.o.background = "dark"
+		vim.cmd("colorscheme habamax")
 	else
 		vim.o.background = "light"
+		vim.cmd("colorscheme default")
 	end
 
-  -- Reapply colorscheme
-	vim.cmd("colorscheme retrobox")
+	-- Reapply colorscheme if dark and light is available with the same name
+	-- vim.cmd("colorscheme habamax")
 
-  -- Apply transparency
+	-- Apply transparency
 	set_transparency()
 end
 

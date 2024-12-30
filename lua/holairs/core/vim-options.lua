@@ -102,9 +102,14 @@ function TabLine()
 		local winnr = vim.fn.tabpagewinnr(tabnr)
 		local bufname = vim.fn.bufname(buflist[winnr])
 		local filename = vim.fn.fnamemodify(bufname, ":t") -- Get filename only
+		local foldername = vim.fn.fnamemodify(bufname, ":h:t")
 
-		-- Show filename or "[No Name]" if it's empty
-		s = s .. " " .. (filename ~= "" and filename or "[Blank]") .. " "
+		-- Show folder/filename or "[Blank]" if the filename is empty
+		if filename ~= "" then
+			s = s .. " " .. foldername .. "/" .. filename .. " "
+		else
+			s = s .. " [Blank] "
+		end
 	end
 
 	s = s .. "%#TabLineFill#" -- Fill white space
@@ -138,14 +143,13 @@ command("Wq", "wq", {})
 
 -- Set default colorscheme
 o.background = "dark"
-cmd("colorscheme retrobox")
+cmd("colorscheme habamax")
 hl(0, "Normal", { bg = "none" })
 hl(0, "NormalNC", { bg = "none" })
 hl(0, "NormalFloat", { bg = "none" })
 hl(0, "FloatBorder", { bg = "none" })
 hl(0, "SignColumn", { bg = "none" })
 hl(0, "EndOfBuffer", { bg = "none" })
-hl(0, "ColorColumn", { bg = "#303030" })
 
 -- Set Error diagnostic sign
 set_sign("DiagnosticSignError", {

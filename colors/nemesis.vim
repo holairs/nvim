@@ -37,19 +37,19 @@ hi TabLineFill guibg=#20232a
 hi CursorLine guibg=#db4f36
 
 " Sintaxis del código
-hi Keyword guifg=#4040b3 gui=bold                      " Palabras clave (azul oscuro)
-hi String guifg=#b34040                                " Cadenas de texto (rojo oscuro)
-hi Function guifg=#d3d7de gui=bold                     " Funciones (gris claro)
-hi Identifier guifg=#4040b3                            " Identificadores/variables (azul oscuro)
-hi Type guifg=#b34040                                  " Tipos de datos (rojo oscuro)
-hi Number guifg=#4040b3                                " Números (azul oscuro)
-hi Constant guifg=#b34040                              " Constantes (rojo oscuro)
-hi Statement guifg=#4040b3 gui=bold                    " Declaraciones (azul oscuro)
-hi PreProc guifg=#b34040                               " Preprocesadores (rojo oscuro)
+hi Keyword guifg=#4040b3 gui=bold
+hi String guifg=#b34040
+hi Function guifg=#d3d7de gui=bold
+hi Identifier guifg=#4040b3
+hi Type guifg=#b34040
+hi Number guifg=#4040b3
+hi Constant guifg=#b34040
+hi Statement guifg=#4040b3 gui=bold
+hi PreProc guifg=#b34040
 
-" Fondo para la columna de color y otros elementos
+" Fondo para la columna de color y otros
 hi VertSplit guibg=#0d0d12 guifg=#3b3f45
 
 " Otros elementos
-hi Error guifg=#ff5555 guibg=#0d0d12 gui=bold          " Errores
-hi Visual guibg=#3b3f45                                " Selección visual
+hi Error guifg=#ff5555 guibg=#0d0d12 gui=bold     
+hi Visual guibg=#3b3f45                           

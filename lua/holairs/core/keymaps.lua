@@ -43,7 +43,7 @@ keymap.set("t", "<leader>qq", "<C-\\><C-n>:tabclose<CR>", {
 })
 
 -- Remap to exit from terminal insert mode
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", {
+vim.keymap.set("t", "||", "<C-\\><C-n>", {
 	noremap = true,
 	silent = true,
 })
