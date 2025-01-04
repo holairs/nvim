@@ -4,7 +4,6 @@ local g = vim.g
 local api = vim.api
 local o = vim.o
 local command = api.nvim_create_user_command
-local hl = vim.api.nvim_set_hl
 local set_sign = vim.fn.sign_define
 local cmd = vim.cmd
 
@@ -12,6 +11,9 @@ local cmd = vim.cmd
 vim.scriptencoding = "utf-8"
 vim.encoding = "utf-8"
 vim.fileencoding = "utf-8"
+
+-- Set the shell to fish
+vim.opt.shell = "fish"
 
 -- Map the space bar as the main command key
 g.mapleader = " "
@@ -140,16 +142,10 @@ opt.cmdheight = 1
 command("Q", "q", {})
 command("W", "w", {})
 command("Wq", "wq", {})
+command("Wqa", "wqa", {})
 
 -- Set default colorscheme
 o.background = "dark"
-cmd("colorscheme habamax")
-hl(0, "Normal", { bg = "none" })
-hl(0, "NormalNC", { bg = "none" })
-hl(0, "NormalFloat", { bg = "none" })
-hl(0, "FloatBorder", { bg = "none" })
-hl(0, "SignColumn", { bg = "none" })
-hl(0, "EndOfBuffer", { bg = "none" })
 
 -- Set Error diagnostic sign
 set_sign("DiagnosticSignError", {

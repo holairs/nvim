@@ -30,7 +30,8 @@ function M.setup()
 		red = "#B34040",
 		yellow = "#F1C40F",
 		orange = "#E67E22",
-		green = "#E67E22",
+		orange_2 = "#b56809",
+		green = "#2ECC71",
 		purple = "#9B59B6",
 		light_blue = "#5353BA",
 		hard_red = "#ff0000",
@@ -44,7 +45,7 @@ function M.setup()
 	set(0, "LineNr", { fg = colors.light_gray, bg = "none" })
 	set(0, "CursorLine", { underline = true, ctermbg = "NONE" })
 	set(0, "CursorLineNr", { fg = colors.yellow, bg = "none" })
-	set(0, "SignColumn", { fg = colors.light_gray, bg = colors.dark_gray })
+	set(0, "SignColumn", { fg = "none", bg = "none" })
 	set(0, "StatusLine", { fg = colors.foreground, bg = colors.dark_gray })
 	set(0, "StatusLineNC", { fg = colors.foreground, bg = colors.mid_gray })
 	set(0, "TabLine", { fg = colors.foreground, bg = colors.dark_gray })
@@ -85,13 +86,35 @@ function M.setup()
 	set(0, "Constant", { fg = colors.orange })
 	set(0, "Statement", { fg = colors.orange, bold = true })
 	set(0, "PreProc", { fg = colors.purple })
-	set(0, "Delimiter", { fg = colors.green })
+	set(0, "Delimiter", { fg = colors.orange_2 })
 	set(0, "Special", { fg = colors.light_blue })
 
 	-- Plugins
-	set(0, "GitSignsAdd", { fg = colors.green, bg = colors.dark_gray })
-	set(0, "GitSignsChange", { fg = colors.yellow, bg = colors.dark_gray })
-	set(0, "GitSignsDelete", { fg = colors.red, bg = colors.dark_gray })
-end
+	-- Gitsigns
+	set(0, "GitSignsAdd", { fg = colors.green, bg = "none" })
+	set(0, "GitSignsChange", { fg = colors.yellow, bg = "none" })
+	set(0, "GitSignsDelete", { fg = colors.red, bg = "none" })
 
+	-- Folke Noice (In progress)
+
+	-- Folke Snacks
+	set(0, "SnacksIndentScope", { fg = colors.orange, bg = "none" })
+
+	-- nvim-tree
+	set(0, "NvimtreeFolderName", { fg = colors.white })
+	set(0, "NvimtreeOpenFolderName", { fg = colors.white })
+	set(0, "NvimtreeEmptyFolderName", { fg = colors.white })
+
+	-- BlinkCmp Highlight Groups
+	set(0, "BlinkCmpMenu", { bg = colors.dark_gray, fg = colors.foreground })
+	set(0, "BlinkCmpMenuBorder", { bg = "none", fg = colors.dark_gray })
+	set(0, "BlinkCmpMenuSelection", { bg = colors.blue, fg = colors.foreground, bold = true })
+	set(0, "BlinkCmpScrollBarThumb", { bg = colors.blue, fg = colors.light_gray })
+	set(0, "BlinkCmpLabelMatch", { fg = colors.orange, bold = true })
+	set(0, "BlinkCmpKind", { fg = colors.purple, bg = "none" })
+	set(0, "BlinkCmpSource", { fg = colors.yellow, bg = "none", italic = true })
+	set(0, "BlinkCmpGhostText", { fg = colors.orange, italic = true })
+	set(0, "BlinkCmpSignatureHelpBorder", { bg = "none", fg = colors.dark_gray })
+	set(0, "BlinkCmpSignatureHelpActiveParameter", { fg = colors.orange, bold = true, italic = true })
+end
 return M

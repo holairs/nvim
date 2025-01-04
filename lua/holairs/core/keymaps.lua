@@ -3,6 +3,9 @@
 local utils = require("holairs.core.custom-actions")
 local keymap = vim.keymap -- for conciseness
 
+-- Set action to use vim motions correctly 🗣️
+utils.cowboy()
+
 -- Better Paste in Visual-line mode
 keymap.set("x", "<leader>p", '"_dP', {
 	noremap = true,
@@ -31,16 +34,16 @@ keymap.set("n", "<leader>aa", "V$%")
 keymap.set("n", "<leader>af", "V$%zf")
 
 -- Create a new tab and start a terminal
-keymap.set("n", "<leader>tt", ":tabnew | term<CR>i", {
-	noremap = true,
-	silent = true,
-})
+-- keymap.set("n", "<leader>tt", ":tabnew | term<CR>i", {
+-- 	noremap = true,
+-- 	silent = true,
+-- })
 
 -- Close actual terminal tab
-keymap.set("t", "<leader>qq", "<C-\\><C-n>:tabclose<CR>", {
-	noremap = true,
-	silent = true,
-})
+-- keymap.set("t", "<leader>qq", "<C-\\><C-n>:tabclose<CR>", {
+-- 	noremap = true,
+-- 	silent = true,
+-- })
 
 -- Remap to exit from terminal insert mode
 vim.keymap.set("t", "||", "<C-\\><C-n>", {
@@ -133,7 +136,7 @@ keymap.set("n", "-", "<C-x>")
 keymap.set("n", "dw", 'vb"_d')
 
 -- Select all
-keymap.set("n", "<leader>sa", "gg<S-v>G")
+keymap.set("n", "<leader>as", "gg<S-v>G")
 
 -- Move between buffers
 keymap.set("n", "<Tab>", ":bnext<CR>", {
