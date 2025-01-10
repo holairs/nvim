@@ -24,4 +24,6 @@ require("holairs.core")
 require("holairs.lazy")
 
 -- Set personal colorscheme
-require("holairs.core.nemesis").setup()
+-- require("holairs.core.nemesis").setup()
+
+require("holairs.core.undo-list")

@@ -17,8 +17,24 @@ local g = vim.g
 local api = vim.api
 local o = vim.o
 local command = api.nvim_create_user_command
+local autocmd = vim.api.nvim_create_autocmd
 local set_sign = vim.fn.sign_define
 local cmd = vim.cmd
+local hl = vim.api.nvim_set_hl
+local fn = vim.fn
+
+-- Set persistent undo
+vim.opt.undofile = true
+
+-- Directory where the undos will be storaged
+opt.undodir = vim.fn.stdpath("cache") .. "/undo"
+
+-- Create directory if not exists
+fn.mkdir(tostring(vim.opt.undodir:get()), "p")
+
+-- Set high amount of undo
+opt.undolevels = 10000
+opt.undoreload = 10000
 
 -- Encoding options
 vim.scriptencoding = "utf-8"
@@ -166,8 +182,24 @@ command("W", "w", {})
 command("Wq", "wq", {})
 command("Wqa", "wqa", {})
 
+-- Disable auto insert comment-line on insert mode defuault: "1jcroql"
+autocmd("BufEnter", {
+	pattern = "*",
+	callback = function()
+		vim.opt_local.formatoptions:remove("o")
+	end,
+})
+
 -- Set default colorscheme
 o.background = "dark"
+cmd("colorscheme retrobox")
+hl(0, "Normal", { bg = "none" })
+hl(0, "NormalNC", { bg = "none" })
+hl(0, "NormalFloat", { bg = "none" })
+hl(0, "FloatBorder", { bg = "none" })
+hl(0, "EndOfBuffer", { bg = "none" })
+hl(0, "SignColumn", { bg = "none" })
+hl(0, "ColorColumn", { bg = "#303030" })
 
 -- Set Error diagnostic sign
 set_sign("DiagnosticSignError", {

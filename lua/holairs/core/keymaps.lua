@@ -36,8 +36,7 @@ keymap.set({ "n", "v" }, "<leader>d", [["+y]])
 keymap.set("n", "<leader>aa", "V$%") -- Replaced by treesitter
 
 -- Make selection and fold of a structured code fragment
--- (as if it were syntax-based)
-keymap.set("n", "<leader>af", "V$%zf")
+vim.keymap.set("n", "<leader>af", "zf%", { noremap = true, desc = "Fold current block" })
 
 -- Remap to exit from terminal insert mode
 vim.keymap.set("t", "||", "<C-\\><C-n>", {
@@ -99,6 +98,12 @@ keymap.set("n", "9p", "9gt")
 
 -- Create a new tab
 keymap.set("n", "<leader>np", ":tabnew<CR>")
+
+-- Move actual tab to the left
+vim.keymap.set("n", "<leader>tl", ":tabmove -1<CR>", { noremap = true, silent = true })
+
+-- Move actual tab to the right
+vim.keymap.set("n", "<leader>tr", ":tabmove +1<CR>", { noremap = true, silent = true })
 
 -- Close actual tab
 keymap.set("n", "<leader>qt", ":tabclose<CR>")
@@ -224,3 +229,15 @@ vim.keymap.set("n", "<leader>zo", "<C-w>=", { noremap = true, silent = true })
 keymap.set("n", "<leader>er", "<Cmd>23Lexplore! %:p:h<CR>", {
 	desc = "Toggle Right-side netrw file explorer with 25 col width",
 })
+
+-- Highlight actual selected word
+vim.keymap.set("n", "<leader>hh", function()
+	vim.cmd("set hlsearch")
+	vim.fn.matchadd("Search", "\\<" .. vim.fn.expand("<cword>") .. "\\>")
+end, { noremap = true, desc = "Highlight word under cursor" })
+
+-- Clear highlight
+vim.keymap.set("n", "<leader>hn", function()
+	vim.cmd("nohlsearch") -- clear highlight
+  vim.fn.clearmatches() -- Clear temp highlights
+end, { noremap = true, silent = true, desc = "Clear highlight" })

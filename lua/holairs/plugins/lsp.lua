@@ -4,14 +4,14 @@
 ------------------------------------- LSP -------------------------------------
 -------------------------------------------------------------------------------
 --                                                                           --
---  This configuration manages the LSP (Language Server Protocol) and       --
---  integrates it with the "nvim-cmp" plugin for enhanced autocompletion.   --
+--  This configuration manages the LSP (Language Server Protocol) and        --
+--  integrates it with the "nvim-cmp" plugin for enhanced autocompletion.    --
 --                                                                           --
---  Features:                                                               --
+--  Features:                                                                --
 --  1. Manual LSP server installation and setup using "neovim/nvim-lspconfig".--
---  2. Seamless integration with "nvim-cmp" for LSP-powered autocompletion. --
---  3. Predefined key mappings for common LSP actions like "Go to           --
---     Definition" and "Find References".                                   --
+--  2. Seamless integration with "nvim-cmp" for LSP-powered autocompletion.  --
+--  3. Predefined key mappings for common LSP actions like "Go to            --
+--     Definition" and "Find References".                                    --
 --                                                                           --
 --  Default personal LSPs:                                                   --
 --                                                                           --
@@ -19,15 +19,15 @@
 --    * ts_ls / vtsls -> For TypeScript & JavaScript                         --
 --    * lua_ls        -> For Lua                                             --
 --                                                                           --
---  Autocompletion (CMP) Features:                                          --
---  * Autocomplete as you type with configurable key mappings.              --
---  * Floating windows with rounded borders for completion and              --
---    documentation popups.                                                 --
---  * Ghost text previews for suggested completions.                        --
+--  Autocompletion (CMP) Features:                                           --
+--  * Autocomplete as you type with configurable key mappings.               --
+--  * Floating windows with rounded borders for completion and               --
+--    documentation pop-up.                                                  --
+--  * Ghost text previews for suggested completions.                         --
 --                                                                           --
 --  To add another LSP server, configure it manually in the respective       --
---  section below, ensuring it uses the shared `on_attach` and `capabilities` --
---  setup for consistency.                                                  --
+--  section below, ensuring it uses the shared `on_attach` and `capabilities`--
+--  setup for consistency.                                                   --
 --                                                                           --
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return {
 					desc = "Search references (LSP) in a new tab",
 				})
 
-				-- Set up inlay hints at startup // unncomment to enable it at startup
+				-- Set up inlay hints at startup // uncomment to enable it at startup
 				-- vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
 			end
 

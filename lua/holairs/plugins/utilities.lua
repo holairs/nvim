@@ -8,13 +8,12 @@
 --  Git integration, and more.                                               --
 --                                                                           --
 --  Features:                                                               --
---  1. Seamless integration of Copilot for AI-assisted code suggestions.    --
---  2. Advanced file formatting using Conform for multiple languages.       --
---  3. Oil.nvim for an intuitive file explorer with floating window support.--
---  4. Flash.nvim for quick navigation within files.                        --
---  5. Telescope for efficient file searching, live grepping, and buffer    --
+--  1. Advanced file formatting using Conform for multiple languages.       --
+--  2. Oil.nvim for an intuitive file explorer with floating window support.--
+--  3. Flash.nvim for quick navigation within files.                        --
+--  4. Telescope for efficient file searching, live grepping, and buffer    --
 --     management.                                                          --
---  6. GitLens for Git blame, diff, and hunk preview/reset functionalities. --
+--  5. GitLens for Git blame, diff, and hunk preview/reset functionalities. --
 --                                                                           --
 --  Key highlights:                                                         --
 --  * Plugins are configured with custom key mappings for ease of use.      --
@@ -28,40 +27,6 @@ local keymap = vim.keymap
 local api = vim.api
 
 return {
-
-	-- Configuration for "Copilot"
-	{
-		"github/copilot.vim",
-		config = function()
-			-- Activar Copilot automáticamente
-			vim.cmd("Copilot disable")
-			-- Accept suggestions with Ctrl-F
-			vim.api.nvim_set_keymap("i", "<C-f>", 'copilot#Accept("<CR>")', {
-				silent = true,
-				expr = true,
-			})
-			-- Navigate suggestions with Ctrl-N and Ctrl-P
-			vim.api.nvim_set_keymap("i", "<C-n>", "<Plug>(copilot-next)", {})
-			vim.api.nvim_set_keymap("i", "<C-p>", "<Plug>(copilot-previous)", {})
-			-- Toggle Copilot (enable/disable)
-			local copilot_enabled = false -- Initial state
-			function _G.toggle_copilot()
-				if copilot_enabled then
-					vim.cmd("Copilot disable")
-					copilot_enabled = false
-					print("Copilot disabled")
-				else
-					vim.cmd("Copilot enable")
-					copilot_enabled = true
-					print("Copilot enabled")
-				end
-			end
-			vim.api.nvim_set_keymap("n", "<leader>cp", ":lua toggle_copilot()<CR>", {
-				noremap = true,
-				silent = true,
-			})
-		end,
-	},
 
 	-- Configuration of "Conform"
 	{
@@ -154,24 +119,35 @@ return {
 		},
 	},
 
-  -- Configuration for "Telescope"
+	-- Configuration for "Telescope"
 	{
 		"nvim-telescope/telescope.nvim",
 		config = function()
 			require("telescope").setup({})
-
-			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
-			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Search Grep" })
-			vim.keymap.set("n", "<leader>fd", builtin.buffers, { desc = "Open Buffers" })
-			local fk_opts = {
-				cwd = "~/.config/nvim",
-				results_title = "Config",
-			}
-			vim.keymap.set("n", "<leader>fc", function()
-				builtin.find_files(fk_opts)
-			end, { desc = "Search Config Files" })
 		end,
+		keys = {
+			{
+				"<leader>ff",
+				function()
+					require("telescope.builtin").find_files()
+				end,
+				desc = "Find Files",
+			},
+			{
+				"<leader>fg",
+				function()
+					require("telescope.builtin").live_grep()
+				end,
+				desc = "Search Grep",
+			},
+			{
+				"<leader>fd",
+				function()
+					require("telescope.builtin").buffers()
+				end,
+				desc = "Open Buffers",
+			},
+		},
 	},
 
 	-- Configuration of "GitLens"
