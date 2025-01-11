@@ -26,16 +26,6 @@ local fn = vim.fn
 -- Set persistent undo
 opt.undofile = true
 
--- Directory where the undos will be storaged
-opt.undodir = fn.stdpath("cache") .. "/undo"
-
--- Create directory if not exists
-fn.mkdir(opt.undodir:get()[1], "p")
-
--- Set high amount of undo
-opt.undolevels = 10000
-opt.undoreload = 10000
-
 -- Encoding options
 vim.scriptencoding = "utf-8"
 vim.encoding = "utf-8"
