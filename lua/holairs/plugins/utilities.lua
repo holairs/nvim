@@ -11,11 +11,10 @@
 --  Features:                                                                --
 --  1. Advanced file formatting using Conform for multiple languages.        --
 --  2. Oil.nvim for an intuitive file explorer with floating window support. --
---  3. Flash.nvim for quick navigation within files.                         --
---  4. Telescope for efficient file searching, live grepping, and buffer     --
+--  3. Telescope for efficient file searching, live grepping, and buffer     --
 --     management.                                                           --
---  5. GitLens for Git blame, diff, and hunk preview/reset functionalities.  --
---  6. Undotree for local history management, allows to jump beetwen         --
+--  4. GitLens for Git blame, diff, and hunk preview/reset functionalities.  --
+--  5. Undotree for local history management, allows to jump beetwen         --
 --     undo tree changes.                                                    --
 --                                                                           --
 --  Key highlights:                                                          --
@@ -108,26 +107,21 @@ return {
 		end,
 	},
 
-	-- Configuration for "Flash"
-	{
-		"folke/flash.nvim",
-		keys = {
-			{
-				";",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").jump()
-				end,
-				desc = "Flash",
-			},
-		},
-	},
-
 	-- Configuration for "Telescope"
 	{
 		"nvim-telescope/telescope.nvim",
 		config = function()
-			require("telescope").setup({})
+			require("telescope").setup({
+				defaults = {
+					preview = false,
+					layout_config = {
+						horizontal = {
+							prompt_position = "bottom",
+							height = 0.7,
+						},
+					},
+				},
+			})
 		end,
 		keys = {
 			{

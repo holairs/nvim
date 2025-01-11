@@ -9,11 +9,7 @@
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 
-local utils = require("holairs.core.custom-actions")
 local keymap = vim.keymap -- for conciseness
-
--- Set action to use vim motions correctly 🗣️
-utils.cowboy()
 
 -- Better Paste in Visual-line mode
 keymap.set("x", "<leader>p", '"_dP', {
@@ -241,3 +237,11 @@ keymap.set("n", "<leader>hn", function()
 	vim.cmd("nohlsearch") -- clear highlight
 	vim.fn.clearmatches() -- Clear temp highlights
 end, { noremap = true, silent = true, desc = "Clear highlight" })
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<leader>res", "<cmd>LspRestart<cr>")
+
+vim.keymap.set("n", "<leader>fn", vim.lsp.buf.format)
+-- Replace actual word in the actual buffer
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])

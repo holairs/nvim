@@ -78,8 +78,13 @@ return {
 					desc = "Search references (LSP) in a new tab",
 				})
 
-				-- Set up inlay hints at startup // uncomment to enable it at startup
-				-- vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
+				-- Toggle Inlay Hints
+				vim.keymap.set("n", "<Leader>ih", function()
+					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
+				end, {
+					buffer = bufnr,
+					desc = "Toggle Inlay Hints (LSP)",
+				})
 			end
 
 			-- Manual LSP servers configuration

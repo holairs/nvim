@@ -12,16 +12,20 @@
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 
+-- Require custom-actions
+local utils = require("holairs.core.custom-actions")
+
 local opt = vim.opt
 local g = vim.g
 local api = vim.api
 local o = vim.o
 local command = api.nvim_create_user_command
-local autocmd = vim.api.nvim_create_autocmd
 local set_sign = vim.fn.sign_define
 local cmd = vim.cmd
 local hl = vim.api.nvim_set_hl
-local fn = vim.fn
+
+-- Init custom actions
+utils.cowboy()
 
 -- Set persistent undo
 opt.undofile = true
@@ -33,6 +37,17 @@ vim.fileencoding = "utf-8"
 
 -- Map the space bar as the main command key
 g.mapleader = " "
+
+-- Set list options
+vim.opt.list = true
+
+-- Define listchars characters
+vim.opt.listchars = {
+	trail = "·",
+	eol = " ",
+	space = " ",
+	tab = "  ",
+}
 
 -- Guide column for 100 characters and chage color to march statusline
 opt.colorcolumn = "80"
@@ -87,7 +102,7 @@ opt.wrap = false
 -- Changes the terminal's title to the name of the current file
 opt.title = true
 -- Minimal number of screen lines to keep above and below the cursor
-opt.scrolloff = 10
+opt.scrolloff = 8
 -- Ignore case in search patterns
 opt.ignorecase = true
 -- Preserve indentation in wrapped lines
@@ -117,32 +132,6 @@ opt.formatoptions:append({ "i" })
 o.showtabline = 1 -- Hide tabline when there is only one tab
 o.tabline = "%!v:lua.TabLine()" -- Use lua function to generate tabline
 
-function TabLine()
-	local s = ""
-	for tabnr = 1, vim.fn.tabpagenr("$") do
-		-- Select the current tab
-		local active = (tabnr == fn.tabpagenr()) and "%#TabLineSel#" or "%#TabLine#"
-		s = s .. active
-
-		-- Active buffer name
-		local buflist = fn.tabpagebuflist(tabnr)
-		local winnr = fn.tabpagewinnr(tabnr)
-		local bufname = fn.bufname(buflist[winnr])
-		local filename = fn.fnamemodify(bufname, ":t") -- Get filename only
-		local foldername = fn.fnamemodify(bufname, ":h:t")
-
-		-- Show folder/filename or "[Blank]" if the filename is empty
-		if filename ~= "" then
-			s = s .. " " .. foldername .. "/" .. filename .. " "
-		else
-			s = s .. " [Blank] "
-		end
-	end
-
-	s = s .. "%#TabLineFill#" -- Fill white space
-	return s
-end
-
 -- Set cursorline
 opt.cursorline = true
 
@@ -168,14 +157,6 @@ command("Q", "q", {})
 command("W", "w", {})
 command("Wq", "wq", {})
 command("Wqa", "wqa", {})
-
--- Disable auto insert comment-line on insert mode defuault: "1jcroql"
-autocmd("BufEnter", {
-	pattern = "*",
-	callback = function()
-		vim.opt_local.formatoptions:remove("o")
-	end,
-})
 
 -- Set default colorscheme
 o.background = "dark"
