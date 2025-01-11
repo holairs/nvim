@@ -24,13 +24,13 @@ local hl = vim.api.nvim_set_hl
 local fn = vim.fn
 
 -- Set persistent undo
-vim.opt.undofile = true
+opt.undofile = true
 
 -- Directory where the undos will be storaged
-opt.undodir = vim.fn.stdpath("cache") .. "/undo"
+opt.undodir = fn.stdpath("cache") .. "/undo"
 
 -- Create directory if not exists
-fn.mkdir(tostring(vim.opt.undodir:get()), "p")
+fn.mkdir(opt.undodir:get()[1], "p")
 
 -- Set high amount of undo
 opt.undolevels = 10000
@@ -40,9 +40,6 @@ opt.undoreload = 10000
 vim.scriptencoding = "utf-8"
 vim.encoding = "utf-8"
 vim.fileencoding = "utf-8"
-
--- Set the shell to fish
-vim.opt.shell = "/opt/homebrew/bin/zsh"
 
 -- Map the space bar as the main command key
 g.mapleader = " "
@@ -79,8 +76,8 @@ g.netrw_preview = 1
 g.netrw_list_hide = 0
 
 -- Disable netrw
-g.loaded_netrw = 0
-g.loaded_netrwPlugin = 0
+-- g.loaded_netrw = 1
+-- g.loaded_netrwPlugin = 1
 
 -- Some default settings
 -- Sets the number of spaces a tab is displayed as
@@ -134,15 +131,15 @@ function TabLine()
 	local s = ""
 	for tabnr = 1, vim.fn.tabpagenr("$") do
 		-- Select the current tab
-		local active = (tabnr == vim.fn.tabpagenr()) and "%#TabLineSel#" or "%#TabLine#"
+		local active = (tabnr == fn.tabpagenr()) and "%#TabLineSel#" or "%#TabLine#"
 		s = s .. active
 
 		-- Active buffer name
-		local buflist = vim.fn.tabpagebuflist(tabnr)
-		local winnr = vim.fn.tabpagewinnr(tabnr)
-		local bufname = vim.fn.bufname(buflist[winnr])
-		local filename = vim.fn.fnamemodify(bufname, ":t") -- Get filename only
-		local foldername = vim.fn.fnamemodify(bufname, ":h:t")
+		local buflist = fn.tabpagebuflist(tabnr)
+		local winnr = fn.tabpagewinnr(tabnr)
+		local bufname = fn.bufname(buflist[winnr])
+		local filename = fn.fnamemodify(bufname, ":t") -- Get filename only
+		local foldername = fn.fnamemodify(bufname, ":h:t")
 
 		-- Show folder/filename or "[Blank]" if the filename is empty
 		if filename ~= "" then

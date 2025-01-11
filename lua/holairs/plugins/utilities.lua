@@ -1,30 +1,34 @@
 -- plugins/utilities.lua
+
 -------------------------------------------------------------------------------
 -------------------------------- UTILITIES ------------------------------------
 -------------------------------------------------------------------------------
 --                                                                           --
---  This configuration manages various plugins for enhancing the Neovim     --
+--  This configuration manages various plugins for enhancing the Neovim      --
 --  experience, ranging from LSP features to file explorers, code formatting,--
 --  Git integration, and more.                                               --
 --                                                                           --
---  Features:                                                               --
---  1. Advanced file formatting using Conform for multiple languages.       --
---  2. Oil.nvim for an intuitive file explorer with floating window support.--
---  3. Flash.nvim for quick navigation within files.                        --
---  4. Telescope for efficient file searching, live grepping, and buffer    --
---     management.                                                          --
---  5. GitLens for Git blame, diff, and hunk preview/reset functionalities. --
+--  Features:                                                                --
+--  1. Advanced file formatting using Conform for multiple languages.        --
+--  2. Oil.nvim for an intuitive file explorer with floating window support. --
+--  3. Flash.nvim for quick navigation within files.                         --
+--  4. Telescope for efficient file searching, live grepping, and buffer     --
+--     management.                                                           --
+--  5. GitLens for Git blame, diff, and hunk preview/reset functionalities.  --
+--  6. Undotree for local history management, allows to jump beetwen         --
+--     undo tree changes.                                                    --
 --                                                                           --
---  Key highlights:                                                         --
---  * Plugins are configured with custom key mappings for ease of use.      --
---  * Floating windows and minimal UI options to improve workflow.          --
---  * Lazy loading and conditional plugin activation for better performance.--
+--  Key highlights:                                                          --
+--  * Plugins are configured with custom key mappings for ease of use.       --
+--  * Floating windows and minimal UI options to improve workflow.           --
+--  * Lazy loading and conditional plugin activation for better performance. --
 --                                                                           --
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 local keymap = vim.keymap
 local api = vim.api
+local opt = vim.opt
 
 return {
 
@@ -178,6 +182,25 @@ return {
 			keymap.set("v", "<leader>gr", function()
 				require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 			end, { noremap = true, silent = true }) -- Reset selected (v) hunks
+		end,
+	},
+
+	-- Configuration for "undotree"
+	{
+		"mbbill/undotree",
+		config = function()
+			-- Enable persistent undo
+			opt.undofile = true
+			-- Directory where undo files will be saved
+			opt.undodir = vim.fn.expand("~/.undotree")
+			-- Create the directory if it doesn't exist
+			-- Ensure the correct value is used as a string
+			vim.fn.system({ "mkdir", "-p", opt.undodir._value })
+			-- Mapping to open Undotree
+			api.nvim_set_keymap("n", "<leader>u", ":UndotreeToggle<CR>", {
+				noremap = true,
+				silent = true,
+			})
 		end,
 	},
 }
