@@ -138,7 +138,7 @@ return {
 							height = 0.7,
 						},
 					},
-					file_ignore_patterns = { "node_modules" },
+					file_ignore_patterns = { "node_modules", ".git" },
 					hidden = true,
 				},
 			})

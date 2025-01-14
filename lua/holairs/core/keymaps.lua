@@ -9,6 +9,7 @@
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 
+local utils = require("holairs.core.custom-actions")
 local keymap = vim.keymap -- for conciseness
 
 -- Better Paste in Visual-line mode
