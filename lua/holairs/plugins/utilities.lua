@@ -51,25 +51,8 @@ return {
 					lua = { "stylua" },
 					rust = { "rustfmt" },
 					python = { "black" },
-          gleam = { "gleam" }
+					gleam = { "gleam" },
 				},
-				-- formatters = {
-				-- 	prettier = function(bufnr)
-				-- 		local config_file = vim.fn.findfile(".prettierrc", vim.fn.getcwd() .. ";") ~= ""
-				-- 			or vim.fn.findfile("prettier.config.js", vim.fn.getcwd() .. ";") ~= ""
-				-- 		return {
-				-- 			command = "npx", -- O "bun" según tu entorno
-				-- 			args = config_file and {
-				-- 				"prettier",
-				-- 				"--config",
-				-- 				vim.fn.findfile(".prettierrc", vim.fn.getcwd() .. ";"),
-				-- 				"--stdin-filepath",
-				-- 				vim.api.nvim_buf_get_name(bufnr),
-				-- 			} or { "prettier", "--stdin-filepath", vim.api.nvim_buf_get_name(bufnr) },
-				-- 			stdin = true,
-				-- 		}
-				-- 	end,
-				-- },
 			})
 		end,
 	},
