@@ -1,5 +1,3 @@
--- holairs/core/statusline.lua
-
 -------------------------------------------------------------------------------
 ------------------------------ Statusline Configuration ------------------------
 -------------------------------------------------------------------------------
@@ -12,7 +10,9 @@
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 
-local statusline_augroup = vim.api.nvim_create_augroup("native_statusline", { clear = true })
+local statusline_augroup = vim.api.nvim_create_augroup("native_statusline", {
+	clear = true,
+})
 
 --- @return string
 local function filename()
@@ -36,7 +36,7 @@ local function get_lsp_diagnostics_count(severity)
 		return 0
 	end
 
-	local count = vim.diagnostic.count(0, { serverity = severity })[severity]
+	local count = vim.diagnostic.count(0, { severity = severity })[severity]
 	if count == nil then
 		return 0
 	end
@@ -238,6 +238,15 @@ local function full_git()
 end
 
 --- @return string
+local function unsaved_changes_indicator()
+	if vim.bo.modified then
+		-- return " [+] "
+		return string.format("%%#Visual#[+]%%*")
+	end
+	return ""
+end
+
+--- @return string
 local function file_percentage()
 	local current_line = vim.api.nvim_win_get_cursor(0)[1]
 	local lines = vim.api.nvim_buf_line_count(0)
@@ -275,6 +284,43 @@ local redeable_filetypes = {
 	["tsplayground"] = true,
 }
 
+local mode_map = {
+	n = "NORMAL",
+	i = "INSERT",
+	v = "VISUAL",
+	V = "V-LINE",
+	["\22"] = "V-BLOCK", -- Control-V
+	c = "COMMAND",
+	t = "TERMINAL",
+	R = "REPLACE",
+}
+
+local function get_mode_name()
+	local mode = vim.api.nvim_get_mode().mode
+	return mode_map[mode] or mode:upper()
+end
+
+local function set_mode_highlight()
+	local mode = vim.api.nvim_get_mode().mode
+	local hl_group = {
+		n = "Visual",
+		i = "Visual",
+		v = "Visual",
+		V = "Visual",
+		["\22"] = "Visual",
+		c = "Visual",
+		t = "Visual",
+		R = "Visual",
+	}
+	return hl_group[mode] or "Normal"
+end
+
+local function statusline_mode()
+	local mode_name = get_mode_name()
+	local hl_group = set_mode_highlight()
+	return string.format("%%#%s# %s %%*", hl_group, mode_name)
+end
+
 StatusLine.active = function()
 	local mode_str = vim.api.nvim_get_mode().mode
 	if mode_str == "t" or mode_str == "nt" then
@@ -289,7 +335,6 @@ StatusLine.active = function()
 	if redeable_filetypes[vim.bo.filetype] or vim.o.modifiable == false then
 		return table.concat({
 			formatted_filetype("StatusLineMode"),
-
 			"%=",
 			"%=",
 			file_percentage(),
@@ -298,6 +343,7 @@ StatusLine.active = function()
 	end
 
 	local statusline = {
+		statusline_mode(),
 		filename(),
 		full_git(),
 		"%=",
@@ -308,9 +354,9 @@ StatusLine.active = function()
 		diagnostics_warns(),
 		diagnostics_hint(),
 		diagnostics_info(),
-		filetype(),
+		unsaved_changes_indicator(),
+		-- filetype(),
 		file_percentage(),
-		" [ %#StatusLineMode#%{toupper(mode())}%* ]",
 	}
 
 	return table.concat(statusline)

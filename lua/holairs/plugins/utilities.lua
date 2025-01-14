@@ -13,7 +13,7 @@
 --  2. Oil.nvim for an intuitive file explorer with floating window support. --
 --  3. Telescope for efficient file searching, live grepping, and buffer     --
 --     management.                                                           --
---  4. GitLens for Git blame, diff, and hunk preview/reset functionalities.  --
+--  4. GitSigns for Git blame, diff, and hunk preview/reset functionalities.  --
 --  5. Undotree for local history management, allows to jump beetwen         --
 --     undo tree changes.                                                    --
 --                                                                           --
@@ -51,7 +51,25 @@ return {
 					lua = { "stylua" },
 					rust = { "rustfmt" },
 					python = { "black" },
+          gleam = { "gleam" }
 				},
+				-- formatters = {
+				-- 	prettier = function(bufnr)
+				-- 		local config_file = vim.fn.findfile(".prettierrc", vim.fn.getcwd() .. ";") ~= ""
+				-- 			or vim.fn.findfile("prettier.config.js", vim.fn.getcwd() .. ";") ~= ""
+				-- 		return {
+				-- 			command = "npx", -- O "bun" según tu entorno
+				-- 			args = config_file and {
+				-- 				"prettier",
+				-- 				"--config",
+				-- 				vim.fn.findfile(".prettierrc", vim.fn.getcwd() .. ";"),
+				-- 				"--stdin-filepath",
+				-- 				vim.api.nvim_buf_get_name(bufnr),
+				-- 			} or { "prettier", "--stdin-filepath", vim.api.nvim_buf_get_name(bufnr) },
+				-- 			stdin = true,
+				-- 		}
+				-- 	end,
+				-- },
 			})
 		end,
 	},
@@ -120,6 +138,8 @@ return {
 							height = 0.7,
 						},
 					},
+					file_ignore_patterns = { "node_modules" },
+					hidden = true,
 				},
 			})
 		end,
@@ -127,7 +147,9 @@ return {
 			{
 				"<leader>ff",
 				function()
-					require("telescope.builtin").find_files()
+					require("telescope.builtin").find_files({
+						hidden = true,
+					})
 				end,
 				desc = "Find Files",
 			},
@@ -139,6 +161,13 @@ return {
 				desc = "Search Grep",
 			},
 			{
+				"<leader>fc",
+				function()
+					require("telescope.builtin").colorscheme()
+				end,
+				desc = "Search colorscheme",
+			},
+			{
 				"<leader>fd",
 				function()
 					require("telescope.builtin").buffers()
@@ -148,7 +177,7 @@ return {
 		},
 	},
 
-	-- Configuration of "GitLens"
+	-- Configuration of "GitSigns"
 	{
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
@@ -196,5 +225,79 @@ return {
 				silent = true,
 			})
 		end,
+	},
+
+	-- Configuration of "Harpoon"
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		config = function()
+			local harpoon = require("harpoon")
+			harpoon:setup()
+
+			vim.keymap.set("n", "<leader>ah", function()
+				harpoon:list():add()
+			end)
+			vim.keymap.set("n", "<leader>h", function()
+				harpoon.ui:toggle_quick_menu(harpoon:list())
+			end)
+
+			-- Set <space>1..<space>5 be my shortcuts to moving to the files
+			for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
+				vim.keymap.set("n", string.format("<space>%d", idx), function()
+					harpoon:list():select(idx)
+				end)
+			end
+		end,
+	},
+
+	-- Configuration of "treesitter"
+	{
+		"nvim-treesitter/nvim-treesitter",
+		event = { "BufRead", "BufNewFile" },
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = {
+					"lua",
+					"javascript",
+					"typescript",
+					"json",
+					"rust",
+				},
+				sync_install = false,
+				auto_install = true,
+				indent = {
+					enable = true,
+				},
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting = true,
+				},
+				incremental_selection = {
+					enable = true,
+					keymaps = {
+						init_selection = "<C-space>",
+						node_incremental = "<C-space>",
+						scope_incremental = false,
+						node_decremental = "<bs>",
+					},
+				},
+			})
+		end,
+	},
+
+	-- Configuration for "Flash"
+	{
+		"folke/flash.nvim",
+		keys = {
+			{
+				";",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+		},
 	},
 }

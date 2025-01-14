@@ -227,13 +227,13 @@ keymap.set("n", "<leader>er", "<Cmd>23Lexplore! %:p:h<CR>", {
 })
 
 -- Highlight actual selected word
-keymap.set("n", "<leader>hh", function()
+keymap.set("n", "<leader>jh", function()
 	vim.cmd("set hlsearch")
 	vim.fn.matchadd("Search", "\\<" .. vim.fn.expand("<cword>") .. "\\>")
 end, { noremap = true, desc = "Highlight word under cursor" })
 
 -- Clear highlight
-keymap.set("n", "<leader>hn", function()
+keymap.set("n", "<leader>jn", function()
 	vim.cmd("nohlsearch") -- clear highlight
 	vim.fn.clearmatches() -- Clear temp highlights
 end, { noremap = true, silent = true, desc = "Clear highlight" })

@@ -147,7 +147,7 @@ cmd([[
 opt.guicursor = "n-v-c-sm:block,i-ci-ve:blinkon1"
 
 -- Disable native mode line
-opt.showmode = true
+opt.showmode = false
 
 -- CommandLine use just 1 line
 opt.cmdheight = 1
@@ -160,7 +160,7 @@ command("Wqa", "wqa", {})
 
 -- Set default colorscheme
 o.background = "dark"
-cmd("colorscheme retrobox")
+cmd("colorscheme lunaperche")
 hl(0, "Normal", { bg = "none" })
 hl(0, "NormalNC", { bg = "none" })
 hl(0, "NormalFloat", { bg = "none" })
