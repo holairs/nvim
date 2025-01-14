@@ -1,4 +1,4 @@
--- lua/holairs/core/nemesis.lua
+-- lua/holairs/core/colroschemes/nemesis.lua
 
 -------------------------------------------------------------------------------
 ------------------------------ Nemesis Colorscheme ----------------------------

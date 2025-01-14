@@ -9,7 +9,7 @@
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 
-require("holairs.core.nemesis")
+require("holairs.core.colorschemes.nemesis")
 require("holairs.core.vim-options")
 require("holairs.core.keymaps")
 require("holairs.core.statusline")

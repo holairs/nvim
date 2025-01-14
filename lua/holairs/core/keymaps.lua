@@ -30,7 +30,8 @@ keymap.set("v", ">", ">gv", opts) -- move selection to the right
 keymap.set({ "n", "v" }, "<leader>d", [["+y]])
 
 -- Select a structured block (syntax)
-keymap.set("n", "<leader>aa", "V$%") -- Replaced by treesitter
+keymap.set("n", "<leader>aa", "V$%") -- in normal mode
+keymap.set("v", "<leader>aa", "$%") -- in visual mode
 
 -- Make selection and fold of a structured code fragment
 keymap.set("n", "<leader>af", "zf%", { noremap = true, desc = "Fold current block" })
