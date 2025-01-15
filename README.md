@@ -1,8 +1,7 @@
 # Neovim Configuration
 
+## Overview
 Welcome to my Neovim configuration repository! This setup is tailored for efficient and enjoyable development workflows. It is structured in a modular way, focusing on performance, simplicity, and modern features.
-
-![Screenshot 2025-01-14 at 8 59 38 PM](https://github.com/user-attachments/assets/64651899-e338-4aa0-92e0-40d06475112b)
 
 ### Features
 - **Lazy Loading**: Plugins are loaded only when needed for faster startup.
@@ -106,7 +105,7 @@ require("holairs.core.colorschemes.nemesis").setup()
 ## Getting Started
 1. Clone this repository into your Neovim config directory:
    ```bash
-   git clone https://github.com/holairs/nvim.git ~/.config/nvim
+   git clone <repo-url> ~/.config/nvim
    ```
 2. Open Neovim and run `:Lazy` to install plugins.
 3. Start coding with a beautiful and functional setup!

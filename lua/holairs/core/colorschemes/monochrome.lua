@@ -43,6 +43,7 @@ function M.setup()
 		purple = "#af0000", -- Púrpura oscuro para texto resaltado
 		light_blue = "#eeeeee", -- Gris muy claro para detalles menores
 		hard_red = "#ff0000", -- Rojo intenso para valores críticos
+		black = "#000000",
 	}
 
 	-- General UI Highlight Groups
@@ -59,7 +60,7 @@ function M.setup()
 	set(0, "TabLine", { fg = colors.foreground, bg = colors.dark_gray })
 	set(0, "TabLineSel", { fg = colors.yellow, bg = colors.blue })
 	set(0, "TabLineFill", { bg = colors.dark_gray })
-	set(0, "Visual", { bg = colors.dark_orange, fg = colors.foreground })
+	set(0, "Visual", { bg = colors.foreground, fg = colors.black })
 	set(0, "Search", { fg = colors.blue, bg = colors.mid_gray })
 	set(0, "IncSearch", { fg = colors.yellow, bg = colors.blue })
 	set(0, "Error", { fg = colors.light_blue, bg = colors.dark_orange, bold = true })
@@ -77,11 +78,11 @@ function M.setup()
 	set(0, "Identifier", { fg = colors.foreground })
 	set(0, "Type", { fg = colors.light_gray })
 	set(0, "Number", { fg = colors.red })
-	set(0, "Constant", { fg = colors.orange })
+	set(0, "Constant", { fg = colors.foreground })
 	set(0, "Statement", { fg = colors.purple })
 	set(0, "PreProc", { fg = colors.yellow })
-	set(0, "Delimiter", { fg = colors.dark_gray })
-	set(0, "Special", { fg = colors.light_blue })
+	set(0, "Delimiter", { fg = colors.dark_gray, bold = true })
+	set(0, "Special", { fg = colors.orange })
 
 	-- LSP Diagnostics Highlight Groups
 	set(0, "DiagnosticSignError", { fg = colors.red, bg = colors.dark_gray })

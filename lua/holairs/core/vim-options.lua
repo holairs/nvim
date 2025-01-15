@@ -159,7 +159,7 @@ command("Wq", "wq", {})
 command("Wqa", "wqa", {})
 
 -- Set default colorscheme
-o.background = "dark"
+o.background = "light"
 cmd("colorscheme lunaperche")
 hl(0, "Normal", { bg = "none" })
 hl(0, "NormalNC", { bg = "none" })
