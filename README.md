@@ -3,6 +3,11 @@
 ## Overview
 Welcome to my Neovim configuration repository! This setup is tailored for efficient and enjoyable development workflows. It is structured in a modular way, focusing on performance, simplicity, and modern features.
 
+![Screenshot 2025-01-14 at 8 59 38 PM](https://github.com/user-attachments/assets/64651899-e338-4aa0-92e0-40d06475112b)
+
+## Overview
+Welcome to my Neovim configuration repository! This setup is tailored for efficient and enjoyable development workflows. It is structured in a modular way, focusing on performance, simplicity, and modern features.
+
 ### Features
 - **Lazy Loading**: Plugins are loaded only when needed for faster startup.
 - **Custom Colorschemes**: Includes `Monochrome` and `Nemesis` for visually appealing coding sessions.
