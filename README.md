@@ -106,7 +106,7 @@ require("holairs.core.colorschemes.nemesis").setup()
 ## Getting Started
 1. Clone this repository into your Neovim config directory:
    ```bash
-   git clone <repo-url> ~/.config/nvim
+   git clone https://github.com/holairs/nvim.git ~/.config/nvim
    ```
 2. Open Neovim and run `:Lazy` to install plugins.
 3. Start coding with a beautiful and functional setup!
