@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 --------------------------- Monochrome Colorscheme ----------------------------
 -------------------------------------------------------------------------------
---  Name: Monochrome_Light                                                    --
+--  Name: Monochrome_Light                                                   --
 --  Author: Holairs                                                          --
 --  A minimalistic colorscheme inspired by shades of gray and monochromatic  --
 --  tones, designed for a light background. The palette focuses on subtle    --
