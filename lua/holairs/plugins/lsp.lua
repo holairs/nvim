@@ -216,9 +216,9 @@ return {
 						return vim_item
 					end,
 				},
-				experimental = {
-					ghost_text = true, -- Shows suggested text as ghost text
-				},
+				-- experimental = {
+				-- 	ghost_text = true, -- Shows suggested text as ghost text
+				-- },
 			})
 		end,
 	},

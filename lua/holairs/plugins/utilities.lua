@@ -13,9 +13,16 @@
 --  2. Oil.nvim for an intuitive file explorer with floating window support. --
 --  3. Telescope for efficient file searching, live grepping, and buffer     --
 --     management.                                                           --
---  4. GitSigns for Git blame, diff, and hunk preview/reset functionalities.  --
+--  4. GitSigns for Git blame, diff, and hunk preview/reset functionalities. --
 --  5. Undotree for local history management, allows to jump beetwen         --
 --     undo tree changes.                                                    --
+--  6. Harpoon for quick file navigation and project bookmarking with        --
+--     customizable keybindings. Easily toggle a menu to manage marked files --
+--     and switch between them with a single keypress.                       --
+--  7. Treesitter for enhanced syntax highlighting, incremental selection,   --
+--     and code indentation. Ensures better parsing for supported languages  --
+--     like Lua, JavaScript, TypeScript, JSON, and Rust.                     --
+--     Auto-installation of parsers keeps the setup up-to-date.              --
 --                                                                           --
 --  Key highlights:                                                          --
 --  * Plugins are configured with custom key mappings for ease of use.       --
@@ -225,7 +232,6 @@ return {
 				harpoon.ui:toggle_quick_menu(harpoon:list())
 			end)
 
-			-- Set <space>1..<space>5 be my shortcuts to moving to the files
 			for _, idx in ipairs({ 1, 2, 3, 4, 5 }) do
 				vim.keymap.set("n", string.format("<space>%d", idx), function()
 					harpoon:list():select(idx)
@@ -267,20 +273,5 @@ return {
 				},
 			})
 		end,
-	},
-
-	-- Configuration for "Flash"
-	{
-		"folke/flash.nvim",
-		keys = {
-			{
-				";",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").jump()
-				end,
-				desc = "Flash",
-			},
-		},
 	},
 }
