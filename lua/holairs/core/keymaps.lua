@@ -240,10 +240,18 @@ keymap.set("n", "<leader>jn", function()
 	vim.fn.clearmatches() -- Clear temp highlights
 end, { noremap = true, silent = true, desc = "Clear highlight" })
 
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<leader>res", "<cmd>LspRestart<cr>")
+keymap.set("n", "<C-d>", "<C-d>zz")
+keymap.set("n", "<C-u>", "<C-u>zz")
+keymap.set("n", "<leader>res", "<cmd>LspRestart<cr>")
 
-vim.keymap.set("n", "<leader>fn", vim.lsp.buf.format)
+keymap.set("n", "<leader>fn", vim.lsp.buf.format)
 -- Replace actual word in the actual buffer
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- Trigger auto-imports in TS
+keymap.set("n", "<leader>oi", function()
+	vim.lsp.buf.code_action({
+		apply = true,
+		context = { only = { "source.addMissingImports.ts", "source.removeUnused.ts" }, diagnostics = {} },
+	})
+end, { desc = "Organise Imports" })

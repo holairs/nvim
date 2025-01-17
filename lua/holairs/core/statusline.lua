@@ -267,7 +267,7 @@ local function formatted_filetype(hlgroup)
 end
 
 local function filetype()
-	return string.format(" [ kind: %s ] ", vim.bo.filetype):lower()
+	return string.format(" [ %s ] ", vim.bo.filetype):lower()
 end
 
 StatusLine = {}
@@ -285,14 +285,14 @@ local redeable_filetypes = {
 }
 
 local mode_map = {
-	n = "NORMAL",
-	i = "INSERT",
-	v = "VISUAL",
-	V = "V-LINE",
-	["\22"] = "V-BLOCK", -- Control-V
-	c = "COMMAND",
-	t = "TERMINAL",
-	R = "REPLACE",
+	n = "NOR",
+	i = "INS",
+	v = "VIS",
+	V = "V-L",
+	["\22"] = "V-B",
+	c = "COM",
+	t = "TER",
+	R = "REP",
 }
 
 local function get_mode_name()
@@ -343,9 +343,8 @@ StatusLine.active = function()
 	end
 
 	local statusline = {
-		statusline_mode(),
+		-- statusline_mode(),
 		filename(),
-		full_git(),
 		"%=",
 		"%=",
 		"%S ",
@@ -355,7 +354,8 @@ StatusLine.active = function()
 		diagnostics_hint(),
 		diagnostics_info(),
 		unsaved_changes_indicator(),
-		-- filetype(),
+		full_git(),
+		filetype(),
 		file_percentage(),
 	}
 
