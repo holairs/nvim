@@ -73,16 +73,16 @@ opt.hlsearch = false
 
 -- Netrw tree view
 g.netrw_banner = 0
-g.netrw_liststyle = 3
-g.netrw_browse_split = 4
+g.netrw_liststyle = 0
+-- g.netrw_browse_split = 4
 g.netrw_altv = 1
 g.netrw_winsize = 25
 g.netrw_preview = 1
 g.netrw_list_hide = 0
 
 -- Disable netrw
--- g.loaded_netrw = 1
--- g.loaded_netrwPlugin = 1
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
 
 -- Some default settings
 -- Sets the number of spaces a tab is displayed as
@@ -98,7 +98,7 @@ opt.smartindent = true
 -- Enables more specific C-style indenting
 opt.cindent = true
 -- Disables line wrapping
-opt.wrap = true
+opt.wrap = false
 -- Changes the terminal's title to the name of the current file
 opt.title = true
 -- Minimal number of screen lines to keep above and below the cursor

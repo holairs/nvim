@@ -225,9 +225,9 @@ keymap.set("n", "<leader>zi", "<C-w>|<C-w>_", { noremap = true, silent = true })
 keymap.set("n", "<leader>zo", "<C-w>=", { noremap = true, silent = true })
 
 -- Open netrw in the current directory
-keymap.set("n", "<leader>er", "<Cmd>23Lexplore! %:p:h<CR>", {
-	desc = "Toggle Right-side netrw file explorer with 25 col width",
-})
+-- keymap.set("n", "<leader>er", "<Cmd>23Lexplore! %:p:h<CR>", {
+-- 	desc = "Toggle Right-side netrw file explorer with 25 col width",
+-- })
 
 -- Highlight actual selected word
 keymap.set("n", "<leader>jh", function()

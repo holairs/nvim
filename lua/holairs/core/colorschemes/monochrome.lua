@@ -56,7 +56,7 @@ function M.setup()
 	set(0, "LineNr", { fg = colors.dark_gray, bg = colors.mid_gray })
 	set(0, "SignColumn", { bg = colors.background })
 	set(0, "StatusLine", { fg = colors.foreground, bg = colors.mid_gray })
-	set(0, "StatusLineNC", { fg = colors.mid_gray, bg = colors.background })
+	set(0, "StatusLineNC", { fg = colors.mid_gray, bg = colors.dark_gray })
 	set(0, "TabLine", { fg = colors.foreground, bg = colors.dark_gray })
 	set(0, "TabLineSel", { fg = colors.yellow, bg = colors.blue })
 	set(0, "TabLineFill", { bg = colors.mid_gray })
@@ -223,5 +223,8 @@ function M.setup()
 	set(0, "NetrwMarkFile", { fg = colors.yellow, bg = "none", bold = true })
 	set(0, "NetrwLinkTarget", { fg = colors.orange, bg = "none", bold = true })
 	set(0, "NetrwLinkTargetHidden", { fg = colors.light_gray, bg = "none", italic = true })
+
+  -- Telescope Highlight Group
+  set(0, "TelescopeBorder", { fg = colors.red, bg = "none" })
 end
 return M
