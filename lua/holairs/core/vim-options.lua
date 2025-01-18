@@ -98,11 +98,17 @@ opt.smartindent = true
 -- Enables more specific C-style indenting
 opt.cindent = true
 -- Disables line wrapping
-opt.wrap = false
+opt.wrap = true
 -- Changes the terminal's title to the name of the current file
 opt.title = true
 -- Minimal number of screen lines to keep above and below the cursor
 opt.scrolloff = 8
+opt.sidescroll = 1
+opt.sidescrolloff = 8
+
+-- No double space when Shift + J
+opt.joinspaces = false
+
 -- Ignore case in search patterns
 opt.ignorecase = true
 -- Preserve indentation in wrapped lines
@@ -151,6 +157,12 @@ opt.showmode = true
 
 -- CommandLine use just 1 line
 opt.cmdheight = 1
+
+-- Disable Swap File
+vim.opt.swapfile = false
+
+-- Disable backup
+vim.opt.backup = false
 
 -- Create custom command for miskates :)
 command("Q", "q", {})

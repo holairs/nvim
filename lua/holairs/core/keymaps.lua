@@ -11,6 +11,7 @@
 
 local utils = require("holairs.core.custom-actions")
 local keymap = vim.keymap -- for conciseness
+local opt = vim.opt
 
 -- Better Paste in Visual-line mode
 keymap.set("x", "<leader>p", '"_dP', {
@@ -240,18 +241,19 @@ keymap.set("n", "<leader>jn", function()
 	vim.fn.clearmatches() -- Clear temp highlights
 end, { noremap = true, silent = true, desc = "Clear highlight" })
 
+-- Better scroll
 keymap.set("n", "<C-d>", "<C-d>zz")
 keymap.set("n", "<C-u>", "<C-u>zz")
-keymap.set("n", "<leader>res", "<cmd>LspRestart<cr>")
 
+-- Restart lsp
+keymap.set("n", "<leader>rl", "<cmd>LspRestart<cr>")
+
+-- Run format with LSP
 keymap.set("n", "<leader>fn", vim.lsp.buf.format)
--- Replace actual word in the actual buffer
-keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
--- Trigger auto-imports in TS
-keymap.set("n", "<leader>oi", function()
-	vim.lsp.buf.code_action({
-		apply = true,
-		context = { only = { "source.addMissingImports.ts", "source.removeUnused.ts" }, diagnostics = {} },
-	})
-end, { desc = "Organise Imports" })
+-- Replace actual word in the actual buffer
+keymap.set("n", "<leader>rp", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- Better find Next and Previous
+vim.keymap.set("n", "n", "nzzzv", { noremap = true })
+vim.keymap.set("n", "N", "Nzzzv", { noremap = true })
