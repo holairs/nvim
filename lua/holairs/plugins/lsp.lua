@@ -18,6 +18,7 @@
 --    * rust_analyzer -> For Rust                                            --
 --    * ts_ls / vtsls -> For TypeScript & JavaScript                         --
 --    * lua_ls        -> For Lua                                             --
+--    * gleam         -> For Gleam
 --                                                                           --
 --  Autocompletion (CMP) Features:                                           --
 --  * Autocomplete as you type with configurable key mappings.               --
@@ -88,38 +89,11 @@ return {
 			end
 
 			-- Manual LSP servers configuration
-			-- TypeScript and JavaScript LSP
 
+			-- TypeScript and JavaScript LSP
 			lspconfig.vtsls.setup({
 				on_attach = on_attach,
 				capabilities = capabilities,
-				settings = {
-					typescript = {
-						inlayHints = {
-							includeInlayParameterNameHints = "all", -- Show all parameter hints
-							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayVariableTypeHints = true,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayEnumMemberValueHints = true,
-						},
-					},
-					javascript = {
-						inlayHints = {
-							includeInlayParameterNameHints = "all",
-							includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayVariableTypeHints = true,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayEnumMemberValueHints = true,
-						},
-					},
-					diagnostics = {
-						ignoredCodes = { 80001 }, -- File is a CommonJS module diagnostic
-					},
-				},
 			})
 
 			-- Lua LSP
@@ -172,12 +146,6 @@ return {
 				capabilities = capabilities,
 			})
 
-			-- C++ LSP
-			lspconfig.clangd.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-
 			cmp.setup({
 				completion = {
 					autocomplete = { cmp.TriggerEvent.TextChanged }, -- Autocomplete on type
@@ -187,7 +155,7 @@ return {
 					["<C-p>"] = cmp.mapping.select_prev_item(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<C-f>"] = cmp.mapping.scroll_docs(5),
+					["<C-d>"] = cmp.mapping.scroll_docs(5),
 					["<C-u>"] = cmp.mapping.scroll_docs(-5),
 				},
 				sources = {

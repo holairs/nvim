@@ -11,7 +11,6 @@
 
 local utils = require("holairs.core.custom-actions")
 local keymap = vim.keymap -- for conciseness
-local opt = vim.opt
 
 -- Better Paste in Visual-line mode
 keymap.set("x", "<leader>p", '"_dP', {
@@ -29,6 +28,9 @@ keymap.set("v", ">", ">gv", opts) -- move selection to the right
 
 -- Delete but without saving the deleted data on clipboard
 keymap.set({ "n", "v" }, "<leader>d", [["+y]])
+
+-- Insert mode to skip pair symbols "" () {} ...
+keymap.set("i", "<C-;>", "<C-o>l", { noremap = true, silent = true })
 
 -- Select a structured block (syntax)
 keymap.set("n", "<leader>aa", "V$%") -- in normal mode

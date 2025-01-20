@@ -16,17 +16,22 @@ local statusline_augroup = vim.api.nvim_create_augroup("native_statusline", {
 
 --- @return string
 local function filename()
-	local filepath = vim.fn.expand("%:.:h")
-	local fname = vim.fn.expand("%:t")
+	local fullpath = vim.fn.expand("%:.:h") -- Full relative path
+	local fname = vim.fn.expand("%:t") -- Actual file name
 	if fname == "" then
-		return ""
-	end
-	if filepath == "" then
-		return fname .. " "
+		return "" -- If nothig => shows nothing haha
 	end
 
-	-- Combina la ruta y el nombre del archivo
-	return "[ " .. filepath .. "/" .. fname .. " ] "
+	-- Splits with "/" each part
+	local parts = vim.split(fullpath, "/", { plain = true })
+
+	-- Just the last 2 segments of the path
+	-- local last_two = table.concat({ parts[#parts - 1] or "", parts[#parts] or "" }, "/")
+
+	-- Just the last segment of the path
+	local last_two = parts[#parts] or ""
+
+	return "[ " .. last_two .. "/" .. fname .. " ]"
 end
 
 --- @param severity integer
@@ -345,6 +350,7 @@ StatusLine.active = function()
 	local statusline = {
 		-- statusline_mode(),
 		filename(),
+		full_git(),
 		"%=",
 		"%=",
 		"%S ",
@@ -354,7 +360,6 @@ StatusLine.active = function()
 		diagnostics_hint(),
 		diagnostics_info(),
 		unsaved_changes_indicator(),
-		full_git(),
 		filetype(),
 		file_percentage(),
 	}

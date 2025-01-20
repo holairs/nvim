@@ -43,11 +43,22 @@ vim.opt.list = true
 
 -- Define listchars characters
 vim.opt.listchars = {
-	trail = "·",
-	eol = " ",
-	space = " ",
-	tab = "  ",
+	trail = "·", -- Blank chars at the end of the line
+	eol = " ", -- End of the line
+	space = " ", -- Spaces
+	tab = "  ", -- Indent
 }
+
+-- Set a custom fillchar for vertical and horizontal splits
+opt.fillchars:append({
+	horiz = "-", -- Horizontal line
+	vert = "|", -- Vertical line
+	horizup = "_", -- Top horizontal connection
+	horizdown = "_", -- Bottom horizontal connection
+	vertleft = "|", -- Left vertical connection
+	vertright = "|", -- Right vertical connection
+	verthoriz = "+", -- Vertical-horizontal connection
+})
 
 -- Guide column for 100 characters and chage color to march statusline
 opt.colorcolumn = "80"
@@ -172,7 +183,7 @@ command("Wqa", "wqa", {})
 
 -- Set default colorscheme
 o.background = "dark"
-cmd("colorscheme quiet")
+cmd("colorscheme retrobox")
 hl(0, "Normal", { bg = "none" })
 hl(0, "NormalNC", { bg = "none" })
 hl(0, "NormalFloat", { bg = "none" })
