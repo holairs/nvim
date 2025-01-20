@@ -257,5 +257,10 @@ keymap.set("n", "<leader>fn", vim.lsp.buf.format)
 keymap.set("n", "<leader>rp", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Better find Next and Previous
-vim.keymap.set("n", "n", "nzzzv", { noremap = true })
-vim.keymap.set("n", "N", "Nzzzv", { noremap = true })
+keymap.set("n", "n", "nzzzv", { noremap = true })
+keymap.set("n", "N", "Nzzzv", { noremap = true })
+
+-- Better add undo break-points
+keymap.set("i", ",", ",<c-g>u")
+keymap.set("i", ".", ".<c-g>u")
+keymap.set("i", ";", ";<c-g>u")
