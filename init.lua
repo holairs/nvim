@@ -27,4 +27,4 @@ require("holairs.lazy")
 -- require("holairs.core.colorschemes.nemesis").setup()
 -- require("holairs.core.colorschemes.monochrome").setup()
 -- require("holairs.core.colorschemes.monochrome_light").setup()
-require("holairs.core.colorschemes.colorscheme") -- Generic Colorscheme
+require("holairs.core.colorschemes.blossom")

@@ -170,7 +170,7 @@ opt.guicursor = "n-v-c-sm:block-Cursor,i-ci-ve:block-CursorInsert-blinkon1,r-cr:
 opt.showmode = true
 
 -- CommandLine use just 1 line
-opt.cmdheight = 0
+opt.cmdheight = 1
 
 -- Disable Swap File
 vim.opt.swapfile = false
