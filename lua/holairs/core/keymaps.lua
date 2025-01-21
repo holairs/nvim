@@ -14,8 +14,8 @@ local keymap = vim.keymap -- for conciseness
 
 -- Better Paste in Visual-line mode
 keymap.set("x", "<leader>p", '"_dP', {
-	noremap = true,
-	silent = true,
+  noremap = true,
+  silent = true,
 })
 
 -- Move selections up / down
@@ -34,15 +34,15 @@ keymap.set("i", "<C-;>", "<C-o>l", { noremap = true, silent = true })
 
 -- Select a structured block (syntax)
 keymap.set("n", "<leader>aa", "V$%") -- in normal mode
-keymap.set("v", "<leader>aa", "$%") -- in visual mode
+keymap.set("v", "<leader>aa", "$%")  -- in visual mode
 
 -- Make selection and fold of a structured code fragment
 keymap.set("n", "<leader>af", "zf%", { noremap = true, desc = "Fold current block" })
 
 -- Remap to exit from terminal insert mode
 keymap.set("t", "||", "<C-\\><C-n>", {
-	noremap = true,
-	silent = true,
+  noremap = true,
+  silent = true,
 })
 
 -- Open LSP suggestion menu
@@ -50,9 +50,9 @@ keymap.set("i", "<C-l>", "<C-x><C-o>")
 
 -- Code Actions (LSP) for all language servers
 keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {
-	noremap = true,
-	silent = true,
-	desc = "Code Actions (LSP)",
+  noremap = true,
+  silent = true,
+  desc = "Code Actions (LSP)",
 })
 
 -- Use CTRL + C as if it were "ESC"
@@ -64,20 +64,20 @@ keymap.set("x", "<C-c>", "<Esc>")
 
 -- Show actual file errors
 keymap.set("n", "<leader>sel", "<cmd>lua vim.diagnostic.setqflist()<cr>", {
-	noremap = true,
-	silent = true,
+  noremap = true,
+  silent = true,
 })
 
 -- Show diagnostic inline
 keymap.set("n", "<leader>sd", vim.diagnostic.open_float, {
-	noremap = true,
-	silent = true,
+  noremap = true,
+  silent = true,
 })
 
 -- Rename symbol (LSP)
 keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {
-	buffer = bufnr,
-	desc = "Rename symbol (LSP)",
+  buffer = bufnr,
+  desc = "Rename symbol (LSP)",
 })
 
 -- Move between native tabs
@@ -140,85 +140,85 @@ keymap.set("n", "<leader>as", "gg<S-v>G")
 
 -- Move between buffers
 keymap.set("n", "<Tab>", ":bnext<CR>", {
-	noremap = true,
-	silent = true,
+  noremap = true,
+  silent = true,
 })
 keymap.set("n", "<S-Tab>", ":bprevious<CR>", {
-	noremap = true,
-	silent = true,
+  noremap = true,
+  silent = true,
 })
 
 -- Close actual buffer
 keymap.set("n", "<leader>ww", ":bdelete<CR>", {
-	noremap = true,
-	silent = true,
+  noremap = true,
+  silent = true,
 })
 
 -- Close other buffers
 keymap.set("n", "<leader>we", ":%bdelete|edit#|bdelete#<CR>", {
-	noremap = true,
-	silent = true,
+  noremap = true,
+  silent = true,
 })
 
 -- Surround words with symbols
 keymap.set("x", "<leader>s'", [[:s/\%V\(.*\)\%V/'\1'/ <CR>]], {
-	desc = "Surround selection with '",
+  desc = "Surround selection with '",
 })
 keymap.set("x", '<leader>s"', [[:s/\%V\(.*\)\%V/"\1"/ <CR>]], {
-	desc = 'Surround selection with "',
+  desc = 'Surround selection with "',
 })
 keymap.set("x", "<leader>s*", [[:s/\%V\(.*\)\%V/*\1*/ <CR>]], {
-	desc = "Surround selection with *",
+  desc = "Surround selection with *",
 })
 keymap.set("x", "<leader>s)", [[:s/\%V\(.*\)\%V/(\1)/ <CR>]], {
-	desc = "Surround selection with ()",
+  desc = "Surround selection with ()",
 })
 keymap.set("x", "<leader>s}", [[:s/\%V\(.*\)\%V/{\1}/ <CR>]], {
-	desc = "Surround selection with {}",
+  desc = "Surround selection with {}",
 })
 keymap.set("x", "<leader>s]", [[:s/\%V\(.*\)\%V/[\1]/ <CR>]], {
-	desc = "Surround selection with []",
+  desc = "Surround selection with []",
 })
 keymap.set("x", "<leader>s>", [[:s/\%V\(.*\)\%V/<\1>/ <CR>]], {
-	desc = "Surround selection with <>",
+  desc = "Surround selection with <>",
 })
 
 -- Surround selection words with symbols
 keymap.set("n", "<leader>s*", [[:s/\<<C-r><C-w>\>/*<C-r><C-w>\*/ <CR>]], {
-	desc = "Surround word with *",
+  desc = "Surround word with *",
 })
 keymap.set("n", '<leader>s"', [[:s/\<<C-r><C-w>\>/"<C-r><C-w>\"/ <CR>]], {
-	desc = 'Surround word with "',
+  desc = 'Surround word with "',
 })
 keymap.set("n", "<leader>s'", [[:s/\<<C-r><C-w>\>/'<C-r><C-w>\'/ <CR>]], {
-	desc = "Surround word with '",
+  desc = "Surround word with '",
 })
 keymap.set("n", "<leader>s)", [[:s/\<<C-r><C-w>\>/(<C-r><C-w>\)/ <CR>]], {
-	desc = "Surround word with ()",
+  desc = "Surround word with ()",
 })
 keymap.set("n", "<leader>s}", [[:s/\<<C-r><C-w>\>/{<C-r><C-w>\}/ <CR>]], {
-	desc = "Surround word with {}",
+  desc = "Surround word with {}",
 })
 keymap.set("n", "<leader>s]", [[:s/\<<C-r><C-w>\>/[<C-r><C-w>\]/ <CR>]], {
-	desc = "Surround word with []",
+  desc = "Surround word with []",
 })
 keymap.set("n", "<leader>s>", [[:s/\<<C-r><C-w>\>/<<C-r><C-w>\>/ <CR>]], {
-	desc = "Surround word with <>",
+  desc = "Surround word with <>",
 })
 
 -- Keymap to toggle line numbers
 keymap.set("n", "<leader>cn", function()
-	utils.ToggleLineNumber()
+  utils.ToggleLineNumber()
 end, { noremap = true, silent = true })
 
 -- Keymap to toggle background theme
 keymap.set("n", "<leader>cb", function()
-	utils.ToggleTheme()
+  utils.ToggleTheme()
 end, { noremap = true, silent = true })
 
 -- Keymap to focus on a float window
 keymap.set("n", "<leader>jf", function()
-	utils.FocusFloat()
+  utils.FocusFloat()
 end, { noremap = true, silent = true })
 
 -- Keymap to zoom active window pane native nvim
@@ -233,14 +233,14 @@ keymap.set("n", "<leader>zo", "<C-w>=", { noremap = true, silent = true })
 
 -- Highlight actual selected word
 keymap.set("n", "<leader>jh", function()
-	vim.cmd("set hlsearch")
-	vim.fn.matchadd("Search", "\\<" .. vim.fn.expand("<cword>") .. "\\>")
+  vim.cmd("set hlsearch")
+  vim.fn.matchadd("Search", "\\<" .. vim.fn.expand("<cword>") .. "\\>")
 end, { noremap = true, desc = "Highlight word under cursor" })
 
 -- Clear highlight
 keymap.set("n", "<leader>jn", function()
-	vim.cmd("nohlsearch") -- clear highlight
-	vim.fn.clearmatches() -- Clear temp highlights
+  vim.cmd("nohlsearch") -- clear highlight
+  vim.fn.clearmatches() -- Clear temp highlights
 end, { noremap = true, silent = true, desc = "Clear highlight" })
 
 -- Better scroll

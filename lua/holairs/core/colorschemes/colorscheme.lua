@@ -66,8 +66,6 @@ local highlights = {
   Todo           = { fg = palette.teal, style = "bold" },
   StatusLine     = { fg = palette.rosewater, bg = palette.crust },
   StatusLineNC   = { fg = palette.rosewater, bg = palette.crust },
-  -- Cmdline        = { fg = palette.text, bg = palette.rosewater },
-  -- CmdlinePrompt  = { fg = palette.text, bg = palette.rosewater },
   MsgArea        = { fg = palette.crust, bg = palette.rosewater },
   MsgSeparator   = { fg = palette.crust, bg = palette.rosewater },
   Cursor         = { fg = palette.crust, bg = palette.red },
