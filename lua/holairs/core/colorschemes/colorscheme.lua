@@ -7,7 +7,7 @@ local palette = {
   maroon    = "#993333", -- Marrón rojizo
   peach     = "#d39b66", -- Naranja pastel
   yellow    = "#d7af5f", -- Amarillo mostaza, típico de esquemas retro
-  green     = "#a9b665", -- Verde oliva apagado
+  green     = "#b0bc72", -- Verde oliva apagado
   teal      = "#668c8d", -- Verde azulado clásico
   sky       = "#6c99bb", -- Azul cielo con un tono frío
   sapphire  = "#45707a", -- Azul apagado
@@ -66,8 +66,8 @@ local highlights = {
   Todo           = { fg = palette.teal, style = "bold" },
   StatusLine     = { fg = palette.rosewater, bg = palette.crust },
   StatusLineNC   = { fg = palette.rosewater, bg = palette.crust },
-  Cmdline        = { fg = palette.text, bg = palette.rosewater },
-  CmdlinePrompt  = { fg = palette.text, bg = palette.rosewater },
+  -- Cmdline        = { fg = palette.text, bg = palette.rosewater },
+  -- CmdlinePrompt  = { fg = palette.text, bg = palette.rosewater },
   MsgArea        = { fg = palette.crust, bg = palette.rosewater },
   MsgSeparator   = { fg = palette.crust, bg = palette.rosewater },
   Cursor         = { fg = palette.crust, bg = palette.red },

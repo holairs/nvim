@@ -239,7 +239,7 @@ local function full_git()
 		full = full .. removed .. space
 	end
 
-	return "[" .. full .. "]"
+	return   full
 end
 
 --- @return string
@@ -256,7 +256,7 @@ local function file_percentage()
 	local current_line = vim.api.nvim_win_get_cursor(0)[1]
 	local lines = vim.api.nvim_buf_line_count(0)
 
-	return string.format("[ %d%%%% of %d ]", math.ceil(current_line / lines * 100), lines)
+	return string.format(" %d%%%% of %d ", math.ceil(current_line / lines * 100), lines)
 end
 
 --- @return string
@@ -272,7 +272,7 @@ local function formatted_filetype(hlgroup)
 end
 
 local function filetype()
-	return string.format(" [ %s ] ", vim.bo.filetype):lower()
+	return string.format("  %s  ", vim.bo.filetype):lower()
 end
 
 StatusLine = {}
@@ -349,7 +349,7 @@ StatusLine.active = function()
 
 	local statusline = {
 		statusline_mode(),
-    "[ %t ]",
+    " %t ",
 		-- filename(),
 		full_git(),
 		"%=",
