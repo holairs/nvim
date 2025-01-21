@@ -43,21 +43,21 @@ vim.opt.list = true
 
 -- Define listchars characters
 vim.opt.listchars = {
-	trail = "·", -- Blank chars at the end of the line
-	eol = " ", -- End of the line
-	space = " ", -- Spaces
-	tab = "  ", -- Indent
+  trail = "·", -- Blank chars at the end of the line
+  eol = " ",  -- End of the line
+  space = " ", -- Spaces
+  tab = "  ", -- Indent
 }
 
 -- Set a custom fillchar for vertical and horizontal splits
 opt.fillchars:append({
-	horiz = "-", -- Horizontal line
-	vert = "|", -- Vertical line
-	horizup = "_", -- Top horizontal connection
-	horizdown = "_", -- Bottom horizontal connection
-	vertleft = "|", -- Left vertical connection
-	vertright = "|", -- Right vertical connection
-	verthoriz = "+", -- Vertical-horizontal connection
+  horiz = "-",    -- Horizontal line
+  vert = "|",     -- Vertical line
+  horizup = "_",  -- Top horizontal connection
+  horizdown = "_", -- Bottom horizontal connection
+  vertleft = "|", -- Left vertical connection
+  vertright = "|", -- Right vertical connection
+  verthoriz = "+", -- Vertical-horizontal connection
 })
 
 -- Guide column for 100 characters and chage color to march statusline
@@ -146,7 +146,7 @@ opt.splitright = true
 -- Specifically, 'i' means 'auto-wrap text using textwidth'.
 opt.formatoptions:append({ "i" })
 
-o.showtabline = 1 -- Hide tabline when there is only one tab
+o.showtabline = 1               -- Hide tabline when there is only one tab
 o.tabline = "%!v:lua.TabLine()" -- Use lua function to generate tabline
 
 -- Set cursorline
@@ -155,25 +155,33 @@ opt.cursorline = true
 cmd([[
   augroup CustomCursorLine
     autocmd!
-    autocmd ColorScheme * highlight CursorLine gui=underline ctermbg=NONE guibg=NONE 
+    autocmd ColorScheme * highlight CursorLine gui=underline ctermbg=NONE guibg=NONE
     " Use or add "gui=underline" to set underline
   augroup END
 ]])
 
 -- Cursor as "Block" but with "Blink" effect in insert mode
-opt.guicursor = "n-v-c-sm:block,i-ci-ve:blinkon1"
+-- opt.guicursor = "n-v-c-sm:block,i-ci-ve:blinkon1"
+opt.guicursor = "n-v-c-sm:block-Cursor,i-ci-ve:block-CursorInsert-blinkon1,r-cr:block-Cursor"
+
+
 
 -- Disable native mode line
 opt.showmode = true
 
 -- CommandLine use just 1 line
-opt.cmdheight = 1
+opt.cmdheight = 0
 
 -- Disable Swap File
 vim.opt.swapfile = false
 
 -- Disable backup
 vim.opt.backup = false
+
+-- Disable unnecesary plugins
+vim.g.loaded_matchit = 1
+vim.g.loaded_man = 1
+
 
 -- Create custom command for miskates :)
 command("Q", "q", {})
@@ -194,7 +202,7 @@ hl(0, "ColorColumn", { bg = "#303030" })
 
 -- Set Error diagnostic sign
 set_sign("DiagnosticSignError", {
-	text = ">>",
-	texthl = "DiagnosticSignError",
-	numhl = "",
+  text = ">>",
+  texthl = "DiagnosticSignError",
+  numhl = "",
 })

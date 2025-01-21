@@ -70,6 +70,3 @@ require("lazy").setup({
 		notify = false,
 	},
 })
-
-
-

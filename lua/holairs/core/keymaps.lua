@@ -250,8 +250,11 @@ keymap.set("n", "<C-u>", "<C-u>zz")
 -- Restart lsp
 keymap.set("n", "<leader>rl", "<cmd>LspRestart<cr>")
 
+-- Run format with Prettier
+keymap.set("n", "<leader>fp", "<cmd>%!bun prettier --stdin-filepath %<cr>")
+
 -- Run format with LSP
-keymap.set("n", "<leader>fn", vim.lsp.buf.format)
+keymap.set("n", "<leader>fa", vim.lsp.buf.format)
 
 -- Replace actual word in the actual buffer
 keymap.set("n", "<leader>rp", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])

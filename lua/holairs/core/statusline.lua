@@ -290,14 +290,14 @@ local redeable_filetypes = {
 }
 
 local mode_map = {
-	n = "NOR",
-	i = "INS",
-	v = "VIS",
-	V = "V-L",
-	["\22"] = "V-B",
-	c = "COM",
-	t = "TER",
-	R = "REP",
+	n = "N",
+	i = "I",
+	v = "V",
+	V = "V",
+	["\22"] = "B",
+	c = "C",
+	t = "T",
+	R = "R",
 }
 
 local function get_mode_name()
@@ -348,8 +348,9 @@ StatusLine.active = function()
 	end
 
 	local statusline = {
-		-- statusline_mode(),
-		filename(),
+		statusline_mode(),
+    "[ %t ]",
+		-- filename(),
 		full_git(),
 		"%=",
 		"%=",
