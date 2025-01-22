@@ -14,8 +14,8 @@ local palette = {
 	blue = "#7d8fbf",
 	lavender = "#8c7cba",
 	silver = "#766e68",
-	charcoal = "#221e19",
-	base = "#221e19",
+	charcoal = "#161410",
+	base = "#161410",
 	crust = "#0c0b08",
 }
 
