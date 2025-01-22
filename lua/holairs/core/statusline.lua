@@ -239,7 +239,7 @@ local function full_git()
 		full = full .. removed .. space
 	end
 
-	return   full
+	return full
 end
 
 --- @return string
@@ -349,7 +349,7 @@ StatusLine.active = function()
 
 	local statusline = {
 		statusline_mode(),
-    " %t ",
+		" %t ",
 		-- filename(),
 		full_git(),
 		"%=",

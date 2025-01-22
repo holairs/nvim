@@ -6,7 +6,8 @@
 --                                                                           --
 --    This is the main entry point for configuring Neovim. It enables the    --
 --    Neovim Lua loader, loads the core configurations, sets up the plugin   --
---    manager, and applies the custom "Nemesis" colorscheme.                 --
+--    manager, and applies the custom "Nemesis" colorscheme and others       --
+--    original colorschemes.                                                 --
 --                                                                           --
 --    Features:                                                              --
 --    1. Enables the Lua loader for better performance.                      --

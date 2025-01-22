@@ -224,7 +224,7 @@ function M.setup()
 	set(0, "NetrwLinkTarget", { fg = colors.orange, bg = "none", bold = true })
 	set(0, "NetrwLinkTargetHidden", { fg = colors.light_gray, bg = "none", italic = true })
 
-  -- Telescope Highlight Group
-  set(0, "TelescopeBorder", { fg = colors.red, bg = "none" })
+	-- Telescope Highlight Group
+	set(0, "TelescopeBorder", { fg = colors.red, bg = "none" })
 end
 return M
