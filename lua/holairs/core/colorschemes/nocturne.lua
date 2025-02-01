@@ -104,5 +104,5 @@ for group, opts in pairs(highlights) do
   vim.cmd(cmd)
 
   -- Force CursorLine underline style
-  vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = false })
+  vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
 end
