@@ -85,7 +85,6 @@ opt.hlsearch = false
 -- Netrw tree view
 g.netrw_banner = 0
 g.netrw_liststyle = 0
--- g.netrw_browse_split = 4
 g.netrw_altv = 1
 g.netrw_winsize = 25
 g.netrw_preview = 1
@@ -152,17 +151,9 @@ o.tabline = "%!v:lua.TabLine()" -- Use lua function to generate tabline
 -- Set cursorline
 opt.cursorline = true
 
-cmd([[
-  augroup CustomCursorLine
-    autocmd!
-    autocmd ColorScheme * highlight CursorLine gui=underline ctermbg=NONE guibg=NONE
-    " Use or add "gui=underline" to set underline
-  augroup END
-]])
-
 -- Cursor as "Block" but with "Blink" effect in insert mode
--- opt.guicursor = "n-v-c-sm:block,i-ci-ve:blinkon1"
-opt.guicursor = "n-v-c-sm:block-Cursor,i-ci-ve:block-CursorInsert-blinkon1,r-cr:block-Cursor"
+opt.guicursor = "n-v-c-sm:block,i-ci-ve:blinkon1"
+-- opt.guicursor = "n-v-c-sm:block-Cursor,i-ci-ve:block-CursorInsert-blinkon1,r-cr:block-Cursor"
 
 -- Disable native mode line
 opt.showmode = true
@@ -185,17 +176,6 @@ command("Q", "q", {})
 command("W", "w", {})
 command("Wq", "wq", {})
 command("Wqa", "wqa", {})
-
--- Set default colorscheme
-o.background = "dark"
-cmd("colorscheme retrobox")
-hl(0, "Normal", { bg = "none" })
-hl(0, "NormalNC", { bg = "none" })
-hl(0, "NormalFloat", { bg = "none" })
-hl(0, "FloatBorder", { bg = "none" })
-hl(0, "EndOfBuffer", { bg = "none" })
-hl(0, "SignColumn", { bg = "none" })
-hl(0, "ColorColumn", { bg = "#303030" })
 
 -- Set Error diagnostic sign
 set_sign("DiagnosticSignError", {

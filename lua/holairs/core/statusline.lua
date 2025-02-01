@@ -14,26 +14,6 @@ local statusline_augroup = vim.api.nvim_create_augroup("native_statusline", {
 	clear = true,
 })
 
---- @return string
-local function filename()
-	local fullpath = vim.fn.expand("%:.:h") -- Full relative path
-	local fname = vim.fn.expand("%:t") -- Actual file name
-	if fname == "" then
-		return "" -- If nothig => shows nothing haha
-	end
-
-	-- Splits with "/" each part
-	local parts = vim.split(fullpath, "/", { plain = true })
-
-	-- Just the last 2 segments of the path
-	-- local last_two = table.concat({ parts[#parts - 1] or "", parts[#parts] or "" }, "/")
-
-	-- Just the last segment of the path
-	local last_two = parts[#parts] or ""
-
-	return "[ " .. last_two .. "/" .. fname .. " ]"
-end
-
 --- @param severity integer
 --- @return integer
 local function get_lsp_diagnostics_count(severity)
@@ -350,7 +330,6 @@ StatusLine.active = function()
 	local statusline = {
 		statusline_mode(),
 		" %t ",
-		-- filename(),
 		full_git(),
 		"%=",
 		"%=",
