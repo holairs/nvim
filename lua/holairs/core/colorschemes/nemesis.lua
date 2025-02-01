@@ -70,7 +70,6 @@ function M.setup()
 	set(0, "ModeMsg", { fg = colors.red, bg = "none" })
 	set(0, "QuickFixLine", { fg = colors.orange, bg = "none" })
 
-
 	-- Floating windows and popup menu
 	set(0, "NormalFloat", { bg = "none", ctermbg = "none" })
 	set(0, "FloatBorder", { bg = "none", fg = colors.orange, ctermbg = "none" })

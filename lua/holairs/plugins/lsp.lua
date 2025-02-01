@@ -123,13 +123,13 @@ return {
 						telemetry = {
 							enable = false,
 						},
-            format = {
-              enable = true,
-              defaultConfig = {
-                indent_style = "space",
-                indent_size = "2",
-              },
-            },
+						format = {
+							enable = true,
+							defaultConfig = {
+								indent_style = "space",
+								indent_size = "2",
+							},
+						},
 					},
 				},
 			})
@@ -191,10 +191,20 @@ return {
 						return vim_item
 					end,
 				},
-				-- experimental = {
-				-- 	ghost_text = true, -- Shows suggested text as ghost text
-				-- },
 			})
 		end,
 	},
+
+	vim.diagnostic.config({
+		virtual_text = {
+			spaces = 4,
+			prefix = "●",
+		},
+		float = {
+			source = true,
+			border = "rounded",
+		},
+		underline = false,
+		update_in_insert = true,
+	}),
 }
