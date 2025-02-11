@@ -96,6 +96,12 @@ return {
 				capabilities = capabilities,
 			})
 
+			-- Dart LSP
+			lspconfig.dartls.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+
 			-- Lua LSP
 			lspconfig.lua_ls.setup({
 				on_attach = on_attach,

@@ -25,7 +25,9 @@ local cmd = vim.cmd
 local hl = vim.api.nvim_set_hl
 
 -- Init custom actions
-utils.cowboy()
+-- utils.cowboy()
+
+vim.o.completeopt = "menuone,noselect,noinsert"
 
 -- Set persistent undo
 opt.undofile = true
