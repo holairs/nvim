@@ -35,182 +35,176 @@
 -------------------------------------------------------------------------------
 
 return {
-	{
-		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
 
-		dependencies = {
-			-- CMP and LSP related plugins
-			"hrsh7th/nvim-cmp",
-			"hrsh7th/cmp-nvim-lsp",
-		},
-		config = function()
-			local lspconfig = require("lspconfig")
-			local cmp = require("cmp")
-			local cmp_nvim_lsp = require("cmp_nvim_lsp")
+    dependencies = {
+      -- CMP and LSP related plugins
+      "hrsh7th/nvim-cmp",
+      "hrsh7th/cmp-nvim-lsp",
+    },
+    config = function()
+      local lspconfig = require("lspconfig")
+      local cmp = require("cmp")
+      local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-			-- Add LSP capabilities to the completion menu
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+      -- Add LSP capabilities to the completion menu
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
-			-- Mappings and options function when LSP is attached
-			local on_attach = function(client, bufnr)
-				-- Native LSP actions mappgings
-				vim.keymap.set("n", "gd", vim.lsp.buf.definition, {
-					buffer = bufnr,
-					desc = "Go to definition(LSP)",
-				})
-				vim.keymap.set("n", "gr", vim.lsp.buf.references, {
-					buffer = bufnr,
-					desc = "Search references (LSP)",
-				})
-				vim.keymap.set("n", "td", function()
-					vim.cmd("tab split")
-					vim.lsp.buf.definition()
-				end, {
-					buffer = bufnr,
-					desc = "Go to definition (LSP) in a new tab",
-				})
-				vim.keymap.set("n", "tr", function()
-					vim.cmd("tab split")
-					vim.lsp.buf.references()
-				end, {
-					buffer = bufnr,
-					desc = "Search references (LSP) in a new tab",
-				})
+      -- Mappings and options function when LSP is attached
+      local on_attach = function(client, bufnr)
+        -- Native LSP actions mappgings
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, {
+          buffer = bufnr,
+          desc = "Go to definition(LSP)",
+        })
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, {
+          buffer = bufnr,
+          desc = "Search references (LSP)",
+        })
+        vim.keymap.set("n", "td", function()
+          vim.cmd("tab split")
+          vim.lsp.buf.definition()
+        end, {
+          buffer = bufnr,
+          desc = "Go to definition (LSP) in a new tab",
+        })
+        vim.keymap.set("n", "tr", function()
+          vim.cmd("tab split")
+          vim.lsp.buf.references()
+        end, {
+          buffer = bufnr,
+          desc = "Search references (LSP) in a new tab",
+        })
 
-				-- Toggle Inlay Hints
-				vim.keymap.set("n", "<Leader>ih", function()
-					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
-				end, {
-					buffer = bufnr,
-					desc = "Toggle Inlay Hints (LSP)",
-				})
-			end
+        -- Toggle Inlay Hints
+        vim.keymap.set("n", "<Leader>ih", function()
+          vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
+        end, {
+          buffer = bufnr,
+          desc = "Toggle Inlay Hints (LSP)",
+        })
+      end
 
-			-- Manual LSP servers configuration
+      -- Manual LSP servers configuration
 
-			-- TypeScript and JavaScript LSP
-			lspconfig.vtsls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+      -- TypeScript and JavaScript LSP
+      lspconfig.vtsls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
 
-			-- Dart LSP
-			lspconfig.dartls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+      -- Lua LSP
+      lspconfig.lua_ls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            runtime = {
+              version = "LuaJIT",
+            },
+            diagnostics = {
+              globals = {
+                "vim",
+                "require",
+                "opts",
+                "bufnr",
+                "_value",
+                "fs_stat",
+                "cwd",
+                "utils",
+              },
+            },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+            telemetry = {
+              enable = false,
+            },
+            format = {
+              enable = true,
+              defaultConfig = {
+                indent_style = "space",
+                indent_size = "2",
+              },
+            },
+          },
+        },
+      })
 
-			-- Lua LSP
-			lspconfig.lua_ls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					Lua = {
-						runtime = {
-							version = "LuaJIT",
-						},
-						diagnostics = {
-							globals = {
-								"vim",
-								"require",
-								"opts",
-								"bufnr",
-								"_value",
-								"fs_stat",
-								"cwd",
-								"utils",
-							},
-						},
-						workspace = {
-							library = vim.api.nvim_get_runtime_file("", true),
-						},
-						telemetry = {
-							enable = false,
-						},
-						format = {
-							enable = true,
-							defaultConfig = {
-								indent_style = "space",
-								indent_size = "2",
-							},
-						},
-					},
-				},
-			})
+      -- Rust LSP
+      lspconfig.rust_analyzer.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        root_dir = lspconfig.util.root_pattern("Cargo.toml", ".git"),
+      })
 
-			-- Rust LSP
-			lspconfig.rust_analyzer.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				root_dir = lspconfig.util.root_pattern("Cargo.toml", ".git"),
-			})
+      -- Json LSP
+      lspconfig.jsonls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
 
-			-- Json LSP
-			lspconfig.jsonls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+      -- Gleam LSP
+      lspconfig.gleam.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
 
-			-- Gleam LSP
-			lspconfig.gleam.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+      cmp.setup({
+        completion = {
+          autocomplete = { cmp.TriggerEvent.TextChanged }, -- Autocomplete on type
+        },
+        mapping = {
+          ["<C-n>"] = cmp.mapping.select_next_item(),
+          ["<C-p>"] = cmp.mapping.select_prev_item(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<C-e>"] = cmp.mapping.abort(),
+          ["<C-d>"] = cmp.mapping.scroll_docs(5),
+          ["<C-u>"] = cmp.mapping.scroll_docs(-5),
+        },
+        sources = {
+          { name = "nvim_lsp" }, -- LSP source
+        },
+        window = {
+          documentation = {
+            winhighlight = "Normal:CmpDocNormal,FloatBorder:CmpDocBorder",
+            scrolloff = 3,
+            col_offset = 1,
+            max_height = 15,
+            max_width = 60,
+          },
+          completion = {
+            scrollbar = true,
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+            scrolloff = 3,
+            col_offset = 0,
+          },
+        },
+        formatting = {
+          format = function(entry, vim_item)
+            vim_item.menu = ({
+              nvim_lsp = "[LSP]",
+            })[entry.source.name]
+            return vim_item
+          end,
+        },
+      })
+    end,
+  },
 
-			cmp.setup({
-				completion = {
-					autocomplete = { cmp.TriggerEvent.TextChanged }, -- Autocomplete on type
-				},
-				mapping = {
-					["<C-n>"] = cmp.mapping.select_next_item(),
-					["<C-p>"] = cmp.mapping.select_prev_item(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<C-d>"] = cmp.mapping.scroll_docs(5),
-					["<C-u>"] = cmp.mapping.scroll_docs(-5),
-				},
-				sources = {
-					{ name = "nvim_lsp" }, -- LSP source
-				},
-				window = {
-					documentation = {
-						winhighlight = "Normal:CmpDocNormal,FloatBorder:CmpDocBorder",
-						scrolloff = 3,
-						col_offset = 1,
-						max_height = 15,
-						max_width = 60,
-					},
-					completion = {
-						scrollbar = true,
-						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-						scrolloff = 3,
-						col_offset = 0,
-					},
-				},
-				formatting = {
-					format = function(entry, vim_item)
-						vim_item.menu = ({
-							nvim_lsp = "[LSP]",
-						})[entry.source.name]
-						return vim_item
-					end,
-				},
-			})
-		end,
-	},
-
-	vim.diagnostic.config({
-		virtual_text = {
-			spaces = 4,
-			prefix = "●",
-		},
-		float = {
-			source = true,
-			border = "rounded",
-		},
-		underline = false,
-		update_in_insert = true,
-	}),
+  vim.diagnostic.config({
+    virtual_text = {
+      spaces = 4,
+      prefix = "●",
+    },
+    float = {
+      source = true,
+      border = "rounded",
+    },
+    underline = false,
+    update_in_insert = true,
+  }),
 }

@@ -12,20 +12,12 @@
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 
--- Require custom-actions
-local utils = require("holairs.core.custom-actions")
-
 local opt = vim.opt
 local g = vim.g
 local api = vim.api
 local o = vim.o
 local command = api.nvim_create_user_command
 local set_sign = vim.fn.sign_define
-local cmd = vim.cmd
-local hl = vim.api.nvim_set_hl
-
--- Init custom actions
--- utils.cowboy()
 
 vim.o.completeopt = "menuone,noselect,noinsert"
 
@@ -40,27 +32,6 @@ vim.fileencoding = "utf-8"
 -- Map the space bar as the main command key
 g.mapleader = " "
 
--- Set list options
-vim.opt.list = true
-
--- Define listchars characters
-vim.opt.listchars = {
-	trail = "·", -- Blank chars at the end of the line
-	eol = " ", -- End of the line
-	space = " ", -- Spaces
-	tab = "  ", -- Indent
-}
-
--- Set a custom fillchar for vertical and horizontal splits
-opt.fillchars:append({
-	horiz = "-", -- Horizontal line
-	vert = "|", -- Vertical line
-	horizup = "_", -- Top horizontal connection
-	horizdown = "_", -- Bottom horizontal connection
-	vertleft = "|", -- Left vertical connection
-	vertright = "|", -- Right vertical connection
-	verthoriz = "+", -- Vertical-horizontal connection
-})
 
 -- Guide column for 100 characters and chage color to march statusline
 opt.colorcolumn = "80"
