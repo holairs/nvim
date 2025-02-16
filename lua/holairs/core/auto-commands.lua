@@ -40,28 +40,3 @@ autocmd("VimResized", {
 		vim.api.nvim_set_current_tabpage(current_tab)
 	end,
 })
-
--- highlights yanked text
-autocmd("textyankpost", {
-	callback = function()
-		vim.highlight.on_yank({
-			higroup = "IncSearch",
-			timeout = 50,
-		})
-	end,
-})
-
--- Disable syntax and filetype when open a .log file
-autocmd("BufReadPre", {
-	pattern = "*.log",
-	callback = function()
-		local max_file_size = 1024 * 1024 -- Max size: 1 MB
-		local file_size = vim.fn.getfsize(vim.fn.expand("%"))
-
-		if file_size > max_file_size then
-			vim.opt.syntax = "off"
-			vim.opt.filetype = "off"
-			print("Syntax and filetype disabled" .. vim.fn.expand("%:t"))
-		end
-	end,
-})

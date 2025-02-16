@@ -34,15 +34,15 @@ function M.setup()
 		foreground = "#bcbcbc", -- Texto principal en un gris claro
 		light_gray = "#d0d0d0", -- Gris claro para constantes
 		dark_gray = "#585858", -- Gris oscuro para separadores y comentarios
-		mid_gray = "#303030", -- Gris intermedio para resaltados menores
-		blue = "#8a8a8a", -- Azul desaturado para cadenas
-		red = "#ff0000", -- Rojo brillante para errores y números
-		yellow = "#eeeeee", -- Gris cálido para palabras clave
-		orange = "#d70000", -- Rojo oscuro para cambios
+		mid_gray = "#303030",  -- Gris intermedio para resaltados menores
+		blue = "#8a8a8a",      -- Azul desaturado para cadenas
+		red = "#ff0000",       -- Rojo brillante para errores y números
+		yellow = "#eeeeee",    -- Gris cálido para palabras clave
+		orange = "#d70000",    -- Rojo oscuro para cambios
 		dark_orange = "#870000", -- Rojo profundo para mensajes de error
-		purple = "#af0000", -- Púrpura oscuro para texto resaltado
+		purple = "#af0000",    -- Púrpura oscuro para texto resaltado
 		light_blue = "#eeeeee", -- Gris muy claro para detalles menores
-		hard_red = "#ff0000", -- Rojo intenso para valores críticos
+		hard_red = "#ff0000",  -- Rojo intenso para valores críticos
 		black = "#000000",
 	}
 
@@ -227,4 +227,5 @@ function M.setup()
 	-- Telescope Highlight Group
 	set(0, "TelescopeBorder", { fg = colors.red, bg = "none" })
 end
+
 return M

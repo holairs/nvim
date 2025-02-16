@@ -35,7 +35,6 @@ The configuration is organized for readability and maintainability:
         │   ├── custom-actions.lua
         │   ├── init.lua
         │   ├── keymaps.lua
-        │   ├── statusline.lua
         │   └── vim-options.lua
         ├── lazy.lua
         └── plugins

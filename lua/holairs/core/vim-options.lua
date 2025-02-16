@@ -32,7 +32,6 @@ vim.fileencoding = "utf-8"
 -- Map the space bar as the main command key
 g.mapleader = " "
 
-
 -- Guide column for 100 characters and chage color to march statusline
 opt.colorcolumn = "80"
 
@@ -45,6 +44,8 @@ opt.relativenumber = true
 
 -- Better term colors :0
 opt.termguicolors = true
+
+opt.fillchars:append { vert = "|", horiz = "-" } -- Use a thin vertical bar as a separator
 
 -- Set as "searching" the actual searh
 opt.incsearch = true
@@ -73,7 +74,7 @@ opt.tabstop = 2
 -- Sets the number of spaces used for indentation steps
 opt.shiftwidth = 2
 -- Converts tabs to spaces
-opt.expandtab = true
+opt.expandtab = false
 -- Automatically indents a new line the same amount as the line just typed
 opt.autoindent = true
 -- Does smart autoindenting when starting a new line (for C-like programming)
@@ -119,7 +120,7 @@ opt.splitright = true
 opt.formatoptions:append({ "i" })
 
 o.showtabline = 1 -- Hide tabline when there is only one tab
-o.tabline = "%!v:lua.TabLine()" -- Use lua function to generate tabline
+-- o.tabline = "%!v:lua.TabLine()" -- Use lua function to generate tabline
 
 -- Set cursorline
 opt.cursorline = true
@@ -141,8 +142,11 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 
 -- Disable unnecesary plugins
-vim.g.loaded_matchit = 1
-vim.g.loaded_man = 1
+g.loaded_matchit = 1
+g.loaded_man = 1
+g.loaded_tutor_mode_plugin = 1
+g.loaded_tutor_mode_plugin = 1
+g.osc52 = 1
 
 -- Create custom command for miskates :)
 command("Q", "q", {})

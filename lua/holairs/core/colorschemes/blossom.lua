@@ -64,6 +64,33 @@ local highlights = {
 	CursorInsert = { fg = palette.crust, bg = palette.cherry },
 	CursorLineNr = { fg = palette.mustard, bg = "none", style = "bold" },
 	LineNr = { bg = "none" },
+	NormalFloat = { bg = "none" },
+	FloatBorder = { bg = "none" },
+
+
+	-- Gitsigns symbols
+	GitSignsAdd = { fg = palette.lagoon, bg = "none" },
+	GitSignsChange = { fg = palette.charcoal, bg = "none" },
+	GitSignsDelete = { fg = palette.blood, bg = "none" },
+
+	-- Highlights for Oil
+	OilDir = { fg = palette.sapphire, bg = "none", style = "bold" },
+	OilFile = { fg = palette.blue, bg = "none" },
+	OilSymlink = { fg = palette.blue, bg = "none", style = "italic" },
+	OilSelected = { fg = palette.blue, bg = palette.blood, style = "bold" },
+	OilBorder = { fg = palette.blue, bg = "none" },
+
+	-- Highlights for fzf-lua
+	FzfLuaNormal = { fg = palette.amber, bg = "none" },
+	FzfLuaBorder = { fg = palette.grappe, bg = "none" },
+	FzfLuaCursor = { fg = palette.lagoon, bg = palette.blood },
+	FzfLuaPreview = { fg = palette.blue, bg = "none" },
+	FzfLuaPrompt = { fg = palette.grappe, bg = "none" },
+	FzfLuaMatch = { fg = palette.amber, bg = "none", style = "bold" },
+	FzfLuaSelection = { fg = palette.wine, bg = palette.lagoon, style = "bold" },
+	FzfLuaTabTitle = { fg = palette.peach, bg = "none" },
+	FzfLuaSelectionFzfLuaBufFlagAlt = { fg = palette.charcoal, bg = "none" },
+
 }
 
 -- apply highlights
@@ -79,4 +106,7 @@ for group, opts in pairs(highlights) do
 		cmd = cmd .. " gui=" .. opts.style
 	end
 	vim.cmd(cmd)
+
+	-- Force CursorLine underline style
+	vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
 end

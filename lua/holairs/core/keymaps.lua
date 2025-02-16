@@ -23,18 +23,15 @@ keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move selection up(v)
 keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move selection down(v)
 
 -- Move selection right / left
-keymap.set("v", "<", "<gv", opts) -- move selection to the left
-keymap.set("v", ">", ">gv", opts) -- move selection to the right
+keymap.set("v", "<", "<gv") -- move selection to the left
+keymap.set("v", ">", ">gv") -- move selection to the right
 
 -- Delete but without saving the deleted data on clipboard
 keymap.set({ "n", "v" }, "<leader>d", [["+y]])
 
--- Insert mode to skip pair symbols "" () {} ...
-keymap.set("i", "<C-;>", "<C-o>l", { noremap = true, silent = true })
-
 -- Select a structured block (syntax)
 keymap.set("n", "<leader>aa", "V$%") -- in normal mode
-keymap.set("v", "<leader>aa", "$%") -- in visual mode
+keymap.set("v", "<leader>aa", "$%")  -- in visual mode
 
 -- Make selection and fold of a structured code fragment
 keymap.set("n", "<leader>af", "zf%", { noremap = true, desc = "Fold current block" })
@@ -85,17 +82,6 @@ keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {
 -- Move to previous & next tabs
 keymap.set("n", "<", ":tabprevious<CR>", { noremap = true, silent = true })
 keymap.set("n", ">", ":tabnext<CR>", { noremap = true, silent = true })
-
--- Got to specific tab using numbers
-keymap.set("n", "1p", "1gt")
-keymap.set("n", "2p", "2gt")
-keymap.set("n", "3p", "3gt")
-keymap.set("n", "4p", "4gt")
-keymap.set("n", "5p", "5gt")
-keymap.set("n", "6p", "6gt")
-keymap.set("n", "7p", "7gt")
-keymap.set("n", "8p", "8gt")
-keymap.set("n", "9p", "9gt")
 
 -- Create a new tab
 keymap.set("n", "<leader>np", ":tabnew<CR>")
@@ -205,16 +191,6 @@ keymap.set("n", "<leader>s]", [[:s/\<<C-r><C-w>\>/[<C-r><C-w>\]/ <CR>]], {
 keymap.set("n", "<leader>s>", [[:s/\<<C-r><C-w>\>/<<C-r><C-w>\>/ <CR>]], {
 	desc = "Surround word with <>",
 })
-
--- Keymap to toggle line numbers
-keymap.set("n", "<leader>cn", function()
-	utils.ToggleLineNumber()
-end, { noremap = true, silent = true })
-
--- Keymap to toggle background theme
-keymap.set("n", "<leader>cb", function()
-	utils.ToggleTheme()
-end, { noremap = true, silent = true })
 
 -- Keymap to focus on a float window
 keymap.set("n", "<leader>jf", function()

@@ -28,12 +28,12 @@ function M.setup()
 
 	-- Define colors
 	local colors = {
-		background = "none", -- Fondo blanco
+		background = "none",  -- Fondo blanco
 		white = "#ffffff",
 		foreground = "#000000", -- Texto principal en negro
 		light_gray = "#757575", -- Gris intermedio para constantes
 		dark_gray = "#454545", -- Gris claro para separadores y comentarios
-		red = "#ff0000", -- Rojo brillante para errores y números (inalterado)
+		red = "#ff0000",      -- Rojo brillante para errores y números (inalterado)
 	}
 
 	-- General UI Highlight Groups

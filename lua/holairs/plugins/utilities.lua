@@ -10,10 +10,9 @@
 --                                                                           --
 --  Features:                                                                --
 --  1. Oil.nvim for an intuitive file explorer with floating window support. --
---  2. Telescope for efficient file searching, live grepping, and buffer     --
 --     management.                                                           --
---  3. GitSigns for Git blame, diff, and hunk preview/reset functionalities. --
---  4. Fzf-Lua for grep searching and fuzzy file searching
+--  2. GitSigns for Git blame, diff, and hunk preview/reset functionalities. --
+--  3. Fzf-Lua for grep searching and fuzzy file searching
 --                                                                           --
 --  Key highlights:                                                          --
 --  * Plugins are configured with custom key mappings for ease of use.       --
@@ -82,7 +81,7 @@ return {
 	-- Configuration of "GitSigns"
 	{
 		"lewis6991/gitsigns.nvim",
-		event = "VeryLazy",
+		event = "BufReadPost",
 		cond = function()
 			return vim.fn.isdirectory(".git") == 1
 		end,
