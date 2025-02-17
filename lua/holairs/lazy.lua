@@ -39,4 +39,22 @@ require("lazy").setup({
 		{ import = "holairs.plugins" },
 	},
 	checker = { enabled = false },
+
+	-- Aquí sobreescribes únicamente la parte de la config que quieres cambiar
+	performance = {
+		rtp = {
+			reset = true,
+			disabled_plugins = {
+				"gzip",
+				"netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+				"editorconfig",
+				"rplugin",
+				"spellfile"
+			},
+		},
+	},
 })

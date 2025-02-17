@@ -30,9 +30,20 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			"hrsh7th/nvim-cmp",
+			"hrsh7th/cmp-nvim-lsp",
+		},
 
 		config = function()
 			local lspconfig = require("lspconfig")
+			local cmp = require("cmp")
+			local cmp_nvim_lsp = require("cmp_nvim_lsp")
+
+			-- Add LSP capabilities to the completion menu
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+
 			-- Mappings and options function when LSP is attached
 			local on_attach = function(client, bufnr)
 				-- Native LSP actions mappgings
@@ -73,12 +84,13 @@ return {
 			-- TypeScript and JavaScript LSP
 			lspconfig.vtsls.setup({
 				on_attach = on_attach,
-				-- capabilities = capabilities,
+				capabilities = capabilities,
 			})
 
 			-- Lua LSP
 			lspconfig.lua_ls.setup({
 				on_attach = on_attach,
+				capabilities = capabilities,
 				settings = {
 					Lua = {
 						runtime = {
@@ -116,22 +128,69 @@ return {
 			-- Rust LSP
 			lspconfig.rust_analyzer.setup({
 				on_attach = on_attach,
+				capabilities = capabilities,
 				root_dir = lspconfig.util.root_pattern("Cargo.toml", ".git"),
 			})
 
 			-- Json LSP
 			lspconfig.jsonls.setup({
 				on_attach = on_attach,
+				capabilities = capabilities,
 			})
 
 			-- Python
 			lspconfig.basedpyright.setup({
 				on_attach = on_attach,
+				capabilities = capabilities,
 			})
 
 			-- Cpp LSP
 			lspconfig.clangd.setup({
 				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+
+			cmp.setup({
+				completion = {
+					autocomplete = { cmp.TriggerEvent.TextChanged }, -- Autocomplete on type
+				},
+				mapping = {
+					["<C-n>"] = cmp.mapping.select_next_item(),
+					["<C-p>"] = cmp.mapping.select_prev_item(),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					["<C-e>"] = cmp.mapping.abort(),
+					["<C-f>"] = cmp.mapping.scroll_docs(5),
+					["<C-u>"] = cmp.mapping.scroll_docs(-5),
+				},
+				sources = {
+					{ name = "nvim_lsp" }, -- LSP source
+				},
+				window = {
+					documentation = {
+						winhighlight = "Normal:CmpDocNormal,FloatBorder:CmpDocBorder",
+						scrolloff = 3,
+						col_offset = 1,
+						max_height = 15,
+						max_width = 60,
+					},
+					completion = {
+						scrollbar = true,
+						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+						scrolloff = 3,
+						col_offset = 0,
+					},
+				},
+				formatting = {
+					format = function(entry, vim_item)
+						vim_item.menu = ({
+							nvim_lsp = "[LSP]",
+						})[entry.source.name]
+						return vim_item
+					end,
+				},
+				experimental = {
+					ghost_text = true, -- Shows suggested text as ghost text
+				},
 			})
 		end,
 	},
