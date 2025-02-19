@@ -3,6 +3,7 @@ return {
 	-- Configuration for "Copilot"
 	{
 		"github/copilot.vim",
+		event = "BufReadPost",
 		config = function()
 			-- Activar Copilot automáticamente
 			vim.cmd("Copilot enable")

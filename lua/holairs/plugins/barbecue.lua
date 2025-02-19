@@ -25,7 +25,10 @@ return {
       show_navic = true,
       lead_custom_section = function() return " " end,
       custom_section = function() return " " end,
-      theme = "auto",
+      -- theme = "auto",
+			theme = {
+				normal = { bg = "#352f2d", fg = "#b4bdc3" },
+			},
       context_follow_icon_color = false,
       symbols = {
         modified = "●",
