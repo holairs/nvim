@@ -6,7 +6,7 @@ return {
 		event = "BufReadPost",
 		config = function()
 			-- Activar Copilot automáticamente
-			vim.cmd("Copilot enable")
+			-- vim.cmd("Copilot enable")
 			-- Accept suggestions with Ctrl-F
 			vim.api.nvim_set_keymap("i", "<C-f>", 'copilot#Accept("<CR>")', {
 				silent = true,

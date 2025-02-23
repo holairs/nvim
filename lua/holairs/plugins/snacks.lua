@@ -7,18 +7,38 @@ return {
 		opts = {
 			bigfile = { enabled = true },
 			quickfile = { enabled = true },
-			-- statuscolumn = { enabled = true },
 			words = {
 				enabled = true,
-				debounce = 200,  -- time in ms to wait before updating
-				notify_jump = false, -- show a notification when jumping
-				notify_end = true, -- show a notification when reaching the end
-				foldopen = true, -- open folds after jumping
-				jumplist = true, -- set jump point before jumping
+				debounce = 200,
+				notify_jump = false,
+				notify_end = true,
+				foldopen = true,
+				jumplist = true,
 				modes = { "n" },
+			},
+			picker = {
+				layout = {
+					preset = "ivy_split", -- Layout compacto
+					cycle = false,   -- No ciclar al llegar al final
+				},
+				matcher = {
+					frecency = true, -- Priorizar archivos usados frecuentemente
+				},
+				win = {
+					input = {
+						keys = {
+							["<Esc>"] = { "close", mode = { "n", "i" } },
+							["J"] = { "preview_scroll_down", mode = { "i", "n" } },
+							["K"] = { "preview_scroll_up", mode = { "i", "n" } },
+							["H"] = { "preview_scroll_left", mode = { "i", "n" } },
+							["L"] = { "preview_scroll_right", mode = { "i", "n" } },
+						},
+					},
+				},
 			},
 		},
 		keys = {
+			-- Git
 			{
 				"<leader>gg",
 				function()
@@ -47,6 +67,7 @@ return {
 				end,
 				desc = "Lazygit Log (cwd)",
 			},
+			-- Terminal
 			{
 				"<c-/>",
 				function()
@@ -55,6 +76,7 @@ return {
 				mode = { "n", "t" },
 				desc = "Toggle Terminal",
 			},
+			-- Navegación entre referencias
 			{
 				"]]",
 				function()
@@ -71,18 +93,36 @@ return {
 				desc = "Prev Reference",
 				mode = { "n", "t" },
 			},
+			-- Buscar archivos y buffers
+			{
+				"<leader>ff",
+				function()
+					Snacks.picker.files()
+				end,
+				desc = "Find Files",
+			},
+			{
+				"<leader>fg",
+				function()
+					Snacks.picker.grep()
+				end,
+				desc = "Find in Files",
+			},
+			{
+				"<leader>fd",
+				function()
+					Snacks.picker.buffers()
+				end,
+				desc = "Find Buffers",
+			},
 		},
 		init = function()
 			Snacks = require("snacks")
 			vim.api.nvim_create_autocmd("User", {
 				pattern = "VeryLazy",
 				callback = function()
-					-- Create some toggle mappings
 					Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
 					Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-					Snacks.toggle.diagnostics():map("<leader>ud")
-					Snacks.toggle.treesitter():map("<leader>ut")
-					-- Snacks.toggle.inlay_hints():map("<leader>ih")
 				end,
 			})
 		end,

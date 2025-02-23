@@ -10,7 +10,7 @@ return {
 			-- Ensure the correct value is used as a string
 			vim.fn.system({ "mkdir", "-p", vim.opt.undodir._value })
 			-- Mapping to open Undotree
-			vim.api.nvim_set_keymap("n", "<leader>u", ":UndotreeToggle<CR>", {
+			vim.api.nvim_set_keymap("n", "<leader>uu", ":UndotreeToggle<CR>", {
 				noremap = true,
 				silent = true,
 			})

@@ -5,9 +5,9 @@ return {
 		opts = {
 			include_declaration = true, -- Reference include declaration
 			sections = {             -- Enable / Disable specific request
-				definition = false,
+				definition = true,
 				references = true,
-				implementation = false,
+				implementation = true,
 			},
 		},
 		keys = {
