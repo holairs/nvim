@@ -1,12 +1,6 @@
 return {
 	{
 		"olimorris/codecompanion.nvim",
-		dependencies = {
-			{
-				"MeanderingProgrammer/render-markdown.nvim",
-				ft = { "markdown", "codecompanion" },
-			},
-		},
 		keys = {
 			{
 				"<leader>cc",

@@ -7,6 +7,8 @@ return {
 		opts = {
 			bigfile = { enabled = true },
 			quickfile = { enabled = true },
+			statuscolumn = { enabled = true },
+			input = { enabled = true },
 			words = {
 				enabled = true,
 				debounce = 200,
@@ -114,6 +116,20 @@ return {
 					Snacks.picker.buffers()
 				end,
 				desc = "Find Buffers",
+			},
+			{
+				"<leader>fc",
+				function()
+					Snacks.picker.colorschemes()
+				end,
+				desc = "Change Colorscheme",
+			},
+			{
+				"<leader>fr",
+				function()
+					Snacks.picker.lsp_references()
+				end,
+				desc = "LSP References",
 			},
 		},
 		init = function()
