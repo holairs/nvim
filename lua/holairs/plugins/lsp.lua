@@ -1,31 +1,3 @@
--- plugins/lsp/lsp.lualsp
-
--------------------------------------------------------------------------------
-------------------------------------- LSP -------------------------------------
--------------------------------------------------------------------------------
---                                                                           --
---  This configuration manages the LSP (Language Server Protocol) and        --
---  integrates it with the "nvim-cmp" plugin for enhanced autocompletion.    --
---                                                                           --
---  Features:                                                                --
---  1. Manual LSP server installation and setup using "neovim/nvim-lspconfig".--
---  2. Predefined key mappings for common LSP actions like "Go to            --
---     Definition" and "Find References".                                    --
---                                                                           --
---  Default personal LSPs:                                                   --
---                                                                           --
---    * rust_analyzer -> For Rust                                            --
---    * ts_ls / vtsls -> For TypeScript & JavaScript                         --
---    * lua_ls        -> For Lua                                             --
---                                                                           --
---  To add another LSP server, configure it manually in the respective       --
---  section below, ensuring it uses the shared `on_attach` and `capabilities`--
---  setup for consistency.                                                   --
---                                                                           --
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-
 return {
 	{
 		"neovim/nvim-lspconfig",

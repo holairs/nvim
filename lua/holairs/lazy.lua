@@ -1,23 +1,5 @@
 -- nvim/lua/holairs/lazy.lua
 
--------------------------------------------------------------------------------
----------------------------- Lazy Plugin Manager ------------------------------
--------------------------------------------------------------------------------
---                                                                           --
---  This configuration bootstraps and sets up the "lazy.nvim" plugin manager --
---  for Neovim. It automatically clones the "lazy.nvim" repository if it     --
---  does not exist locally, ensuring a seamless initialization process.      --
---                                                                           --
---  Features:                                                               --
---  1. Imports the "holairs.plugins" module for plugin configuration.        --
---  2. Enables plugin updates with notifications disabled for a clean UI.   --
---  3. Provides change detection for plugin configurations without UI        --
---     interruptions.                                                       --
---                                                                           --
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"

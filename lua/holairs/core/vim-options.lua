@@ -1,17 +1,5 @@
 -- core/vim-options.lua
 
--------------------------------------------------------------------------------
----------------------------- Vim Options Configuration ------------------------
--------------------------------------------------------------------------------
---   This file defines custom options and settings for Neovim. It includes   --
---   encoding preferences, tab behavior, search settings, clipboard          --
---   integration, UI adjustments, and custom commands for convenience.       --
---   The configuration ensures a streamlined and optimized editing           --
---   experience tailored to modern development workflows.                    --
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-
 local opt = vim.opt
 local g = vim.g
 local api = vim.api
@@ -46,6 +34,10 @@ opt.relativenumber = false
 opt.termguicolors = true
 
 opt.fillchars:append { vert = "|", horiz = "-" } -- Use a thin vertical bar as a separator
+
+-- Show whitespace.
+vim.opt.list = true
+vim.opt.listchars = { space = '⋅', trail = '⋅', tab = '  ↦' }
 
 -- Set as "searching" the actual searh
 opt.incsearch = true
@@ -100,7 +92,7 @@ opt.breakindent = true
 -- Allows for recursive file searching in commands like `:find`
 opt.path:append({ "**" })
 -- Ignores node_modules directories when using file completion
-opt.wildignore:append({ "*/node_modules/*" })
+opt.wildignore:append({ "**/node_modules/**", ".DS_Store" })
 -- Disables creating backup files
 opt.backup = false
 -- Shows the effects of a command incrementally in a split window
@@ -168,3 +160,10 @@ set_sign("DiagnosticSignError", {
 	texthl = "DiagnosticSignError",
 	numhl = "",
 })
+
+-- Disable health checks for these providers.
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
+

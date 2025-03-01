@@ -1,14 +1,5 @@
 -- core/keymaps.lua
 
--------------------------------------------------------------------------------
--------------------------- Key Mappings Configuration -------------------------
--------------------------------------------------------------------------------
---   This file defines custom key mappings for Neovim, enhancing usability   --
---   with actions like better paste, movement, LSP integration, and more.    --
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
-
 local utils = require("holairs.core.custom-actions")
 local keymap = vim.keymap -- for conciseness
 
