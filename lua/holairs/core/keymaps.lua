@@ -1,5 +1,3 @@
--- core/keymaps.lua
-
 local utils = require("holairs.core.custom-actions")
 local keymap = vim.keymap -- for conciseness
 

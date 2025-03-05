@@ -1,5 +1,3 @@
--- core/custom-actions.lua
-
 local M = {}
 local keymap = vim.keymap
 local api = vim.api

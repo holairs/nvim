@@ -1,5 +1,3 @@
--- core/auto-commands.lua
-
 local autocmd = vim.api.nvim_create_autocmd
 local wo = vim.wo
 local w = vim.w

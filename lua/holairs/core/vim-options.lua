@@ -1,5 +1,3 @@
--- core/vim-options.lua
-
 local opt = vim.opt
 local g = vim.g
 local api = vim.api
@@ -34,10 +32,6 @@ opt.relativenumber = false
 opt.termguicolors = true
 
 opt.fillchars:append { vert = "|", horiz = "-" } -- Use a thin vertical bar as a separator
-
--- Show whitespace.
-vim.opt.list = true
-vim.opt.listchars = { space = '⋅', trail = '⋅', tab = '  ↦' }
 
 -- Set as "searching" the actual searh
 opt.incsearch = true
@@ -148,11 +142,14 @@ command("Wqa", "wqa", {})
 
 -- Set habamax colorschemes
 opt.background = "dark"
-vim.cmd("colorscheme habamax")
+vim.cmd("colorscheme vim")
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
+vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none" })
 
 -- Set Error diagnostic sign
 set_sign("DiagnosticSignError", {
