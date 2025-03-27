@@ -9,6 +9,9 @@ return {
 			quickfile = { enabled = true },
 			statuscolumn = { enabled = true },
 			input = { enabled = true },
+			explorer = {
+				enabled = true,
+			},
 			words = {
 				enabled = true,
 				debounce = 200,
@@ -37,6 +40,17 @@ return {
 						},
 					},
 				},
+				sources = {
+    explorer = {
+      layout = {
+        preset = "sidebar",
+        -- preview = false,
+        layout = {
+          position = "right",
+        },
+      },
+    },
+  },
 			},
 		},
 		keys = {
@@ -130,6 +144,13 @@ return {
 					Snacks.picker.lsp_references()
 				end,
 				desc = "LSP References",
+			},
+			{
+				"<leader>er",
+				function()
+					Snacks.explorer.reveal()
+				end,
+				desc = "Toggle Explorer",
 			},
 		},
 		init = function()
