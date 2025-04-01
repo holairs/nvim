@@ -106,14 +106,9 @@ opt.splitright = true
 opt.formatoptions:append({ "i" })
 
 o.showtabline = 1 -- Hide tabline when there is only one tab
--- o.tabline = "%!v:lua.TabLine()" -- Use lua function to generate tabline
 
 -- Set cursorline
 opt.cursorline = true
-
--- Cursor as "Block" but with "Blink" effect in insert mode
-opt.guicursor = "n-v-c-sm:block,i-ci-ve:blinkon1"
--- opt.guicursor = "n-v-c-sm:block-Cursor,i-ci-ve:block-CursorInsert-blinkon1,r-cr:block-Cursor"
 
 -- Disable native mode line
 opt.showmode = true
@@ -141,15 +136,15 @@ command("Wq", "wq", {})
 command("Wqa", "wqa", {})
 
 -- Set colorschemes
--- opt.background = "dark"
--- vim.cmd("colorscheme quiet")
--- vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
--- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
--- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
--- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
--- vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
--- vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
--- vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none" })
+opt.background = "dark"
+vim.cmd("colorscheme vim")
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
+vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
+vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none" })
 
 -- Set Error diagnostic sign
 set_sign("DiagnosticSignError", {

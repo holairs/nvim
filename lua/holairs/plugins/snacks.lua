@@ -12,6 +12,18 @@ return {
 			explorer = {
 				enabled = true,
 			},
+			git = {
+				enabled = true,
+				blame_line =
+				{
+					width = 0.6,
+					height = 0.6,
+					border = "rounded",
+					title = " Git Blame ",
+					title_pos = "center",
+					ft = "git",
+				}
+			},
 			words = {
 				enabled = true,
 				debounce = 200,
@@ -23,11 +35,11 @@ return {
 			},
 			picker = {
 				layout = {
-					preset = "ivy_split", -- Layout compacto
-					cycle = false,   -- No ciclar al llegar al final
+					preset = "ivy_split", -- Compact Layout
+					cycle = false,   -- Disable cicle list
 				},
 				matcher = {
-					frecency = true, -- Priorizar archivos usados frecuentemente
+					frecency = true, -- Show most used files first
 				},
 				win = {
 					input = {
@@ -41,16 +53,16 @@ return {
 					},
 				},
 				sources = {
-    explorer = {
-      layout = {
-        preset = "sidebar",
-        -- preview = false,
-        layout = {
-          position = "right",
-        },
-      },
-    },
-  },
+					explorer = {
+						layout = {
+							preset = "sidebar",
+							-- preview = false,
+							layout = {
+								position = "right",
+							},
+						},
+					},
+				},
 			},
 		},
 		keys = {
@@ -61,6 +73,14 @@ return {
 					Snacks.lazygit()
 				end,
 				desc = "Lazygit",
+			},
+			{
+				"<leader>gb", -- O el atajo que prefieras
+				function()
+					-- Llama a la función blame_line del módulo git de Snacks
+					Snacks.git.blame_line()
+				end,
+				desc = "Git Blame Line", -- Descripción para which-key o similar
 			},
 			{
 				"<leader>gB",
@@ -151,6 +171,22 @@ return {
 					Snacks.explorer.reveal()
 				end,
 				desc = "Toggle Explorer",
+			},
+
+			-- ZenMode and Zoom
+			{
+				"<leader>zz",
+				function()
+					Snacks.zen()
+				end,
+				desc = "Toggle Zen Mode"
+			},
+			{
+				"<leader>zx",
+				function()
+					Snacks.zen.zoom()
+				end,
+				desc = "Toggle Zoom"
 			},
 		},
 		init = function()
