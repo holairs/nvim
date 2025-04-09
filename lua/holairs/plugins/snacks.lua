@@ -7,7 +7,7 @@ return {
 		opts = {
 			bigfile = { enabled = true },
 			quickfile = { enabled = true },
-			statuscolumn = { enabled = true },
+			-- statuscolumn = { enabled = true },
 			input = { enabled = true },
 			explorer = {
 				enabled = true,

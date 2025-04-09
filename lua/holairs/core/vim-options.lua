@@ -146,12 +146,12 @@ vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
 vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none" })
 
--- Set Error diagnostic sign
-set_sign("DiagnosticSignError", {
-	text = ">>",
-	texthl = "DiagnosticSignError",
-	numhl = "",
-})
+-- -- Set Error diagnostic sign
+-- set_sign("DiagnosticSignError", {
+-- 	text = ">>",
+-- 	texthl = "DiagnosticSignError",
+-- 	numhl = "",
+-- })
 
 -- Disable health checks for these providers.
 vim.g.loaded_python3_provider = 0
@@ -159,3 +159,19 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
 
+-- Highlight the line number for warnings
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = '>>',
+            -- [vim.diagnostic.severity.HINT] = '!!',
+            -- [vim.diagnostic.severity.WARN] = 'XX',
+        },
+        -- linehl = {
+        --     [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+        -- },
+        -- numhl = {
+        --     [vim.diagnostic.severity.WARN] = 'WarningMsg',
+        -- },
+    },
+})
