@@ -137,7 +137,7 @@ command("Wqa", "wqa", {})
 
 -- Set colorschemes
 opt.background = "dark"
-vim.cmd("colorscheme vim")
+vim.cmd("colorscheme default")
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
@@ -145,13 +145,7 @@ vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
 vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
 vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "none" })
-
--- -- Set Error diagnostic sign
--- set_sign("DiagnosticSignError", {
--- 	text = ">>",
--- 	texthl = "DiagnosticSignError",
--- 	numhl = "",
--- })
+vim.api.nvim_set_hl(0, "SnacksPickerDir", {fg = "#FFFFFF"})
 
 -- Disable health checks for these providers.
 vim.g.loaded_python3_provider = 0
@@ -164,14 +158,6 @@ vim.diagnostic.config({
     signs = {
         text = {
             [vim.diagnostic.severity.ERROR] = '>>',
-            -- [vim.diagnostic.severity.HINT] = '!!',
-            -- [vim.diagnostic.severity.WARN] = 'XX',
         },
-        -- linehl = {
-        --     [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
-        -- },
-        -- numhl = {
-        --     [vim.diagnostic.severity.WARN] = 'WarningMsg',
-        -- },
     },
 })
