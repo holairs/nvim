@@ -7,7 +7,6 @@ return {
 		opts = {
 			bigfile = { enabled = true },
 			quickfile = { enabled = true },
-			-- statuscolumn = { enabled = true },
 			input = { enabled = true },
 			explorer = {
 				enabled = true,
@@ -56,7 +55,6 @@ return {
 					explorer = {
 						layout = {
 							preset = "sidebar",
-							-- preview = false,
 							layout = {
 								position = "right",
 							},
@@ -75,7 +73,7 @@ return {
 				desc = "Lazygit",
 			},
 			{
-				"<leader>gb", -- O el atajo que prefieras
+				"<leader>gb",
 				function()
 					-- Llama a la función blame_line del módulo git de Snacks
 					Snacks.git.blame_line()

@@ -101,8 +101,7 @@ return {
 			})
 
 			-- Cpp LSP
-			lspconfig.clangd.setup({
-				init_options = {
+			lspconfig.clangd.setup({ init_options = {
 					fallbackFlags = {
 						"-std=c++11",
 					},

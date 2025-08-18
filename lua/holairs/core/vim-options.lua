@@ -5,7 +5,7 @@ local o = vim.o
 local command = api.nvim_create_user_command
 local set_sign = vim.fn.sign_define
 
-vim.o.completeopt = "menuone,noselect,noinsert"
+opt.completeopt = { "menu", "menuone", "noinsert" }
 
 -- Set persistent undo
 opt.undofile = true
@@ -14,7 +14,6 @@ opt.undofile = true
 vim.scriptencoding = "utf-8"
 vim.encoding = "utf-8"
 vim.fileencoding = "utf-8"
-
 -- Map the space bar as the main command key
 g.mapleader = " "
 
@@ -28,8 +27,7 @@ opt.clipboard = "unnamed"
 opt.number = false
 opt.relativenumber = false
 
--- Better term colors :0
-opt.termguicolors = true
+-- Better term colors :0 opt.termguicolors = true
 
 opt.fillchars:append { vert = "|", horiz = "-" } -- Use a thin vertical bar as a separator
 
@@ -56,11 +54,11 @@ g.loaded_netrwPlugin = 1
 
 -- Some default settings
 -- Sets the number of spaces a tab is displayed as
-opt.tabstop = 2
+opt.tabstop = 8
 -- Sets the number of spaces used for indentation steps
-opt.shiftwidth = 2
+opt.shiftwidth = 8
 -- Converts tabs to spaces
-opt.expandtab = false
+opt.expandtab = true
 -- Automatically indents a new line the same amount as the line just typed
 opt.autoindent = true
 -- Does smart autoindenting when starting a new line (for C-like programming)
@@ -137,7 +135,7 @@ command("Wqa", "wqa", {})
 
 -- Set colorschemes
 opt.background = "dark"
-vim.cmd("colorscheme default")
+vim.cmd("colorscheme retrobox")
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
