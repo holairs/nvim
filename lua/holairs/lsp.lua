@@ -18,6 +18,22 @@ local servers = {
                 _root_dir = root_pattern({ "go.work", "go.mod", ".git" }),
                 filetypes = { "go", "gomod", "gowork", "gotmpl" },
         },
+        basedpyright = {
+                name = "basedpyright",
+                cmd = { "basedpyright-langserver", "--stdio" },
+                _root_dir = root_pattern({ "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile",
+                        "pyrightconfig.json", ".git" }),
+                filetypes = { "python" },
+                settings = {
+                        python = {
+                                analysis = {
+                                        autoSearchPaths = true,
+                                        diagnosticMode = "openFilesOnly",
+                                        useLibraryCodeForTypes = true,
+                                },
+                        },
+                }
+        },
         rust_analyzer = {
                 name = "rust-analyzer",
                 cmd = { "rust-analyzer" },
