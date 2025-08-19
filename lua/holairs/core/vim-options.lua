@@ -134,7 +134,7 @@ command("Wq", "wq", {})
 command("Wqa", "wqa", {})
 
 -- Set colorschemes
-opt.background = "dark"
+opt.background = "light"
 vim.cmd("colorscheme retrobox")
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })

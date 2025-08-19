@@ -46,6 +46,17 @@ local servers = {
                 filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
                 _root_dir = root_pattern({ "package.json", "tsconfig.json", "jsconfig.json", ".git" }),
         },
+        cpp = {
+                name = "clangd",
+                cmd = { "clangd" },
+                filetypes = { "cpp", "c" },
+                root_dir = root_pattern({ ".git" }),
+                init_options = {
+                        fallbackFlags = {
+                                "-std=c++11",
+                        },
+                },
+        },
 }
 
 local group = vim.api.nvim_create_augroup("UserLspStart", { clear = true })
