@@ -24,8 +24,8 @@ opt.colorcolumn = "80"
 opt.clipboard = "unnamed"
 
 -- Relative and numberline
-opt.number = false
-opt.relativenumber = false
+opt.number = true
+opt.relativenumber = true
 
 -- Better term colors :0 opt.termguicolors = true
 
@@ -134,8 +134,8 @@ command("Wq", "wq", {})
 command("Wqa", "wqa", {})
 
 -- Set colorschemes
-opt.background = "light"
-vim.cmd("colorscheme retrobox")
+opt.background = "dark"
+vim.cmd("colorscheme habamax")
 vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })

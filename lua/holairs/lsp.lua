@@ -5,6 +5,7 @@ local function root_pattern(marker)
 end
 
 local servers = {
+        -- Lua
         lua_ls = {
                 name = "lua-language-server",
                 cmd = { "lua-language-server" },
@@ -12,12 +13,7 @@ local servers = {
                         "selene.toml", "selene.yml", ".git" }),
                 filetypes = { "lua" },
         },
-        gopls = {
-                name = "gopls",
-                cmd = { "gopls" },
-                _root_dir = root_pattern({ "go.work", "go.mod", ".git" }),
-                filetypes = { "go", "gomod", "gowork", "gotmpl" },
-        },
+        -- Python
         basedpyright = {
                 name = "basedpyright",
                 cmd = { "basedpyright-langserver", "--stdio" },
@@ -34,18 +30,21 @@ local servers = {
                         },
                 }
         },
+        -- Rust
         rust_analyzer = {
                 name = "rust-analyzer",
                 cmd = { "rust-analyzer" },
                 _root_dir = root_pattern({ "Cargo.toml", ".git" }),
                 filetypes = { "rust" },
         },
+        -- TypeScript / JavaScript
         vtsls = {
                 name = "vtsls",
                 cmd = { "vtsls", "--stdio" },
                 filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
                 _root_dir = root_pattern({ "package.json", "tsconfig.json", "jsconfig.json", ".git" }),
         },
+        -- C / C++
         cpp = {
                 name = "clangd",
                 cmd = { "clangd" },
@@ -54,6 +53,18 @@ local servers = {
                 init_options = {
                         fallbackFlags = {
                                 "-std=c++11",
+                        },
+                },
+        },
+        -- C#
+        omnisharp = {
+                name = "omnisharp",
+                cmd = { "omnisharp" },
+                _root_dir = root_pattern({ ".sln", ".csproj", ".fsproj", ".vbp", ".suo", ".cs" }),
+                filetypes = { "cs" },
+                settings = {
+                        ['omnisharp.json'] = {
+                                EnableImportCompletion = true,
                         },
                 },
         },
@@ -75,6 +86,7 @@ for _, config in pairs(servers) do
         end
 end
 
+-- Diagnostics style
 vim.diagnostic.config({
         virtual_text = {
                 spaces = 4,
@@ -88,8 +100,8 @@ vim.diagnostic.config({
         update_in_insert = true,
 })
 
+-- LSP Keymaps
 local set = vim.keymap.set
-
 set('n', '<leader>e', ':lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
 set('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
 set('n', '<leader>ca', ':lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
