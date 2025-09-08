@@ -7,8 +7,22 @@ return {
 		opts = {
 			bigfile = { enabled = true },
 			quickfile = { enabled = true },
-			statuscolumn = { enabled = true },
 			input = { enabled = true },
+			explorer = {
+				enabled = true,
+			},
+			git = {
+				enabled = true,
+				blame_line =
+				{
+					width = 0.6,
+					height = 0.6,
+					border = "rounded",
+					title = " Git Blame ",
+					title_pos = "center",
+					ft = "git",
+				}
+			},
 			words = {
 				enabled = true,
 				debounce = 200,
@@ -20,11 +34,11 @@ return {
 			},
 			picker = {
 				layout = {
-					preset = "ivy_split", -- Layout compacto
-					cycle = false,   -- No ciclar al llegar al final
+					preset = "ivy_split", -- Compact Layout
+					cycle = false,   -- Disable cicle list
 				},
 				matcher = {
-					frecency = true, -- Priorizar archivos usados frecuentemente
+					frecency = true, -- Show most used files first
 				},
 				win = {
 					input = {
@@ -34,6 +48,16 @@ return {
 							["K"] = { "preview_scroll_up", mode = { "i", "n" } },
 							["H"] = { "preview_scroll_left", mode = { "i", "n" } },
 							["L"] = { "preview_scroll_right", mode = { "i", "n" } },
+						},
+					},
+				},
+				sources = {
+					explorer = {
+						layout = {
+							preset = "sidebar",
+							layout = {
+								position = "right",
+							},
 						},
 					},
 				},
@@ -47,6 +71,14 @@ return {
 					Snacks.lazygit()
 				end,
 				desc = "Lazygit",
+			},
+			{
+				"<leader>gb",
+				function()
+					-- Llama a la función blame_line del módulo git de Snacks
+					Snacks.git.blame_line()
+				end,
+				desc = "Git Blame Line", -- Descripción para which-key o similar
 			},
 			{
 				"<leader>gB",
@@ -130,6 +162,29 @@ return {
 					Snacks.picker.lsp_references()
 				end,
 				desc = "LSP References",
+			},
+			{
+				"<leader>er",
+				function()
+					Snacks.explorer.reveal()
+				end,
+				desc = "Toggle Explorer",
+			},
+
+			-- ZenMode and Zoom
+			{
+				"<leader>zz",
+				function()
+					Snacks.zen()
+				end,
+				desc = "Toggle Zen Mode"
+			},
+			{
+				"<leader>zx",
+				function()
+					Snacks.zen.zoom()
+				end,
+				desc = "Toggle Zoom"
 			},
 		},
 		init = function()

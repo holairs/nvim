@@ -5,7 +5,6 @@ local g = vim.g
 local api = vim.api
 local o = vim.o
 local command = api.nvim_create_user_command
-local set_sign = vim.fn.sign_define
 
 vim.o.completeopt = "menuone,noselect,noinsert"
 
@@ -27,17 +26,17 @@ opt.colorcolumn = "80"
 opt.clipboard = "unnamed"
 
 -- Relative and numberline
-opt.number = false
-opt.relativenumber = false
+opt.number = true
+opt.relativenumber = true
 
 -- Better term colors :0
 opt.termguicolors = true
 
-opt.fillchars:append { vert = "|", horiz = "-" } -- Use a thin vertical bar as a separator
+opt.fillchars:append({ vert = "|", horiz = "-" }) -- Use a thin vertical bar as a separator
 
 -- Show whitespace.
-vim.opt.list = true
-vim.opt.listchars = { space = '⋅', trail = '⋅', tab = '  ↦' }
+-- vim.opt.list = true
+-- vim.opt.listchars = { space = '⋅', trail = '⋅', tab = '  ↦' }
 
 -- Set as "searching" the actual searh
 opt.incsearch = true
@@ -147,18 +146,20 @@ command("Wq", "wq", {})
 command("Wqa", "wqa", {})
 
 -- Set habamax colorschemes
-opt.background = "dark"
-vim.cmd("colorscheme habamax")
-vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+-- opt.background = "dark"
+-- vim.cmd("colorscheme habamax")
+-- vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
 
 -- Set Error diagnostic sign
-set_sign("DiagnosticSignError", {
-	text = ">>",
-	texthl = "DiagnosticSignError",
-	numhl = "",
+vim.diagnostic.config({
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = ">>",
+		},
+	},
 })
 
 -- Disable health checks for these providers.
@@ -166,4 +167,3 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
-

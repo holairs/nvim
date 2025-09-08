@@ -221,6 +221,12 @@ function M.setup()
 	set(0, "NetrwMarkFile", { fg = colors.yellow, bg = "none", bold = true })
 	set(0, "NetrwLinkTarget", { fg = colors.orange, bg = "none", bold = true })
 	set(0, "NetrwLinkTargetHidden", { fg = colors.light_gray, bg = "none", italic = true })
+
+	set_sign("DiagnosticSignError", {
+		text = ">>",
+		texthl = "DiagnosticSignError",
+		numhl = "",
+	})
 end
 
 return M

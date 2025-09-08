@@ -1,3 +1,5 @@
+-- ~/.config/nvim/lua/plugins/lsp.lua
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -5,131 +7,18 @@ return {
 		dependencies = {
 			"hrsh7th/nvim-cmp",
 			"hrsh7th/cmp-nvim-lsp",
+			"williamboman/mason-lspconfig.nvim", -- La dependencia sigue siendo necesaria
+			"onsails/lspkind.nvim",
 		},
-
 		config = function()
-			local lspconfig = require("lspconfig")
+			-- Toda la lógica de setup de servidores se ha movido a 'mason-lspconfig.lua'
+			-- Aquí solo queda la configuración de nvim-cmp
+
 			local cmp = require("cmp")
-			local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-			-- Add LSP capabilities to the completion menu
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-
-			-- Mappings and options function when LSP is attached
-			local on_attach = function(client, bufnr)
-				-- Native LSP actions mappgings
-				vim.keymap.set("n", "gd", vim.lsp.buf.definition, {
-					buffer = bufnr,
-					desc = "Go to definition(LSP)",
-				})
-				vim.keymap.set("n", "gr", vim.lsp.buf.references, {
-					buffer = bufnr,
-					desc = "Search references (LSP)",
-				})
-				vim.keymap.set("n", "td", function()
-					vim.cmd("tab split")
-					vim.lsp.buf.definition()
-				end, {
-					buffer = bufnr,
-					desc = "Go to definition (LSP) in a new tab",
-				})
-				vim.keymap.set("n", "tr", function()
-					vim.cmd("tab split")
-					vim.lsp.buf.references()
-				end, {
-					buffer = bufnr,
-					desc = "Search references (LSP) in a new tab",
-				})
-
-				-- Toggle Inlay Hints
-				vim.keymap.set("n", "<Leader>ih", function()
-					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ 0 }), { 0 })
-				end, {
-					buffer = bufnr,
-					desc = "Toggle Inlay Hints (LSP)",
-				})
-			end
-
-			-- Manual LSP servers configuration
-
-			-- TypeScript and JavaScript LSP
-			lspconfig.vtsls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-
-			-- Lua LSP
-			lspconfig.lua_ls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					Lua = {
-						runtime = {
-							version = "LuaJIT",
-						},
-						diagnostics = {
-							globals = {
-								"vim",
-								"require",
-								"opts",
-								"bufnr",
-								"_value",
-								"fs_stat",
-								"cwd",
-								"utils",
-							},
-						},
-						workspace = {
-							library = vim.api.nvim_get_runtime_file("", true),
-						},
-						telemetry = {
-							enable = false,
-						},
-						format = {
-							enable = true,
-							defaultConfig = {
-								indent_style = "space",
-								indent_size = "2",
-							},
-						},
-					},
-				},
-			})
-
-			-- Rust LSP
-			lspconfig.rust_analyzer.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				root_dir = lspconfig.util.root_pattern("Cargo.toml", ".git"),
-			})
-
-			-- Json LSP
-			lspconfig.jsonls.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-
-			-- Python
-			lspconfig.basedpyright.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-
-			-- Cpp LSP
-			lspconfig.clangd.setup({
-				init_options = {
-					fallbackFlags = {
-						"-std=c++11",
-					},
-				},
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-
+			local lspkind = require("lspkind")
 			cmp.setup({
 				completion = {
-					autocomplete = { cmp.TriggerEvent.TextChanged }, -- Autocomplete on type
+					autocomplete = { cmp.TriggerEvent.TextChanged },
 				},
 				mapping = {
 					["<C-n>"] = cmp.mapping.select_next_item(),
@@ -140,38 +29,55 @@ return {
 					["<C-u>"] = cmp.mapping.scroll_docs(-5),
 				},
 				sources = {
-					{ name = "nvim_lsp" }, -- LSP source
+					{ name = "nvim_lsp" },
 				},
 				window = {
-					documentation = {
-						winhighlight = "Normal:CmpDocNormal,FloatBorder:CmpDocBorder",
-						scrolloff = 3,
-						col_offset = 1,
-						max_height = 15,
-						max_width = 60,
-					},
-					completion = {
-						scrollbar = true,
-						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-						scrolloff = 3,
-						col_offset = 0,
-					},
+					documentation = { winhighlight = "Normal:CmpDocNormal,FloatBorder:CmpDocBorder" },
+					completion = { winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None" },
 				},
 				formatting = {
-					format = function(entry, vim_item)
-						vim_item.menu = ({
-							nvim_lsp = "[LSP]",
-						})[entry.source.name]
-						return vim_item
-					end,
+					format = lspkind.cmp_format({
+						mode = "symbol_text", -- Muestra el icono y el texto
+						maxwidth = 50, -- Ancho máximo antes de cortar el texto
+						ellipsis_char = "...", -- Carácter para el texto cortado
+						-- Opciones adicionales por tipo de sugerencia (opcional)
+						-- symbol_map = {
+						-- 	Text = "󰉿",
+						-- 	Method = "󰆧",
+						-- 	Function = "󰊕",
+						-- 	Constructor = "",
+						-- 	Field = "󰜢",
+						-- 	Variable = "󰀫",
+						-- 	Class = "󰠃",
+						-- 	Interface = "",
+						-- 	Module = "",
+						-- 	Property = "󰜢",
+						-- 	Unit = "󰑭",
+						-- 	Value = "󰎠",
+						-- 	Enum = "",
+						-- 	Keyword = "󰌋",
+						-- 	Snippet = "",
+						-- 	Color = "󰏘",
+						-- 	File = "󰈙",
+						-- 	Reference = "󰈇",
+						-- 	Folder = "󰉋",
+						-- 	EnumMember = "",
+						-- 	Constant = "󰏿",
+						-- 	Struct = "󰙅",
+						-- 	Event = "",
+						-- 	Operator = "󰆕",
+						-- 	TypeParameter = "󰅲",
+						-- },
+					}),
 				},
 				experimental = {
-					ghost_text = false, -- Shows suggested text as ghost text
+					ghost_text = false,
 				},
 			})
 		end,
 	},
 
+	-- La configuración de diagnósticos se mantiene igual
 	vim.diagnostic.config({
 		virtual_text = {
 			spaces = 4,
