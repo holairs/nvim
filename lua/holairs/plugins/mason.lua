@@ -10,6 +10,7 @@ return {
 		ensure_installed = {
 			"roslyn",
 			"rzls",
+			"csharpier", -- csharp
 		},
 	},
 }

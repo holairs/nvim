@@ -22,7 +22,7 @@ keymap.set({ "n", "v" }, "<leader>d", [["+y]])
 
 -- Select a structured block (syntax)
 keymap.set("n", "<leader>aa", "V$%") -- in normal mode
-keymap.set("v", "<leader>aa", "$%")  -- in visual mode
+keymap.set("v", "<leader>aa", "$%") -- in visual mode
 
 -- Make selection and fold of a structured code fragment
 keymap.set("n", "<leader>af", "zf%", { noremap = true, desc = "Fold current block" })
@@ -35,13 +35,6 @@ keymap.set("t", "||", "<C-\\><C-n>", {
 
 -- Open LSP suggestion menu
 keymap.set("i", "<C-l>", "<C-x><C-o>")
-
--- Code Actions (LSP) for all language servers
-keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {
-	noremap = true,
-	silent = true,
-	desc = "Code Actions (LSP)",
-})
 
 -- Use CTRL + C as if it were "ESC"
 -- to maintain consistency with LSP and other utilities ;)
@@ -235,3 +228,15 @@ keymap.set("n", "N", "Nzzzv", { noremap = true })
 keymap.set("i", ",", ",<c-g>u")
 keymap.set("i", ".", ".<c-g>u")
 keymap.set("i", ";", ";<c-g>u")
+
+-- LSP Actions
+keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition (LSP)" })
+keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "Search references (LSP)" })
+keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover docs (LSP)" })
+
+-- Code Actions (LSP) for all language servers
+keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {
+	noremap = true,
+	silent = true,
+	desc = "Code Actions (LSP)",
+})

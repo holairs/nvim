@@ -11,9 +11,6 @@ return {
 			"onsails/lspkind.nvim",
 		},
 		config = function()
-			-- Toda la lógica de setup de servidores se ha movido a 'mason-lspconfig.lua'
-			-- Aquí solo queda la configuración de nvim-cmp
-
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 			cmp.setup({
@@ -40,34 +37,6 @@ return {
 						mode = "symbol_text", -- Muestra el icono y el texto
 						maxwidth = 50, -- Ancho máximo antes de cortar el texto
 						ellipsis_char = "...", -- Carácter para el texto cortado
-						-- Opciones adicionales por tipo de sugerencia (opcional)
-						-- symbol_map = {
-						-- 	Text = "󰉿",
-						-- 	Method = "󰆧",
-						-- 	Function = "󰊕",
-						-- 	Constructor = "",
-						-- 	Field = "󰜢",
-						-- 	Variable = "󰀫",
-						-- 	Class = "󰠃",
-						-- 	Interface = "",
-						-- 	Module = "",
-						-- 	Property = "󰜢",
-						-- 	Unit = "󰑭",
-						-- 	Value = "󰎠",
-						-- 	Enum = "",
-						-- 	Keyword = "󰌋",
-						-- 	Snippet = "",
-						-- 	Color = "󰏘",
-						-- 	File = "󰈙",
-						-- 	Reference = "󰈇",
-						-- 	Folder = "󰉋",
-						-- 	EnumMember = "",
-						-- 	Constant = "󰏿",
-						-- 	Struct = "󰙅",
-						-- 	Event = "",
-						-- 	Operator = "󰆕",
-						-- 	TypeParameter = "󰅲",
-						-- },
 					}),
 				},
 				experimental = {
@@ -76,18 +45,4 @@ return {
 			})
 		end,
 	},
-
-	-- La configuración de diagnósticos se mantiene igual
-	vim.diagnostic.config({
-		virtual_text = {
-			spaces = 4,
-			prefix = "●",
-		},
-		float = {
-			source = true,
-			border = "rounded",
-		},
-		underline = false,
-		update_in_insert = true,
-	}),
 }

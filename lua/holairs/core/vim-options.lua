@@ -162,6 +162,20 @@ vim.diagnostic.config({
 	},
 })
 
+-- Set style for diagnostics in-line
+vim.diagnostic.config({
+	virtual_text = {
+		spaces = 4,
+		prefix = "●",
+	},
+	float = {
+		source = true,
+		border = "rounded",
+	},
+	underline = false,
+	update_in_insert = true,
+})
+
 -- Disable health checks for these providers.
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
