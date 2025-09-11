@@ -5,25 +5,15 @@ return {
 	---@module 'roslyn.config'
 	---@type RoslynNvimConfig
 	ft = { "cs", "razor" },
-	opts = {
-		-- your configuration comes here; leave empty for default settings
-	},
-
-	-- ADD THIS:
-
+	opts = {},
 	dependencies = {
 		{
-			-- By loading as a dependencies, we ensure that we are available to set
-			-- the handlers for Roslyn.
 			"tris203/rzls.nvim",
 			config = true,
 		},
 	},
 	lazy = false,
 	config = function()
-		-- Use one of the methods in the Integration section to compose the command.
-		local mason_registry = require("mason-registry")
-
 		local rzls_path = vim.fn.expand("$MASON/packages/rzls/libexec")
 		local cmd = {
 			"roslyn",
@@ -44,7 +34,6 @@ return {
 				["csharp|inlay_hints"] = {
 					csharp_enable_inlay_hints_for_implicit_object_creation = true,
 					csharp_enable_inlay_hints_for_implicit_variable_types = true,
-
 					csharp_enable_inlay_hints_for_lambda_parameter_types = true,
 					csharp_enable_inlay_hints_for_types = true,
 					dotnet_enable_inlay_hints_for_indexer_parameters = true,
