@@ -240,3 +240,15 @@ keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {
 	silent = true,
 	desc = "Code Actions (LSP)",
 })
+
+-- Toggle between normal and relative line numbers
+keymap.set({ "n", "v" }, "<leader>jn", function()
+	local opt = vim.opt
+	if opt.relativenumber:get() then
+		opt.relativenumber = false
+		opt.number = true
+	else
+		opt.relativenumber = true
+		opt.number = true
+	end
+end, { noremap = true, silent = true, desc = "Toggle relative numbers" })

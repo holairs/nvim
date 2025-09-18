@@ -13,15 +13,14 @@ return {
 			},
 			git = {
 				enabled = true,
-				blame_line =
-				{
+				blame_line = {
 					width = 0.6,
 					height = 0.6,
 					border = "rounded",
 					title = " Git Blame ",
 					title_pos = "center",
 					ft = "git",
-				}
+				},
 			},
 			words = {
 				enabled = true,
@@ -35,7 +34,7 @@ return {
 			picker = {
 				layout = {
 					preset = "ivy_split", -- Compact Layout
-					cycle = false,   -- Disable cicle list
+					cycle = false, -- Disable cicle list
 				},
 				matcher = {
 					frecency = true, -- Show most used files first
@@ -177,14 +176,14 @@ return {
 				function()
 					Snacks.zen()
 				end,
-				desc = "Toggle Zen Mode"
+				desc = "Toggle Zen Mode",
 			},
 			{
 				"<leader>zx",
 				function()
 					Snacks.zen.zoom()
 				end,
-				desc = "Toggle Zoom"
+				desc = "Toggle Zoom",
 			},
 		},
 		init = function()
