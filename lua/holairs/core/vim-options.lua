@@ -146,12 +146,12 @@ command("Wq", "wq", {})
 command("Wqa", "wqa", {})
 
 -- Set habamax colorschemes
--- opt.background = "dark"
--- vim.cmd("colorscheme habamax")
--- vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
--- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
--- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
--- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+opt.background = "dark"
+vim.cmd("colorscheme quiet")
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
 
 -- Set Error diagnostic sign
 vim.diagnostic.config({
