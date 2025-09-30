@@ -49,6 +49,12 @@ keymap.set("n", "<leader>sel", "<cmd>lua vim.diagnostic.setqflist()<cr>", {
 	silent = true,
 })
 
+-- Run Rust program
+keymap.set("n", "<leader>rr", "<cmd>!cargo run<cr>", {
+	noremap = true,
+	silent = true,
+})
+
 -- Show diagnostic inline
 keymap.set("n", "<leader>sd", vim.diagnostic.open_float, {
 	noremap = true,
@@ -242,7 +248,7 @@ keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {
 })
 
 -- Toggle between normal and relative line numbers
-keymap.set({ "n", "v" }, "<leader>jn", function()
+keymap.set({ "n", "v" }, "<leader>cn", function()
 	local opt = vim.opt
 	if opt.relativenumber:get() then
 		opt.relativenumber = false

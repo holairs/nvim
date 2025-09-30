@@ -26,13 +26,13 @@ autocmd("FileType", {
 		local opts = { buffer = event.buf, silent = true }
 		keymap.set("n", "<C-n>", "<cmd>cn | wincmd p<CR>", opts)
 		keymap.set("n", "<C-p>", "<cmd>cN | wincmd p<CR>", opts)
-		keymap.set("n", "<CR>", ":bdelete<CR>", opts)
+		-- keymap.set("n", "<CR>", ":bdelete<CR>", opts)
+		keymap.set("n", "<CR>", "<CR> | <cmd>cclose<CR>", opts)
 	end,
 })
 
 -- Custom buffer tabs
-function TabLine() -- Neds to be global instead of part or "M"
-	local s = ""
+function TabLine() -- Neds to be global instead of part or "M" local s = ""
 	for tabnr = 1, vim.fn.tabpagenr("$") do
 		-- Select the current tab
 		local active = (tabnr == fn.tabpagenr()) and "%#TabLineSel#" or "%#TabLine#"

@@ -100,33 +100,6 @@ return {
 				end,
 				desc = "Lazygit Log (cwd)",
 			},
-			-- Terminal
-			{
-				"<c-/>",
-				function()
-					Snacks.terminal()
-				end,
-				mode = { "n", "t" },
-				desc = "Toggle Terminal",
-			},
-			-- Navegación entre referencias
-			{
-				"]]",
-				function()
-					Snacks.words.jump(vim.v.count1)
-				end,
-				desc = "Next Reference",
-				mode = { "n", "t" },
-			},
-			{
-				"[[",
-				function()
-					Snacks.words.jump(-vim.v.count1)
-				end,
-				desc = "Prev Reference",
-				mode = { "n", "t" },
-			},
-			-- Buscar archivos y buffers
 			{
 				"<leader>ff",
 				function()
@@ -186,15 +159,5 @@ return {
 				desc = "Toggle Zoom",
 			},
 		},
-		init = function()
-			Snacks = require("snacks")
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "VeryLazy",
-				callback = function()
-					Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
-					Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-				end,
-			})
-		end,
 	},
 }

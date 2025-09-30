@@ -19,10 +19,8 @@ return {
 				sh = { "shfmt" },
 				-- Para archivos de C# (.cs)
 				cs = { "csharpier" },
-
-				-- Para archivos Razor (.razor, .cshtml)
-				-- Se ejecutan en orden: primero csharpier, luego prettierd
-				razor = { "csharpier", "prettierd" },
+				-- Para el formateo con el LSP
+				razor = { lsp_format = "fallback" },
 			},
 		})
 	end,
