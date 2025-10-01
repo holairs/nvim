@@ -50,10 +50,10 @@ keymap.set("n", "<leader>sel", "<cmd>lua vim.diagnostic.setqflist()<cr>", {
 })
 
 -- Run Rust program
-keymap.set("n", "<leader>rr", "<cmd>!cargo run<cr>", {
-	noremap = true,
-	silent = true,
-})
+-- keymap.set("n", "<leader>rr", "<cmd>!cargo run<cr>", {
+-- 	noremap = true,
+-- 	silent = true,
+-- })
 
 -- Show diagnostic inline
 keymap.set("n", "<leader>sd", vim.diagnostic.open_float, {

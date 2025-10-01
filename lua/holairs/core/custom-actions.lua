@@ -31,6 +31,30 @@ autocmd("FileType", {
 	end,
 })
 
+-- Code runnner in split terminal
+local function CodeRunner(filetype, command)
+	-- Versión MÁS SIMPLE, sin 'group'
+	autocmd("FileType", {
+		pattern = filetype,
+		callback = function()
+			-- Usando keymap.set (tu alias) directamente
+			keymap.set("n", "<leader>rr", ":w<CR>:split term://" .. command .. " %<CR>:resize 10<CR>", {
+				buffer = true, -- Aplica el mapeo solo a este buffer
+				desc = "Execute File",
+				noremap = true,
+				silent = true,
+			})
+		end,
+	})
+end
+
+-- Define the commands for each filetype
+CodeRunner("javascript", "bun")
+CodeRunner("typescript", "bun")
+CodeRunner("cpp", "g++ % -o %:r && ./%:r")
+CodeRunner("python", "python3")
+CodeRunner("rust", "cargo run")
+
 -- Custom buffer tabs
 function TabLine() -- Neds to be global instead of part or "M" local s = ""
 	for tabnr = 1, vim.fn.tabpagenr("$") do
