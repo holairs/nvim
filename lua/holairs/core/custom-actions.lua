@@ -104,7 +104,7 @@ vim.api.nvim_create_user_command("FzfGrep", function()
   vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
     split = "below",
   })
-  local rg = "rg -Suug !.git --column --color=always --"
+	local rg = "rg -Suug !.git --column --color=always --glob '!node_modules/*' --glob '!Cargo.lock' --glob '!target/*'"
   vim.fn.jobstart({
     "fzf",
     "--ansi",
