@@ -12,8 +12,6 @@ return {
 				"typescript",
 				"c",
 				"rust",
-				"c_sharp",
-				"razor",
 			},
 			sync_install = true,
 			ignore_install = {},
