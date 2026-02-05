@@ -59,8 +59,8 @@ g.netrw_preview = 1
 g.netrw_list_hide = 0
 
 -- Disable netrw
--- g.loaded_netrw = 1
--- g.loaded_netrwPlugin = 1
+g.loaded_netrw = 0
+g.loaded_netrwPlugin = 0
 
 -- Some default settings
 -- Sets the number of spaces a tab is displayed as
@@ -139,8 +139,8 @@ vim.opt.backup = false
 g.loaded_matchit = 1
 g.loaded_man = 1
 g.loaded_tutor_mode_plugin = 1
-g.loaded_tutor_mode_plugin = 1
 g.osc52 = 1
+g.loaded_matchparen = 1
 
 -- Create custom command for miskates :)
 command("Q", "q", {})
@@ -149,13 +149,13 @@ command("Wq", "wq", {})
 command("Wqa", "wqa", {})
 
 -- Set habamax colorschemes
--- opt.background = "dark"
--- vim.cmd("colorscheme quiet")
--- vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = false })
--- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
--- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
--- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
--- vim.api.nvim_set_hl(0, "Float", { bg = "none" })
+opt.background = "dark"
+-- vim.cmd("colorscheme moonfly")
+vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = false })
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+vim.api.nvim_set_hl(0, "Float", { bg = "none" })
 
 -- Better quiet colorscheme:
 

@@ -1,7 +1,7 @@
 return {
 	{
 		"lewis6991/gitsigns.nvim",
-		event = "BufReadPost",
+		event = "VeryLazy",
 		cond = function()
 			return vim.fn.isdirectory(".git") == 1
 		end,
@@ -14,7 +14,7 @@ return {
 					topdelete = { text = "‾" },
 					changedelete = { text = "~" },
 				},
-				current_line_blame = true, -- Enable git blame on line
+				current_line_blame = false,
 			})
 			vim.keymap.set("n", "<leader>gn", ":Gitsigns toggle_current_line_blame<CR>")
 			vim.keymap.set("n", "<leader>df", ":Gitsigns diffthis<CR>")
@@ -25,7 +25,7 @@ return {
 			})
 			vim.keymap.set("v", "<leader>gr", function()
 				require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-			end, { noremap = true, silent = true }) -- Reset selected (v) hunks
+			end, { noremap = true, silent = true })
 		end,
 	},
 }
