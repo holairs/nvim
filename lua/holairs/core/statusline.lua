@@ -196,27 +196,38 @@ end
 
 --- @return string
 local function full_git()
+	-- Colors fot git status
+	vim.cmd("highlight StatusGitBranch  guibg=#404040 guifg=#80a0ff gui=bold") -- Blue
+	vim.cmd("highlight StatusGitAdd     guibg=#404040 guifg=#36c692") -- Green
+	vim.cmd("highlight StatusGitMod     guibg=#404040 guifg=#e3c78a") -- Yellow
+	vim.cmd("highlight StatusGitDel     guibg=#404040 guifg=#ff5d5d") -- Red
+
 	local full = ""
-	local space = "%#StatusLineMedium# %*"
+	local space = "%#StatusGitBranch# %*"
 
-	local branch = git_branch()
-	if branch ~= "" then
-		full = full .. " branch: " .. branch .. space
+	-- Branch in blue
+	local branch = vim.b.gitsigns_head
+	if branch and branch ~= "" then
+		full = full .. string.format("%%#StatusGitBranch# branch: %s %%*", branch) .. space
 	end
 
-	local added = git_diff_added()
-	if added ~= "" then
-		full = full .. added .. space
+	-- Adds in green
+	local added = get_git_diff("added")
+	if added > 0 then
+		full = full .. string.format("%%#StatusGitAdd# +%s %%*", added) .. space
 	end
 
-	local changed = git_diff_changed()
-	if changed ~= "" then
-		full = full .. changed .. space
+	-- Modified in yellow
+	local changed = get_git_diff("changed")
+	if changed > 0 then
+		-- Si prefieres azul para modify, cambia StatusGitMod por StatusGitBranch arriba
+		full = full .. string.format("%%#StatusGitMod# ~%s %%*", changed) .. space
 	end
 
-	local removed = git_diff_removed()
-	if removed ~= "" then
-		full = full .. removed .. space
+	-- Deletes con fondo Rojo
+	local removed = get_git_diff("removed")
+	if removed > 0 then
+		full = full .. string.format("%%#StatusGitDel# -%s %%*", removed) .. space
 	end
 
 	return full
@@ -245,10 +256,11 @@ local function total_lines()
 	return string.format("%%#StatusLineMedium#of %s %%*", lines)
 end
 
---- @param hlgroup string
-local function formatted_filetype(hlgroup)
-	local filetype = vim.bo.filetype or vim.fn.expand("%:e", false)
-	return string.format("%%#%s# %s %%*", hlgroup, filetype)
+local function formatted_filetype()
+    local filetype = vim.bo.filetype or vim.fn.expand("%:e", false)
+    if filetype == "" then return "" end
+    vim.cmd("highlight FileTypeColor guibg=#404040 guifg=#80a0ff gui=bold")
+    return string.format("%%#FileTypeColor# %s %%*", filetype:lower())
 end
 
 local function filetype()
@@ -259,7 +271,7 @@ StatusLine = {}
 
 StatusLine.inactive = function()
 	return table.concat({
-		formatted_filetype("StatusLineMode"),
+		formatted_filetype(),
 	})
 end
 
@@ -288,7 +300,7 @@ end
 local function set_mode_highlight()
 	local mode = vim.api.nvim_get_mode().mode
 	local hl_group = {
-		n = "Visual",
+		n = "IncSearch",
 		i = "Visual",
 		v = "Visual",
 		V = "Visual",
@@ -319,7 +331,7 @@ StatusLine.active = function()
 
 	if redeable_filetypes[vim.bo.filetype] or vim.o.modifiable == false then
 		return table.concat({
-			formatted_filetype("StatusLineMode"),
+			formatted_filetype(),
 			"%=",
 			"%=",
 			file_percentage(),
@@ -340,7 +352,7 @@ StatusLine.active = function()
 		diagnostics_hint(),
 		diagnostics_info(),
 		unsaved_changes_indicator(),
-		filetype(),
+		formatted_filetype(),
 		file_percentage(),
 	}
 
