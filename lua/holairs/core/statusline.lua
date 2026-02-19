@@ -40,13 +40,19 @@ local function get_git_diff(type)
 	return 0
 end
 
+-- Definición de colores estilo Gruvbox para segemento de LSP Status
+vim.cmd("highlight StatusLineLspError guibg=#fb4934 guifg=#101010 gui=bold") -- Fondo Rojo
+vim.cmd("highlight StatusLineLspWarn  guibg=#fabd2f guifg=#101010 gui=bold") -- Fondo Amarillo
+vim.cmd("highlight StatusLineLspHint  guibg=#83a598 guifg=#101010 gui=bold") -- Fondo Azul
+vim.cmd("highlight StatusLineLspInfo  guibg=#8ec07c guifg=#101010 gui=bold")
+
 --- @return string
 local function diagnostics_error()
 	local count = get_lsp_diagnostics_count(vim.diagnostic.severity.ERROR)
 	if count > 0 then
-		return string.format("%%#StatusLineLspError# E %s%%*", count)
+		-- Icono: 󰅚 (Circle X)
+		return string.format("%%#StatusLineLspError# 󰅚 %s %%*", count)
 	end
-
 	return ""
 end
 
@@ -54,9 +60,9 @@ end
 local function diagnostics_warns()
 	local count = get_lsp_diagnostics_count(vim.diagnostic.severity.WARN)
 	if count > 0 then
-		return string.format("%%#StatusLineLspWarn# W %s%%*", count)
+		-- Icono: 󱗗 o  (Warning)
+		return string.format("%%#StatusLineLspWarn#  %s %%*", count)
 	end
-
 	return ""
 end
 
@@ -64,9 +70,9 @@ end
 local function diagnostics_hint()
 	local count = get_lsp_diagnostics_count(vim.diagnostic.severity.HINT)
 	if count > 0 then
-		return string.format("%%#StatusLineLspHint# H %s%%*", count)
+		-- Icono: 󰌶 (Lightbulb)
+		return string.format("%%#StatusLineLspHint# 󰌶 %s %%*", count)
 	end
-
 	return ""
 end
 
@@ -74,9 +80,9 @@ end
 local function diagnostics_info()
 	local count = get_lsp_diagnostics_count(vim.diagnostic.severity.INFO)
 	if count > 0 then
-		return string.format("%%#StatusLineLspInfo# I %s%%*", count)
+		-- Icono: 󰋽 (Info Circle)
+		return string.format("%%#StatusLineLspInfo# 󰋽 %s %%*", count)
 	end
-
 	return ""
 end
 
@@ -208,26 +214,26 @@ local function full_git()
 	-- Branch in blue
 	local branch = vim.b.gitsigns_head
 	if branch and branch ~= "" then
-		full = full .. string.format("%%#StatusGitBranch# branch: %s %%*", branch) .. space
+		full = full .. string.format("%%#StatusGitBranch#  branch: %s %%*", branch) .. space
 	end
 
 	-- Adds in green
 	local added = get_git_diff("added")
 	if added > 0 then
-		full = full .. string.format("%%#StatusGitAdd# +%s %%*", added) .. space
+		full = full .. string.format("%%#StatusGitAdd# +%s %%*", added)
 	end
 
 	-- Modified in yellow
 	local changed = get_git_diff("changed")
 	if changed > 0 then
 		-- Si prefieres azul para modify, cambia StatusGitMod por StatusGitBranch arriba
-		full = full .. string.format("%%#StatusGitMod# ~%s %%*", changed) .. space
+		full = full .. string.format("%%#StatusGitMod# ~%s %%*", changed)
 	end
 
 	-- Deletes con fondo Rojo
 	local removed = get_git_diff("removed")
 	if removed > 0 then
-		full = full .. string.format("%%#StatusGitDel# -%s %%*", removed) .. space
+		full = full .. string.format("%%#StatusGitDel# -%s %%*", removed)
 	end
 
 	return full
@@ -256,11 +262,37 @@ local function total_lines()
 	return string.format("%%#StatusLineMedium#of %s %%*", lines)
 end
 
+file_type_icons_list = {
+	lua = "󰢱",
+	rust = "",
+	typescript = "",
+	javascript = "",
+	js = "",
+	ts = "",
+	javascriptreact = "",
+	typescriptreact = "",
+	tsx = "",
+	jsx = "",
+	ruby = "",
+	python = "",
+	html = "",
+	css = "",
+	json = "",
+	md = "",
+	git = "",
+	rs = "",
+}
+
 local function formatted_filetype()
-    local filetype = vim.bo.filetype or vim.fn.expand("%:e", false)
-    if filetype == "" then return "" end
-    vim.cmd("highlight FileTypeColor guibg=#404040 guifg=#80a0ff gui=bold")
-    return string.format("%%#FileTypeColor# %s %%*", filetype:lower())
+	vim.cmd("highlight FileTypeColor guibg=#404040 guifg=#80a0ff gui=bold")
+
+	local filetype = vim.bo.filetype
+	if filetype == "" or filetype == nil then
+		return ""
+	end
+
+	local icon = file_type_icons_list[filetype:lower()] or "󰈚"
+	return string.format("%%#FileTypeColor# %s %s %%*", icon, filetype:lower())
 end
 
 local function filetype()

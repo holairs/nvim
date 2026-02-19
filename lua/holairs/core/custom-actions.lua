@@ -81,54 +81,54 @@ end
 
 -- Native FZF file search using fzf
 -- Open a file fuzzy finder in a terminal split window, using fzf.
-vim.api.nvim_create_user_command("FzfFind", function()
-  vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
-    split = "below",
-  })
-  vim.fn.jobstart({ "fzf", "--reverse" }, {
-    on_exit = function()
-      local fname = vim.api.nvim_buf_get_lines(0, 0, 1, true)[1]
-      vim.api.nvim_buf_delete(0, { force = true })
-      if fname ~= "" then
-        vim.cmd.edit(vim.fn.fnameescape(fname))
-      end
-    end,
-    term = true,
-  })
-  vim.cmd.startinsert()
-end, {})
-
--- Livegrepper.
--- Open a live grepper in a terminal split window, using fzf and ripgrep.
-vim.api.nvim_create_user_command("FzfGrep", function()
-  vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
-    split = "below",
-  })
-	local rg = "rg -Suug !.git --column --color=always --glob '!node_modules/*' --glob '!Cargo.lock' --glob '!target/*'"
-  vim.fn.jobstart({
-    "fzf",
-    "--ansi",
-    "--disabled",
-    "--reverse",
-    "--bind=change:reload:" .. rg .. " {q} || true",
-  }, {
-    env = { FZF_DEFAULT_COMMAND = rg .. " ''" },
-    on_exit = function()
-      local fname, line, col = vim.api
-        .nvim_buf_get_lines(0, 0, 1, true)[1]
-        :match("^(.+):(%d+):(%d+):.*$")
-      vim.api.nvim_buf_delete(0, { force = true })
-      if fname then
-        vim.cmd.edit(vim.fn.fnameescape(fname))
-        vim.api.nvim_win_set_cursor(0, { tonumber(line), tonumber(col) - 1 })
-      end
-    end,
-    term = true,
-  })
-  vim.cmd.startinsert()
-end, {})
-
-vim.keymap.set("n", "<Leader>ff", "<Cmd>FzfFind<CR>")
-vim.keymap.set("n", "<Leader>fg", "<Cmd>FzfGrep<CR>")
+-- vim.api.nvim_create_user_command("FzfFind", function()
+--   vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
+--     split = "below",
+--   })
+--   vim.fn.jobstart({ "fzf", "--reverse" }, {
+--     on_exit = function()
+--       local fname = vim.api.nvim_buf_get_lines(0, 0, 1, true)[1]
+--       vim.api.nvim_buf_delete(0, { force = true })
+--       if fname ~= "" then
+--         vim.cmd.edit(vim.fn.fnameescape(fname))
+--       end
+--     end,
+--     term = true,
+--   })
+--   vim.cmd.startinsert()
+-- end, {})
+--
+-- -- Livegrepper.
+-- -- Open a live grepper in a terminal split window, using fzf and ripgrep.
+-- vim.api.nvim_create_user_command("FzfGrep", function()
+--   vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
+--     split = "below",
+--   })
+-- 	local rg = "rg -Suug !.git --column --color=always --glob '!node_modules/*' --glob '!Cargo.lock' --glob '!target/*'"
+--   vim.fn.jobstart({
+--     "fzf",
+--     "--ansi",
+--     "--disabled",
+--     "--reverse",
+--     "--bind=change:reload:" .. rg .. " {q} || true",
+--   }, {
+--     env = { FZF_DEFAULT_COMMAND = rg .. " ''" },
+--     on_exit = function()
+--       local fname, line, col = vim.api
+--         .nvim_buf_get_lines(0, 0, 1, true)[1]
+--         :match("^(.+):(%d+):(%d+):.*$")
+--       vim.api.nvim_buf_delete(0, { force = true })
+--       if fname then
+--         vim.cmd.edit(vim.fn.fnameescape(fname))
+--         vim.api.nvim_win_set_cursor(0, { tonumber(line), tonumber(col) - 1 })
+--       end
+--     end,
+--     term = true,
+--   })
+--   vim.cmd.startinsert()
+-- end, {})
+--
+-- vim.keymap.set("n", "<Leader>ff", "<Cmd>FzfFind<CR>")
+-- vim.keymap.set("n", "<Leader>fg", "<Cmd>FzfGrep<CR>")
 
 return M
