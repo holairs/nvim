@@ -203,10 +203,10 @@ end
 --- @return string
 local function full_git()
 	-- Colors fot git status
-	vim.cmd("highlight StatusGitBranch  guibg=#404040 guifg=#80a0ff gui=bold") -- Blue
-	vim.cmd("highlight StatusGitAdd     guibg=#404040 guifg=#36c692") -- Green
-	vim.cmd("highlight StatusGitMod     guibg=#404040 guifg=#e3c78a") -- Yellow
-	vim.cmd("highlight StatusGitDel     guibg=#404040 guifg=#ff5d5d") -- Red
+	vim.cmd("highlight StatusGitBranch  guibg=#83a598 guifg=#101010 gui=bold") -- Blue (Rama)
+	vim.cmd("highlight StatusGitAdd     guibg=#b8bb26 guifg=#101010 gui=bold") -- Green (Añadidos)
+	vim.cmd("highlight StatusGitMod     guibg=#fabd2f guifg=#101010 gui=bold") -- Yellow (Modificados)
+	vim.cmd("highlight StatusGitDel     guibg=#fb4934 guifg=#101010 gui=bold") -- Red (Eliminados)
 
 	local full = ""
 	local space = "%#StatusGitBranch# %*"
