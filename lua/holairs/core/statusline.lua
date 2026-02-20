@@ -277,10 +277,14 @@ file_type_icons_list = {
 	python = "",
 	html = "",
 	css = "",
-	json = "",
+	json = "󰘦",
 	md = "",
 	git = "",
 	rs = "",
+	m3u8 = "󰲸",
+	hlsplaylist = "󰲸",
+	toml = "",
+	sql = "󰆼",
 }
 
 local function formatted_filetype()
