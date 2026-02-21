@@ -24,6 +24,11 @@ return {
 				modes = { "n" },
 			},
 			picker = {
+				exclude = {
+					".git",
+					"node_modules",
+					"target",
+				},
 				layout = {
 					preset = "ivy_split", -- Compact Layout
 					cycle = false, -- Disable cicle list
@@ -43,7 +48,12 @@ return {
 					},
 				},
 				sources = {
+					files = {
+						ignored = false, -- No mostrar archivos del .gitignore
+						hidden = false, -- No mostrar archivos ocultos (.env, etc)
+					},
 					explorer = {
+						ignored = false,
 						layout = {
 							preset = "sidebar",
 							layout = {
