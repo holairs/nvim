@@ -19,11 +19,11 @@ return {
 			vim.keymap.set("n", "<leader>gn", ":Gitsigns toggle_current_line_blame<CR>")
 			vim.keymap.set("n", "<leader>df", ":Gitsigns diffthis<CR>")
 			vim.keymap.set("n", "<leader>gi", ":Gitsigns preview_hunk<CR>")
-			vim.keymap.set("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", {
+			vim.keymap.set("n", "<leader>gh", ":Gitsigns reset_hunk<CR>", {
 				noremap = true,
 				silent = true,
 			})
-			vim.keymap.set("v", "<leader>gr", function()
+			vim.keymap.set("v", "<leader>gh", function()
 				require("gitsigns").reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 			end, { noremap = true, silent = true })
 		end,

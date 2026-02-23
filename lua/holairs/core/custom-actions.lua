@@ -36,7 +36,7 @@ local function CodeRunner(filetype, command)
 	autocmd("FileType", {
 		pattern = filetype,
 		callback = function()
-			keymap.set("n", "<leader>rr", ":w<CR>:split term://" .. command .. " %<CR>:resize 10<CR>", {
+			keymap.set("n", "<leader>rr", ":w<CR>:split term://" .. command .. " %<CR>:resize 10<CR>i", {
 				buffer = true,
 				desc = "Execute File",
 				noremap = true,
