@@ -11,6 +11,16 @@ lsp.config["lua"] = {
 			runtime = {
 				version = "LuaJIT",
 			},
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = {
+				library = api.nvim_get_runtime_file("", true),
+				checkThirdParty = false,
+			},
+			telemetry = {
+				enable = false,
+			},
 		},
 	},
 }

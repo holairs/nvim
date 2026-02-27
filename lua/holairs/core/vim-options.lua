@@ -6,7 +6,7 @@ local api = vim.api
 local o = vim.o
 local command = api.nvim_create_user_command
 
-vim.o.completeopt = "menuone,noselect,noinsert"
+o.completeopt = "menuone,noselect,noinsert"
 
 -- Set persistent undo
 opt.undofile = true
@@ -38,8 +38,8 @@ opt.termguicolors = true
 opt.fillchars:append({ vert = "|", horiz = "-" }) -- Use a thin vertical bar as a separator
 
 -- Show whitespace.
--- vim.opt.list = true
--- vim.opt.listchars = { space = '⋅', trail = '⋅', tab = '  ↦' }
+-- opt.list = true
+-- opt.listchars = { space = '⋅', trail = '⋅', tab = '  ↦' }
 
 -- Set as "searching" the actual searh
 opt.incsearch = true
@@ -130,10 +130,10 @@ opt.showmode = true
 opt.cmdheight = 1
 
 -- Disable Swap File
-vim.opt.swapfile = false
+opt.swapfile = false
 
 -- Disable backup
-vim.opt.backup = false
+opt.backup = false
 
 -- Disable unnecesary plugins
 g.loaded_matchit = 1
@@ -149,24 +149,15 @@ command("Wq", "wq", {})
 command("Wqa", "wqa", {})
 
 -- Set habamax colorschemes
-opt.background = "dark"
-vim.cmd("colorscheme retrobox")
-vim.api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
-vim.api.nvim_set_hl(0, "Float", { bg = "none" })
-
--- Better quiet colorscheme:
-
--- vim.api.nvim_set_hl(0, "Number", { fg = "#ff0000" })
--- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#8a8a8a", fg = "#000000" })
--- vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "#505050", fg = "#303030" })
--- vim.api.nvim_set_hl(0, "SignColumn", { bg = "#585858", fg = "#af0000" })
--- vim.api.nvim_set_hl(0, "Comment", { fg = "#454545" })
--- vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "#606060", fg = "#ff0000" })
--- vim.api.nvim_set_hl(0, "Delimiter", { fg = "#ff0000" })
--- vim.api.nvim_set_hl(0, "Keyword", { fg = "#909090" })
+-- opt.background = "light"
+-- vim.cmd("colorscheme quiet")
+api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
+api.nvim_set_hl(0, "Normal", { bg = "none" })
+api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+api.nvim_set_hl(0, "Float", { bg = "none" })
+api.nvim_set_hl(0, "Number", { fg = "#ff0000" })
+api.nvim_set_hl(0, "Delimiter", { fg = "#ff0000" })
 
 -- Set Error diagnostic sign
 vim.diagnostic.config({

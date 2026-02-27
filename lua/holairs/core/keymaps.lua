@@ -258,3 +258,13 @@ keymap.set({ "n", "v" }, "<leader>cn", function()
 		opt.number = true
 	end
 end, { noremap = true, silent = true, desc = "Toggle relative numbers" })
+
+-- Toggle between dark and light mode
+keymap.set({ "n", "v" }, "<leader>cb", function()
+	if vim.o.background == "light" then
+		vim.o.background = "dark"
+	else
+		vim.o.background = "light"
+	end
+	print("Background: " .. vim.o.background)
+end, { noremap = true, silent = true, desc = "Toggle background mode" })
