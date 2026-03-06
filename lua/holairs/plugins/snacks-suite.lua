@@ -1,7 +1,7 @@
 return {
 	{
 		"folke/snacks.nvim",
-		dependencies = { { "echasnovski/mini.icons", opts = {} } },
+		-- dependencies = { { "echasnovski/mini.icons", opts = {} } },
 		priority = 1000,
 		lazy = false,
 		---@type snacks.Config
@@ -55,7 +55,6 @@ return {
 					explorer = {
 						ignored = false,
 						layout = {
-							preset = "sidebar",
 							layout = {
 								position = "right",
 							},

@@ -2,7 +2,11 @@
 local lsp = vim.lsp
 local api = vim.api
 
+local has_blink, blink = pcall(require, "blink.cmp")
+local capabilities = has_blink and blink.get_lsp_capabilities() or lsp.protocol.make_client_capabilities()
+
 lsp.config["lua"] = {
+	capabilities = capabilities,
 	cmd = { "lua-language-server" },
 	filetypes = { "lua" },
 	root_markers = { { ".luarc.json", ".luarc.jsonc" }, ".git" },
@@ -27,6 +31,7 @@ lsp.config["lua"] = {
 
 -- Rust
 lsp.config("rust", {
+	capabilities = capabilities,
 	cmd = { "rust-analyzer" },
 	filetypes = { "rust" },
 	settings = {
@@ -47,6 +52,7 @@ lsp.config("rust", {
 })
 
 lsp.config("basedpyright", {
+	capabilities = capabilities,
 	cmd = { "basedpyright-langserver", "--stdio" },
 	filetypes = { "python" },
 	root_markers = { "pyproject.toml", "setup.py", "requirements.txt", ".git" },
@@ -54,6 +60,7 @@ lsp.config("basedpyright", {
 
 -- TypeScript / JavaScript (vtsls)
 lsp.config("vtsls", {
+	capabilities = capabilities,
 	cmd = { "vtsls", "--stdio" },
 	filetypes = {
 		"javascript",
@@ -80,6 +87,7 @@ lsp.config("vtsls", {
 
 -- Python (Basedpyright)
 lsp.config("basedpyright", {
+	capabilities = capabilities,
 	cmd = { "basedpyright-langserver", "--stdio" },
 	filetypes = { "python" },
 	root_markers = {
@@ -104,7 +112,15 @@ lsp.config("basedpyright", {
 	},
 })
 
-lsp.enable({ "lua", "rust", "basedpyright", "vtsls" })
+-- html
+lsp.config("html", {
+	capabilities = capabilities,
+	cmd = { "vscode-html-language-server", "--stdio" },
+	filetypes = { "html", "javascriptreact", "typescriptreact" }, -- Agregamos react aquí
+	root_markers = { "package.json", ".git" },
+})
+
+lsp.enable({ "lua", "rust", "basedpyright", "vtsls", "html" })
 
 api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)

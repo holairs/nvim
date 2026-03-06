@@ -30,7 +30,7 @@ opt.clipboard = "unnamed"
 
 -- Relative and numberline
 opt.number = true
-opt.relativenumber = true
+opt.relativenumber = false
 
 -- Better term colors :0
 opt.termguicolors = true
