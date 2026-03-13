@@ -6,7 +6,7 @@ return {
 	config = function()
 		local api = vim.api
 		vim.o.background = "dark"
-		vim.cmd.colorscheme("zenwritten")
+		vim.cmd.colorscheme("Rosebones")
 		api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
 		api.nvim_set_hl(0, "Normal", { bg = "none" })
 		api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
