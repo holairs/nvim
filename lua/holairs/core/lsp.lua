@@ -116,8 +116,22 @@ lsp.config("basedpyright", {
 lsp.config("html", {
 	capabilities = capabilities,
 	cmd = { "vscode-html-language-server", "--stdio" },
-	filetypes = { "html", "javascriptreact", "typescriptreact" }, -- Agregamos react aquí
-	root_markers = { "package.json", ".git" },
+	filetypes = { "html" },
+	root_markers = { ".git", "index.html", "package.json" },
+	single_file_support = true,
+	ettings = {
+		html = {
+			format = {
+				templating = true,
+				wrapLineLength = 120,
+				wrapAttributes = "auto",
+			},
+			hover = {
+				documentation = true,
+				references = true,
+			},
+		},
+	},
 })
 
 lsp.enable({ "lua", "rust", "basedpyright", "vtsls", "html" })
