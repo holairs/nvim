@@ -8,12 +8,8 @@ return {
 		opts = {
 			bigfile = { enabled = true },
 			quickfile = { enabled = true },
-			explorer = {
-				enabled = true,
-			},
-			statuscolumn = {
-				enabled = true,
-			},
+			explorer = { enabled = true },
+			statuscolumn = { enabled = true },
 			words = {
 				enabled = true,
 				debounce = 200,
@@ -33,9 +29,7 @@ return {
 					preset = "ivy_split", -- Compact Layout
 					cycle = false, -- Disable cicle list
 				},
-				matcher = {
-					frecency = true, -- Show most used files first
-				},
+				matcher = { frecency = true }, -- Show most used files first
 				win = {
 					input = {
 						keys = {
@@ -54,11 +48,7 @@ return {
 					},
 					explorer = {
 						ignored = false,
-						layout = {
-							layout = {
-								position = "right",
-							},
-						},
+						layout = { layout = { position = "right" } },
 					},
 				},
 			},
@@ -78,7 +68,7 @@ return {
 					-- Llama a la función blame_line del módulo git de Snacks
 					Snacks.git.blame_line()
 				end,
-				desc = "Git Blame Line", -- Descripción para which-key o similar
+				desc = "Git Blame Line",
 			},
 			{
 				"<leader>gB",

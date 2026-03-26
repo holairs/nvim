@@ -33,18 +33,14 @@ return {
 						return name == ".DS_Store" or name == ".git"
 					end,
 				},
-				win_options = {
-					wrap = true,
-				},
+				win_options = { wrap = true },
 				-- Floating window options
 				float = {
 					padding = 2,
 					max_width = 60,
 					max_height = 15,
-					border = "double", -- Options: "none", "single", "double", "rounded", etc.
-					win_options = {
-						winblend = 0, -- Transparency
-					},
+					border = "rounded", -- Options: "none", "single", "double", "rounded"
+					win_options = { winblend = 0 }, --Transparency
 				},
 			})
 		end,

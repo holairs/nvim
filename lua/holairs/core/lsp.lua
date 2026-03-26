@@ -1,7 +1,8 @@
--- Lua
+-- Local variables
 local lsp = vim.lsp
 local api = vim.api
 
+-- Create cmp / capabilities to attach
 local has_blink, blink = pcall(require, "blink.cmp")
 local capabilities = has_blink and blink.get_lsp_capabilities() or lsp.protocol.make_client_capabilities()
 
@@ -34,23 +35,14 @@ lsp.config("rust", {
 	capabilities = capabilities,
 	cmd = { "rust-analyzer" },
 	filetypes = { "rust" },
-	settings = {
-		["rust-analyzer"] = {
-			files = { watcher = "server" },
-			cargo = { targetDir = true },
-			check = { command = "clippy" },
-			inlayHints = {
-				bindingModeHints = { enabled = true },
-				closureCaptureHints = { enabled = true },
-				closureReturnTypeHints = { enable = "always" },
-				maxLength = 100,
-			},
-			rustc = { source = "discover" },
-		},
+	handlers = {
+		-- Disable rust-analyzer notifications
+		["window/logMessage"] = function() end,
+		["window/showMessage"] = function() end,
 	},
-	root_markers = { { "Config.toml" }, ".git" },
 })
 
+-- Python
 lsp.config("basedpyright", {
 	capabilities = capabilities,
 	cmd = { "basedpyright-langserver", "--stdio" },
@@ -103,7 +95,7 @@ lsp.config("basedpyright", {
 		basedpyright = {
 			analysis = {
 				-- 'none', 'warning', 'error', 'information'
-				typeCheckingMode = "basic", -- Cámbialo a 'standard' o 'strict' si quieres más rigor
+				typeCheckingMode = "basic", -- Use 'standard' o 'strict' based on case
 				autoSearchPaths = true,
 				useLibraryCodeForTypes = true,
 				diagnosticMode = "openFilesOnly",
@@ -134,8 +126,10 @@ lsp.config("html", {
 	},
 })
 
+-- Enable all lsp
 lsp.enable({ "lua", "rust", "basedpyright", "vtsls", "html" })
 
+-- Autocommand to Run lsp on demmand
 api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local client = lsp.get_client_by_id(ev.data.client_id)
