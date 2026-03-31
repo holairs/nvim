@@ -150,14 +150,14 @@ command("Wqa", "wqa", {})
 
 -- Set habamax colorschemes
 -- opt.background = "light"
--- vim.cmd("colorscheme quiet")
+vim.cmd("colorscheme vim")
 api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
 api.nvim_set_hl(0, "Normal", { bg = "none" })
 api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
 api.nvim_set_hl(0, "Float", { bg = "none" })
-api.nvim_set_hl(0, "Number", { fg = "#ff0000" })
-api.nvim_set_hl(0, "Delimiter", { fg = "#ff0000" })
+-- api.nvim_set_hl(0, "Number", { fg = "#ff0000" })
+-- api.nvim_set_hl(0, "Delimiter", { fg = "#ff0000" })
 
 -- Set Error diagnostic sign
 vim.diagnostic.config({
