@@ -150,7 +150,7 @@ command("Wqa", "wqa", {})
 
 -- Set habamax colorschemes
 -- opt.background = "light"
-vim.cmd("colorscheme vim")
+vim.cmd("colorscheme habamax")
 api.nvim_set_hl(0, "CursorLine", { bg = "none", underline = true })
 api.nvim_set_hl(0, "Normal", { bg = "none" })
 api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
