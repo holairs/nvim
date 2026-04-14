@@ -1,23 +1,23 @@
--- return {
--- 	"saghen/blink.cmp",
--- 	version = "v0.*", -- O '1.*' según la versión actual
--- 	dependencies = "rafamadriz/friendly-snippets",
--- 	opts = {
--- 		keymap = {
--- 			preset = "super-tab",
--- 			["<CR>"] = { "accept", "fallback" }, -- <CR> es la tecla Enter
--- 		},
--- 		appearance = { nerd_font_variant = "mono" },
--- 		completion = {
--- 			menu = {
--- 				border = "none",
--- 				draw = {
--- 					columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
--- 				}, },
--- 			ghost_text = { enabled = true },
--- 		},
--- 		sources = {
--- 			default = { "lsp", "path", "snippets", "buffer" },
--- 		},
--- 	},
--- }
+return {
+	-- "saghen/blink.cmp",
+	-- version = "v0.*", -- O '1.*' según la versión actual
+	-- dependencies = "rafamadriz/friendly-snippets",
+	-- opts = {
+	-- 	keymap = {
+	-- 		preset = "super-tab",
+	-- 		["<CR>"] = { "accept", "fallback" }, -- <CR> es la tecla Enter
+	-- 	},
+	-- 	appearance = { nerd_font_variant = "mono" },
+	-- 	completion = {
+	-- 		menu = {
+	-- 			border = "none",
+	-- 			draw = {
+	-- 				columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+	-- 			}, },
+	-- 		ghost_text = { enabled = true },
+	-- 	},
+	-- 	sources = {
+	-- 		default = { "lsp", "path", "snippets", "buffer" },
+	-- 	},
+	-- },
+}
