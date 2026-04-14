@@ -26,7 +26,7 @@ g.mapleader = " "
 opt.colorcolumn = "80"
 
 -- Global Clipboard
-opt.clipboard = "unnamed"
+opt.clipboard = "unnamedplus"
 
 -- Relative and numberline
 opt.number = true
