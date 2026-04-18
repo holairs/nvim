@@ -1,7 +1,12 @@
-return {
-	"stevearc/conform.nvim",
-	event = { "BufReadPre", "BufNewFile" },
-	config = function()
+-- plugin/conform.lua
+
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+	once = true,
+	callback = function()
+		vim.pack.add({
+			"https://github.com/stevearc/conform.nvim",
+		})
+
 		require("conform").setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
@@ -17,11 +22,9 @@ return {
 				json = { "jq" },
 				yaml = { "yq" },
 				sh = { "shfmt" },
-				-- Para archivos de C# (.cs)
 				cs = { "csharpier" },
-				-- Para el formateo con el LSP
 				razor = { lsp_format = "fallback" },
 			},
 		})
 	end,
-}
+})
