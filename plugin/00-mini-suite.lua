@@ -1,6 +1,4 @@
--- FILE: plugin/00-mini-suite.lua
--- PURPOSE: Instalar y configurar mini.nvim
-------------------------------------------------
+-- plugin/00-mini-suite.lua
 
 vim.pack.add({
 	{

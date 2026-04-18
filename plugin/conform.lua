@@ -1,6 +1,4 @@
--- FILE: plugin/conform.lua
--- PURPOSE: Lazy load de conform.nvim
-------------------------------------------------
+-- plugin/conform.lua
 
 vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
 	once = true,
