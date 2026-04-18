@@ -1,3 +1,4 @@
 -- nvim/init.lua
 
-require("holairs.core")
+require("core.init")
+require("plugin-keymaps")
