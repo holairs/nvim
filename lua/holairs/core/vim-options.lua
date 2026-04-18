@@ -59,8 +59,8 @@ g.netrw_preview = 1
 g.netrw_list_hide = 0
 
 -- Disable netrw
-g.loaded_netrw = 0
-g.loaded_netrwPlugin = 0
+-- g.loaded_netrw = 0
+-- g.loaded_netrwPlugin = 0
 
 -- Some default settings
 -- Sets the number of spaces a tab is displayed as

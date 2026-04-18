@@ -219,9 +219,9 @@ keymap.set("n", "<leader>fp", "<cmd>%!bun prettier --stdin-filepath %<cr>")
 keymap.set("n", "<leader>fl", vim.lsp.buf.format)
 
 -- Run format with CONFORM
-keymap.set("n", "<leader>fa", function()
-	require("conform").format({ bufnr = vim.api.nvim_get_current_buf() })
-end)
+-- keymap.set("n", "<leader>fa", function()
+-- 	require("plugin.conform").format({ bufnr = vim.api.nvim_get_current_buf() })
+-- end)
 
 -- Replace actual word in the actual buffer
 keymap.set("n", "<leader>rp", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
