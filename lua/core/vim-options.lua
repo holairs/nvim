@@ -6,7 +6,9 @@ local api = vim.api
 local o = vim.o
 local command = api.nvim_create_user_command
 
-o.completeopt = "menuone,noselect,noinsert"
+-- Auto CMP
+o.completeopt = "menu,menuone,noinsert,popup"
+-- o.autocomplete = true
 
 -- Set persistent undo
 opt.undofile = true
@@ -188,3 +190,6 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
+
+
+
